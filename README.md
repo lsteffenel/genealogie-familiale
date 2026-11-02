@@ -58,6 +58,20 @@ python manage.py import_gedcom chemin/vers/export.ged --dry-run  # test à blanc
 - **EditProposal** : proposition de modification soumise par un membre, approuvée/rejetée par un modérateur
 - **Profile** : rôle de l'utilisateur (membre, modérateur, administrateur)
 
+## Confidentialité et RGPD
+
+- **Aucune donnée personnelle n'est accessible sans connexion** : liste des
+  personnes, fiches, propositions et médias exigent tous un compte authentifié
+  (testé automatiquement, y compris pour `/media/...`).
+- La page de connexion est la seule page publique.
+- L'administration Django (`/admin/`) est réservée au staff ; la modération des
+  propositions est réservée au rôle modérateur.
+- En production, servez les médias (`/media/`) derrière une authentification
+  (proxy inverse avec contrôle d'accès, ou vue authentifiée comme en DEBUG) :
+  ne les exposez jamais publiquement.
+- Pensez à purger les données des comptes supprimés et à documenter la durée
+  de conservation conforme au RGPD.
+
 ## Interface membre
 
 - `/` : liste des personnes avec recherche

@@ -23,6 +23,35 @@ class AccessTests(BaseViewTests):
         self.assertEqual(response.status_code, 302)
         self.assertIn(reverse("login"), response.url)
 
+    def test_anonymous_has_no_access_to_any_data_route(self):
+        from django.contrib.contenttypes.models import ContentType
+
+        proposal = EditProposal.objects.create(
+            content_type=ContentType.objects.get_for_model(Person),
+            object_id=self.person.pk,
+            field_changes={"birth_place": "Paris"},
+            proposed_by=self.member,
+        )
+        protected_urls = [
+            reverse("person_list"),
+            reverse("person_detail", args=[self.person.pk]),
+            reverse("propose_person_edit", args=[self.person.pk]),
+            reverse("proposal_list"),
+            reverse("proposal_review", args=[proposal.pk]),
+            "/media/photos/test.jpg",
+        ]
+        for url in protected_urls:
+            with self.subTest(url=url):
+                response = self.client.get(url)
+                self.assertEqual(response.status_code, 302)
+                self.assertIn(reverse("login"), response.url)
+
+    def test_authenticated_member_can_reach_media_route(self):
+        self.client.force_login(self.member)
+        response = self.client.get("/media/photos/test.jpg")
+        self.assertNotEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 404)
+
     def test_member_can_see_person_list_and_detail(self):
         self.client.force_login(self.member)
         self.assertEqual(self.client.get(reverse("person_list")).status_code, 200)
