@@ -58,6 +58,41 @@ python manage.py import_gedcom chemin/vers/export.ged --dry-run  # test à blanc
 - **EditProposal** : proposition de modification soumise par un membre, approuvée/rejetée par un modérateur
 - **Profile** : rôle de l'utilisateur (membre, modérateur, administrateur)
 
+## Google Photos (lecture seule)
+
+Les fiches peuvent référencer des photos de l'album Google Photos partagé via
+leur `media item ID` (champ `google_photo_media_item_id` sur `Person` et `Media`).
+
+Configuration (dans `.env`) :
+
+```
+GOOGLE_PHOTOS_CLIENT_ID=...
+GOOGLE_PHOTOS_CLIENT_SECRET=...
+GOOGLE_PHOTOS_REFRESH_TOKEN=...
+```
+
+Obtention du refresh token (une seule fois, depuis un poste ayant accès au compte Google) :
+
+```bash
+python - <<'EOF'
+from google_auth_oauthlib.flow import InstalledAppFlow
+flow = InstalledAppFlow.from_client_config(
+    {"installed": {"client_id": "VOTRE_CLIENT_ID", "client_secret": "VOTRE_SECRET",
+                   "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+                   "token_uri": "https://oauth2.googleapis.com/token",
+                   "redirect_uris": ["http://localhost"]}},
+    scopes=["https://www.googleapis.com/auth/photospicker.mediaitems.readonly"],
+)
+creds = flow.run_local_server(port=0)
+print(creds.refresh_token)
+EOF
+```
+
+Le scope utilisé est `photospicker.mediaitems.readonly` : accès strictement en
+lecture aux médias sélectionnés via le sélecteur Google Photos. Sans ces
+variables, le site affiche un simple libellé à la place des photos. Les URL
+signées retournées par l'API sont mises en cache 6 h.
+
 ## Confidentialité et RGPD
 
 - **Aucune donnée personnelle n'est accessible sans connexion** : liste des

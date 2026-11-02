@@ -7,6 +7,7 @@ from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView
 
 from .forms import PersonProposalForm, ProposalNoteForm, ReviewForm
+from .google_photos import get_media_item_base_url
 from .models import EditProposal, Person, ProposalStatus
 
 
@@ -51,6 +52,14 @@ class PersonDetailView(LoginRequiredMixin, DetailView):
             object_id=person.pk,
         ).select_related("proposed_by", "reviewed_by")
         context["can_propose"] = True
+        context["person_photo_url"] = get_media_item_base_url(
+            person.google_photo_media_item_id
+        )
+        context["media_photos"] = [
+            (item, get_media_item_base_url(item.google_photo_media_item_id))
+            for item in context["media"]
+            if item.google_photo_media_item_id
+        ]
         return context
 
 
