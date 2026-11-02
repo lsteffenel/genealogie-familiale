@@ -1,0 +1,54 @@
+# Généalogie familiale
+
+Site collaboratif pour reprendre et compléter l'arbre généalogique familial
+(export Geneanet / GEDCOM), avec ajout d'informations par les membres et
+validation par un modérateur.
+
+## Stack
+
+- Python 3.12 / Django 5.1
+- SQLite en développement, PostgreSQL recommandé en production
+
+## Installation
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+export DJANGO_SECRET_KEY=une-cle-secrete-longue  # voir .env.example
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
+```
+
+L'administration (gestion des rôles, modération des propositions) se fait via
+`/admin/`.
+
+## Import de l'export Geneanet (GEDCOM)
+
+```bash
+python manage.py import_gedcom chemin/vers/export.ged          # import réel
+python manage.py import_gedcom chemin/vers/export.ged --dry-run  # test à blanc
+```
+
+## Modèle de données
+
+- **Person** : identité, sexe, naissance/décès, biographie, photo (upload ou Google Photos)
+- **Union** : mariage/PACS/concubinage entre deux personnes, enfants associés
+- **Event** : informations tierces (diplôme, métier, résidence, anecdote, distinction)
+- **Media** : photos rattachées à une personne ou un événement (upload ou Google Photos)
+- **EditProposal** : proposition de modification soumise par un membre, approuvée/rejetée par un modérateur
+- **Profile** : rôle de l'utilisateur (membre, modérateur, administrateur)
+
+## Roadmap
+
+1. Fondations (ce dépôt) : modèles, rôles, import GEDCOM, modération
+2. Interface membre : consultation de l'arbre, soumission de propositions
+3. Intégration Google Photos (API, lecture seule)
+4. Déploiement
+
+## Tests
+
+```bash
+python manage.py test
+```
