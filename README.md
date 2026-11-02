@@ -24,6 +24,24 @@ python manage.py runserver
 L'administration (gestion des rôles, modération des propositions) se fait via
 `/admin/`.
 
+## Avec Docker (docker compose)
+
+```bash
+cp .env.example .env   # puis éditer les valeurs (mot de passe PostgreSQL obligatoire)
+docker compose up --build
+```
+
+Le site est alors disponible sur http://localhost:8000 et la base PostgreSQL
+persiste dans le volume `db_data`. En production, le conteneur `web` sert
+l'application via gunicorn (voir `Dockerfile`) ; en compose de développement,
+la commande est remplacée par `runserver` avec rechargement à chaud.
+
+Pour importer l'export GEDCOM dans le conteneur :
+
+```bash
+docker compose exec web python manage.py import_gedcom /app/export.ged
+```
+
 ## Import de l'export Geneanet (GEDCOM)
 
 ```bash
