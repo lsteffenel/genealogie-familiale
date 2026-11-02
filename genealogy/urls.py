@@ -6,6 +6,8 @@ from . import views
 urlpatterns = [
     path("", views.PersonListView.as_view(), name="person_list"),
     path("personnes/", views.PersonListView.as_view(), name="person_list"),
+    path("arbre/", views.tree_view, name="tree"),
+    path("arbre/<int:pk>/", views.tree_view, name="tree_root"),
     path("personne/<int:pk>/", views.PersonDetailView.as_view(), name="person_detail"),
     path(
         "personne/<int:pk>/proposer/",

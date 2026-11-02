@@ -2,13 +2,16 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.contenttypes.models import ContentType
+from django.db.models import Q
+from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
-from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView
 
 from .forms import PersonProposalForm, ProposalNoteForm, ReviewForm
 from .google_photos import get_media_item_base_url
-from .models import EditProposal, Person, ProposalStatus
+from .models import EditProposal, Person, ProposalStatus, Union
+
+MAX_TREE_DEPTH = 8
 
 
 def is_moderator(user):
@@ -25,8 +28,6 @@ class PersonListView(LoginRequiredMixin, ListView):
         queryset = super().get_queryset()
         query = self.request.GET.get("q", "").strip()
         if query:
-            from django.db.models import Q
-
             queryset = queryset.filter(
                 Q(first_name__icontains=query)
                 | Q(last_name__icontains=query)
@@ -94,6 +95,62 @@ def propose_person_edit(request, pk):
         request,
         "genealogy/proposal_form.html",
         {"form": form, "note_form": note_form, "person": person},
+    )
+
+
+@login_required
+def tree_view(request, pk=None):
+    persons = list(Person.objects.all())
+    if not persons:
+        return render(request, "genealogy/tree.html", {"root": None, "persons": []})
+    by_pk = {p.pk: p for p in persons}
+
+    root_id = pk or request.GET.get("root")
+    if root_id:
+        root = by_pk.get(int(root_id))
+        if root is None:
+            raise Http404("Personne inconnue")
+    else:
+        root = persons[0]
+
+    show_name = request.GET.get("name", "1") == "1"
+    show_dates = request.GET.get("dates", "1") == "1"
+    show_photo = request.GET.get("photo", "1") == "1"
+
+    unions = list(Union.objects.prefetch_related("children", "partner_a", "partner_b"))
+    family_map = {}
+    for union in unions:
+        for partner, spouse in (
+            (union.partner_a, union.partner_b),
+            (union.partner_b, union.partner_a),
+        ):
+            family_map.setdefault(partner.pk, []).append(
+                {
+                    "spouse": by_pk[spouse.pk],
+                    "union": union,
+                    "children": [by_pk[c.pk] for c in union.children.all()],
+                }
+            )
+
+    for person in persons:
+        person.family_entries = family_map.get(person.pk, [])
+        person.photo_url = (
+            get_media_item_base_url(person.google_photo_media_item_id)
+            if show_photo and person.google_photo_media_item_id
+            else None
+        )
+
+    return render(
+        request,
+        "genealogy/tree.html",
+        {
+            "root": root,
+            "persons": persons,
+            "show_name": show_name,
+            "show_dates": show_dates,
+            "show_photo": show_photo,
+            "max_depth": MAX_TREE_DEPTH,
+        },
     )
 
 

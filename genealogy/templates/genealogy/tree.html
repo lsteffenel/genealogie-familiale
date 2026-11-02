@@ -1,0 +1,33 @@
+{% extends "genealogy/base.html" %}
+{% block title %}Arbre graphique{% endblock %}
+{% block content %}
+<h1>Arbre généalogique</h1>
+{% if not root %}
+  <p>Aucune personne enregistrée pour le moment.</p>
+{% else %}
+<form method="get" class="card" style="display:flex;gap:1.5rem;align-items:center;flex-wrap:wrap">
+  <label style="margin:0"><input type="checkbox" name="name" value="1" {% if show_name %}checked{% endif %} style="width:auto"> Nom</label>
+  <label style="margin:0"><input type="checkbox" name="dates" value="1" {% if show_dates %}checked{% endif %} style="width:auto"> Dates</label>
+  <label style="margin:0"><input type="checkbox" name="photo" value="1" {% if show_photo %}checked{% endif %} style="width:auto"> Photo</label>
+  <label style="margin:0">Racine :
+    <select name="root" style="width:auto">
+      {% for p in persons %}
+        <option value="{{ p.pk }}" {% if p.pk == root.pk %}selected{% endif %}>{% if show_name %}{{ p.first_name }} {{ p.last_name }}{% else %}Personne #{{ p.pk }}{% endif %}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <button type="submit">Appliquer</button>
+</form>
+<style>
+  .tree, .tree ul { list-style: none; padding-left: 1.4rem; border-left: 2px solid #d8cfc0; }
+  .tree { padding-left: 0; border-left: 0; }
+  .person-card { display: inline-block; background: #fff; border: 1px solid #d8cfc0; border-radius: 6px; padding: 0.5rem 0.8rem; margin: 0.3rem 0; }
+  .person-card img { display: block; width: 90px; border-radius: 4px; margin-bottom: 0.3rem; }
+  .person-card .dates { font-size: 0.8rem; color: #6b6257; }
+  .union { font-size: 0.9rem; color: #6b6257; margin: 0.2rem 0; }
+</style>
+<ul class="tree">
+  <li>{% include "genealogy/tree_node.html" with node=root depth=0 %}</li>
+</ul>
+{% endif %}
+{% endblock %}

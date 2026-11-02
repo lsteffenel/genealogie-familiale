@@ -113,14 +113,25 @@ signées retournées par l'API sont mises en cache 6 h.
 - `/personne/<id>/` : fiche complète (famille, unions, enfants, parcours, photos, historique des propositions)
 - `/personne/<id>/proposer/` : formulaire de proposition de modification (validée par un modérateur)
 - `/propositions/` : file de modération (réservée aux modérateurs)
+- `/arbre/` : **arbre graphique** avec choix de la racine et cases à cocher
+  pour afficher/masquer nom, dates et photo (paramètres `?name=0&dates=0&photo=0`)
 - Connexion requise pour tout le site (`/connexion/`)
+
+## Notifications e-mail
+
+À chaque nouvelle proposition soumise par un membre, un e-mail est envoyé à
+tous les modérateurs/administrateurs actifs ayant une adresse e-mail.
+Configuration via `EMAIL_BACKEND`, `DEFAULT_FROM_EMAIL` et, pour le SMTP,
+`EMAIL_HOST`, `EMAIL_PORT`, `EMAIL_HOST_USER`, `EMAIL_HOST_PASSWORD`,
+`EMAIL_USE_TLS` (console par défaut en développement, voir `.env.example`).
 
 ## Roadmap
 
 1. Fondations : modèles, rôles, import GEDCOM, modération
-2. Interface membre : consultation de l'arbre, soumission de propositions
+2. Interface membre : arbre graphique, soumission de propositions
 3. Intégration Google Photos (API, lecture seule)
-4. Déploiement
+4. Notifications e-mail des modérateurs
+5. Déploiement
 
 ## Tests
 
