@@ -1,8 +1,11 @@
+import os
+
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ValidationError
+from django.core.files.base import ContentFile
 from django.db import models
 
 
@@ -175,11 +178,27 @@ class ProposalStatus(models.TextChoices):
 
 
 class EditProposal(models.Model):
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.PositiveBigIntegerField()
+    class Action(models.TextChoices):
+        EDIT = "edit", "Modification"
+        CREATE = "create", "Ajout"
+
+    action = models.CharField(
+        max_length=10, choices=Action.choices, default=Action.EDIT
+    )
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True, blank=True)
+    object_id = models.PositiveBigIntegerField(null=True, blank=True)
     target = GenericForeignKey("content_type", "object_id")
     field_changes = models.JSONField(
-        help_text="Dictionnaire {champ: nouvelle_valeur} proposé par le membre"
+        default=dict, blank=True,
+        help_text="Dictionnaire {champ: nouvelle_valeur} proposé par le membre",
+    )
+    new_object_data = models.JSONField(
+        null=True, blank=True,
+        help_text="Pour action=create : données du nouvel objet (ex. média à créer)",
+    )
+    uploaded_file = models.FileField(
+        upload_to="proposals/", null=True, blank=True,
+        help_text="Fichier uploadé par le membre, rattaché au nouvel objet à validation",
     )
     note = models.TextField(
         blank=True, help_text="Commentaire du membre accompagnant sa proposition"
@@ -202,6 +221,8 @@ class EditProposal(models.Model):
         ordering = ["-created_at"]
 
     def __str__(self):
+        if self.action == EditProposal.Action.CREATE:
+            return f"Proposition #{self.pk} : ajout ({self.get_status_display()})"
         return f"Proposition #{self.pk} sur {self.content_type.model} #{self.object_id} ({self.get_status_display()})"
 
     def apply(self, reviewer):
@@ -209,11 +230,31 @@ class EditProposal(models.Model):
 
         if self.status != ProposalStatus.PENDING:
             raise ValidationError("Seule une proposition en attente peut être appliquée.")
-        for field, value in self.field_changes.items():
-            if not hasattr(self.target, field):
-                raise ValidationError(f"Champ inconnu : {field}")
-            setattr(self.target, field, value)
-        self.target.save()
+        if self.action == EditProposal.Action.CREATE:
+            data = self.new_object_data or {}
+            if data.get("model") != "media":
+                raise ValidationError("Type d'objet à créer non supporté.")
+            media = Media(
+                person_id=data.get("person_id"),
+                title=data.get("title", ""),
+                description=data.get("description", ""),
+                google_photo_media_item_id=data.get("google_photo_media_item_id", ""),
+            )
+            if self.uploaded_file:
+                self.uploaded_file.open("rb")
+                media.image.save(
+                    os.path.basename(self.uploaded_file.name),
+                    ContentFile(self.uploaded_file.read()),
+                    save=False,
+                )
+            media.full_clean()
+            media.save()
+        else:
+            for field, value in self.field_changes.items():
+                if not hasattr(self.target, field):
+                    raise ValidationError(f"Champ inconnu : {field}")
+                setattr(self.target, field, value)
+            self.target.save()
         self.status = ProposalStatus.APPROVED
         self.reviewed_by = reviewer
         self.reviewed_at = timezone.now()

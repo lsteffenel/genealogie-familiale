@@ -14,6 +14,7 @@ urlpatterns = [
         views.propose_person_edit,
         name="propose_person_edit",
     ),
+    path("photos/ajouter/", views.propose_media_add, name="propose_media_add"),
     path("propositions/", views.proposal_list, name="proposal_list"),
     path("propositions/<int:pk>/", views.proposal_review, name="proposal_review"),
     path("connexion/", auth_views.LoginView.as_view(template_name="genealogy/login.html"), name="login"),

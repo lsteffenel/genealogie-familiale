@@ -7,7 +7,7 @@ from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import DetailView, ListView
 
-from .forms import PersonProposalForm, ProposalNoteForm, ReviewForm
+from .forms import MediaProposalForm, PersonProposalForm, ProposalNoteForm, ReviewForm
 from .google_photos import get_media_item_base_url
 from .models import EditProposal, Person, ProposalStatus, Union
 
@@ -152,6 +152,35 @@ def tree_view(request, pk=None):
             "max_depth": MAX_TREE_DEPTH,
         },
     )
+
+
+@login_required
+def propose_media_add(request):
+    if request.method == "POST":
+        form = MediaProposalForm(request.POST, request.FILES)
+        if form.is_valid():
+            cleaned = form.cleaned_data
+            EditProposal.objects.create(
+                action=EditProposal.Action.CREATE,
+                new_object_data={
+                    "model": "media",
+                    "person_id": cleaned["person"].pk,
+                    "title": cleaned["title"],
+                    "description": cleaned["description"],
+                    "google_photo_media_item_id": cleaned["google_photo_media_item_id"],
+                },
+                uploaded_file=cleaned["image"] or None,
+                note=cleaned["note"],
+                proposed_by=request.user,
+            )
+            messages.success(
+                request,
+                "Votre photo a été soumise et est en attente de validation par un modérateur.",
+            )
+            return redirect("person_detail", pk=cleaned["person"].pk)
+    else:
+        form = MediaProposalForm()
+    return render(request, "genealogy/media_proposal_form.html", {"form": form})
 
 
 @user_passes_test(is_moderator)

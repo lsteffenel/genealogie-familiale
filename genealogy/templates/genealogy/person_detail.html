@@ -13,7 +13,10 @@
   {% elif person.google_photo_media_item_id %}
     <p>📷 Photo disponible via Google Photos (album partagé, non chargée : identifiants API non configurés).</p>
   {% endif %}
-  <p><a class="btn" href="{% url 'propose_person_edit' person.pk %}">Proposer une modification</a></p>
+  <p>
+    <a class="btn" href="{% url 'propose_person_edit' person.pk %}">Proposer une modification</a>
+    <a class="btn secondary" href="{% url 'propose_media_add' %}">Ajouter une photo</a>
+  </p>
 </div>
 
 {% if unions or parent_unions %}

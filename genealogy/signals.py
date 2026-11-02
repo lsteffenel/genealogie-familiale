@@ -27,13 +27,18 @@ def notify_moderators_on_new_proposal(sender, instance, created, **kwargs):
     )
     if not recipients:
         return
-    target = f"{instance.content_type.model} #{instance.object_id}"
-    changes = ", ".join(f"{field} → {value}" for field, value in instance.field_changes.items())
+    if instance.action == EditProposal.Action.CREATE:
+        data = instance.new_object_data or {}
+        target = f"ajout d'un média « {data.get('title', '')} »"
+        changes = f"personne #{data.get('person_id')}"
+    else:
+        target = f"{instance.content_type.model} #{instance.object_id}"
+        changes = ", ".join(f"{field} → {value}" for field, value in instance.field_changes.items())
     send_mail(
         subject=f"[Généalogie] Nouvelle proposition #{instance.pk} à modérer",
         message=(
-            f"{instance.proposed_by.username} propose une modification sur {target}.\n"
-            f"Changements : {changes}\n"
+            f"{instance.proposed_by.username} propose {target}.\n"
+            f"Détail : {changes}\n"
             f"{instance.note}\n\n"
             f"Modérez-la depuis l'admin ou la rubrique Modération du site."
         ),

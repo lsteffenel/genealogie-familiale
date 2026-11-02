@@ -112,6 +112,7 @@ signées retournées par l'API sont mises en cache 6 h.
 - `/` : liste des personnes avec recherche
 - `/personne/<id>/` : fiche complète (famille, unions, enfants, parcours, photos, historique des propositions)
 - `/personne/<id>/proposer/` : formulaire de proposition de modification (validée par un modérateur)
+- `/photos/ajouter/` : **upload local d'une photo** (ou référence Google Photos), soumis à validation avant publication ; le fichier validé est stocké dans `media/photos/` (volume `media_data` sous Docker, servi derrière authentification)
 - `/propositions/` : file de modération (réservée aux modérateurs)
 - `/arbre/` : **arbre graphique** avec choix de la racine et cases à cocher
   pour afficher/masquer nom, dates et photo (paramètres `?name=0&dates=0&photo=0`)

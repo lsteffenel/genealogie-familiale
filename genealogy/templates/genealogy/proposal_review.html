@@ -3,16 +3,34 @@
 {% block content %}
 <h1>Proposition #{{ proposal.pk }}</h1>
 <div class="card">
-  <p>Objet : {{ proposal.content_type.model }} #{{ proposal.object_id }} —
-     proposée par <strong>{{ proposal.proposed_by.username }}</strong> le {{ proposal.created_at|date:"d/m/Y H:i" }}</p>
+  {% if proposal.action == "edit" %}
+    <p>Objet : {{ proposal.content_type.model }} #{{ proposal.object_id }} —
+       proposée par <strong>{{ proposal.proposed_by.username }}</strong> le {{ proposal.created_at|date:"d/m/Y H:i" }}</p>
+  {% else %}
+    <p><strong>Ajout d'un média</strong> proposé par <strong>{{ proposal.proposed_by.username }}</strong>
+       le {{ proposal.created_at|date:"d/m/Y H:i" }}</p>
+  {% endif %}
   {% if proposal.note %}<p><em>Note du membre :</em> {{ proposal.note|linebreaksbr }}</p>{% endif %}
-  <h2>Changements proposés</h2>
-  <table>
-    <tr><th>Champ</th><th>Nouvelle valeur</th></tr>
-    {% for field, value in proposal.field_changes.items %}
-    <tr><td><code>{{ field }}</code></td><td>{{ value }}</td></tr>
-    {% endfor %}
-  </table>
+  {% if proposal.action == "edit" %}
+    <h2>Changements proposés</h2>
+    <table>
+      <tr><th>Champ</th><th>Nouvelle valeur</th></tr>
+      {% for field, value in proposal.field_changes.items %}
+      <tr><td><code>{{ field }}</code></td><td>{{ value }}</td></tr>
+      {% endfor %}
+    </table>
+  {% else %}
+    <h2>Média proposé</h2>
+    <table>
+      <tr><th>Titre</th><td>{{ proposal.new_object_data.title }}</td></tr>
+      <tr><th>Personne</th><td>Personne #{{ proposal.new_object_data.person_id }}</td></tr>
+      <tr><th>Description</th><td>{{ proposal.new_object_data.description }}</td></tr>
+      <tr><th>Source</th><td>
+        {% if proposal.uploaded_file %}📎 fichier : {{ proposal.uploaded_file.name }}{% endif %}
+        {% if proposal.new_object_data.google_photo_media_item_id %}🔗 Google Photos : {{ proposal.new_object_data.google_photo_media_item_id }}{% endif %}
+      </td></tr>
+    </table>
+  {% endif %}
 </div>
 <form method="post">
   {% csrf_token %}

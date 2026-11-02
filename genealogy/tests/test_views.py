@@ -36,6 +36,7 @@ class AccessTests(BaseViewTests):
             reverse("person_list"),
             reverse("person_detail", args=[self.person.pk]),
             reverse("propose_person_edit", args=[self.person.pk]),
+            reverse("propose_media_add"),
             reverse("proposal_list"),
             reverse("proposal_review", args=[proposal.pk]),
             "/media/photos/test.jpg",

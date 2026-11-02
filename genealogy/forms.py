@@ -3,6 +3,31 @@ from django import forms
 from .models import Person
 
 
+class MediaProposalForm(forms.Form):
+    person = forms.ModelChoiceField(queryset=Person.objects.all(), label="Personne associée")
+    title = forms.CharField(max_length=255, label="Titre de la photo")
+    description = forms.CharField(
+        required=False, widget=forms.Textarea(attrs={"rows": 3}), label="Description"
+    )
+    image = forms.ImageField(required=False, label="Fichier photo (stockage local)")
+    google_photo_media_item_id = forms.CharField(
+        required=False, max_length=255,
+        label="Identifiant Google Photos (si la photo vient de l'album partagé)",
+    )
+    note = forms.CharField(
+        required=False, widget=forms.Textarea(attrs={"rows": 2}),
+        label="Commentaire (affiché au modérateur)",
+    )
+
+    def clean(self):
+        cleaned = super().clean()
+        if not cleaned.get("image") and not cleaned.get("google_photo_media_item_id"):
+            raise forms.ValidationError(
+                "Indiquez un fichier à uploader ou un identifiant Google Photos."
+            )
+        return cleaned
+
+
 class PersonProposalForm(forms.ModelForm):
     class Meta:
         model = Person
