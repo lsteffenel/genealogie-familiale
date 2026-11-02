@@ -58,9 +58,17 @@ python manage.py import_gedcom chemin/vers/export.ged --dry-run  # test à blanc
 - **EditProposal** : proposition de modification soumise par un membre, approuvée/rejetée par un modérateur
 - **Profile** : rôle de l'utilisateur (membre, modérateur, administrateur)
 
+## Interface membre
+
+- `/` : liste des personnes avec recherche
+- `/personne/<id>/` : fiche complète (famille, unions, enfants, parcours, photos, historique des propositions)
+- `/personne/<id>/proposer/` : formulaire de proposition de modification (validée par un modérateur)
+- `/propositions/` : file de modération (réservée aux modérateurs)
+- Connexion requise pour tout le site (`/connexion/`)
+
 ## Roadmap
 
-1. Fondations (ce dépôt) : modèles, rôles, import GEDCOM, modération
+1. Fondations : modèles, rôles, import GEDCOM, modération
 2. Interface membre : consultation de l'arbre, soumission de propositions
 3. Intégration Google Photos (API, lecture seule)
 4. Déploiement

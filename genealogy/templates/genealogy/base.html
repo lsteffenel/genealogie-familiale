@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Généalogie familiale{% endblock %}</title>
+  <style>
+    body { font-family: Georgia, serif; margin: 0; background: #f7f5f0; color: #2b2b2b; }
+    header { background: #4a3f35; color: #fff; padding: 0.8rem 1.5rem; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+    header a { color: #f0e6d2; text-decoration: none; }
+    header a:hover { text-decoration: underline; }
+    header .brand { font-weight: bold; font-size: 1.1rem; }
+    main { max-width: 960px; margin: 1.5rem auto; padding: 0 1rem; }
+    .messages { list-style: none; padding: 0; }
+    .messages li { padding: 0.6rem 1rem; border-radius: 4px; margin-bottom: 0.5rem; }
+    .messages .success { background: #dff0d8; color: #2d5a27; }
+    .messages .info { background: #d9edf7; color: #245269; }
+    .messages .error { background: #f2dede; color: #8a2f2b; }
+    table { border-collapse: collapse; width: 100%; background: #fff; }
+    th, td { border: 1px solid #ddd; padding: 0.5rem 0.7rem; text-align: left; }
+    th { background: #efe9df; }
+    .card { background: #fff; border: 1px solid #ddd; border-radius: 6px; padding: 1rem 1.2rem; margin-bottom: 1rem; }
+    .badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 10px; font-size: 0.8rem; }
+    .badge.pending { background: #fcf3cf; color: #7a6210; }
+    .badge.approved { background: #dff0d8; color: #2d5a27; }
+    .badge.rejected { background: #f2dede; color: #8a2f2b; }
+    button, .btn { background: #4a3f35; color: #fff; border: 0; border-radius: 4px; padding: 0.45rem 0.9rem; cursor: pointer; text-decoration: none; display: inline-block; }
+    .btn.secondary { background: #8a7f70; }
+    input, select, textarea { padding: 0.4rem; border: 1px solid #ccc; border-radius: 4px; width: 100%; box-sizing: border-box; }
+    label { font-weight: bold; display: block; margin-top: 0.7rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <span class="brand"><a href="{% url 'person_list' %}">🌳 Généalogie familiale</a></span>
+    {% if user.is_authenticated %}
+      <a href="{% url 'person_list' %}">Arbre</a>
+      {% if user.profile.is_moderator %}
+        <a href="{% url 'proposal_list' %}">Modération</a>
+      {% endif %}
+      <a href="{% url 'admin:index' %}">Administration</a>
+      <span>{{ user.username }}</span>
+      <form method="post" action="{% url 'logout' %}" style="margin:0">
+        {% csrf_token %}
+        <button type="submit" class="btn secondary">Déconnexion</button>
+      </form>
+    {% else %}
+      <a href="{% url 'login' %}">Connexion</a>
+    {% endif %}
+  </header>
+  <main>
+    {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}<li class="{{ message.tags }}">{{ message }}</li>{% endfor %}
+      </ul>
+    {% endif %}
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

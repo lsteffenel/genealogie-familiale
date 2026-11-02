@@ -1,0 +1,29 @@
+{% extends "genealogy/base.html" %}
+{% block title %}Modération{% endblock %}
+{% block content %}
+<h1>Modération des propositions</h1>
+<p>
+  {% for value, label in statuses %}
+    <a class="btn {% if status == value %}secondary{% endif %}" href="?status={{ value }}">{{ label }}</a>
+  {% endfor %}
+</p>
+{% if proposals %}
+<table>
+  <tr><th>#</th><th>Objet</th><th>Proposée par</th><th>Changements</th><th>Statut</th><th>Date</th><th></th></tr>
+  {% for proposal in proposals %}
+  <tr>
+    <td>{{ proposal.pk }}</td>
+    <td>{{ proposal.content_type.model }} #{{ proposal.object_id }}</td>
+    <td>{{ proposal.proposed_by.username }}</td>
+    <td><ul>{% for field, value in proposal.field_changes.items %}<li><code>{{ field }}</code> → {{ value }}</li>{% endfor %}</ul>
+        {% if proposal.note %}<em>{{ proposal.note }}</em>{% endif %}</td>
+    <td><span class="badge {{ proposal.status }}">{{ proposal.get_status_display }}</span></td>
+    <td>{{ proposal.created_at|date:"d/m/Y H:i" }}</td>
+    <td>{% if proposal.status == "pending" %}<a class="btn" href="{% url 'proposal_review' proposal.pk %}">Traiter</a>{% endif %}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+<p>Aucune proposition avec ce statut.</p>
+{% endif %}
+{% endblock %}

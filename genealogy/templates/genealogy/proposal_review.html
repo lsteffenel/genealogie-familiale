@@ -1,0 +1,27 @@
+{% extends "genealogy/base.html" %}
+{% block title %}Proposition #{{ proposal.pk }}{% endblock %}
+{% block content %}
+<h1>Proposition #{{ proposal.pk }}</h1>
+<div class="card">
+  <p>Objet : {{ proposal.content_type.model }} #{{ proposal.object_id }} —
+     proposée par <strong>{{ proposal.proposed_by.username }}</strong> le {{ proposal.created_at|date:"d/m/Y H:i" }}</p>
+  {% if proposal.note %}<p><em>Note du membre :</em> {{ proposal.note|linebreaksbr }}</p>{% endif %}
+  <h2>Changements proposés</h2>
+  <table>
+    <tr><th>Champ</th><th>Nouvelle valeur</th></tr>
+    {% for field, value in proposal.field_changes.items %}
+    <tr><td><code>{{ field }}</code></td><td>{{ value }}</td></tr>
+    {% endfor %}
+  </table>
+</div>
+<form method="post">
+  {% csrf_token %}
+  <label for="{{ form.comment.id_for_label }}">{{ form.comment.label }}</label>
+  {{ form.comment }}
+  <p style="margin-top:1rem">
+    <button type="submit" name="action" value="approve">Approuver et appliquer</button>
+    <button type="submit" name="action" value="reject" class="btn secondary">Rejeter</button>
+    <a class="btn secondary" href="{% url 'proposal_list' %}">Retour</a>
+  </p>
+</form>
+{% endblock %}

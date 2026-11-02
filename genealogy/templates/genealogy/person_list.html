@@ -1,0 +1,29 @@
+{% extends "genealogy/base.html" %}
+{% block title %}Arbre généalogique{% endblock %}
+{% block content %}
+<h1>Arbre généalogique</h1>
+<form method="get" action="{% url 'person_list' %}">
+  <input type="search" name="q" value="{{ request.GET.q }}" placeholder="Rechercher un nom...">
+</form>
+<p>{{ page_obj.paginator.count }} personne(s)</p>
+<table>
+  <tr><th>Nom</th><th>Prénom</th><th>Naissance</th><th>Décès</th></tr>
+  {% for person in persons %}
+  <tr>
+    <td><a href="{% url 'person_detail' person.pk %}">{{ person.last_name }}</a></td>
+    <td>{{ person.first_name }}</td>
+    <td>{{ person.birth_date|default:"" }}{% if person.birth_place %} — {{ person.birth_place }}{% endif %}</td>
+    <td>{{ person.death_date|default:"" }}{% if person.death_place %} — {{ person.death_place }}{% endif %}</td>
+  </tr>
+  {% empty %}
+  <tr><td colspan="4">Aucune personne trouvée.</td></tr>
+  {% endfor %}
+</table>
+{% if page_obj.has_other_pages %}
+<p>
+  {% if page_obj.has_previous %}<a href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Précédent</a>{% endif %}
+  Page {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+  {% if page_obj.has_next %}<a href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Suivant</a>{% endif %}
+</p>
+{% endif %}
+{% endblock %}
