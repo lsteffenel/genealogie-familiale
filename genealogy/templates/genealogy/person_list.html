@@ -2,10 +2,11 @@
 {% block title %}Arbre généalogique{% endblock %}
 {% block content %}
 <h1>Arbre généalogique</h1>
-<form method="get" action="{% url 'person_list' %}">
-  <input type="search" name="q" value="{{ request.GET.q }}" placeholder="Rechercher un nom...">
+<form method="get" action="{% url 'person_list' %}" class="card" style="display:flex;gap:0.8rem;align-items:center">
+  <input type="search" name="q" value="{{ request.GET.q }}" placeholder="Rechercher un nom..." style="max-width:320px">
+  <button type="submit">Rechercher</button>
+  <span class="muted">{{ page_obj.paginator.count }} personne(s)</span>
 </form>
-<p>{{ page_obj.paginator.count }} personne(s)</p>
 <table>
   <tr><th>Nom</th><th>Prénom</th><th>Naissance</th><th>Décès</th></tr>
   {% for person in persons %}
@@ -20,10 +21,10 @@
   {% endfor %}
 </table>
 {% if page_obj.has_other_pages %}
-<p>
-  {% if page_obj.has_previous %}<a href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Précédent</a>{% endif %}
-  Page {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
-  {% if page_obj.has_next %}<a href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Suivant</a>{% endif %}
+<p class="pagination">
+  {% if page_obj.has_previous %}<a class="btn secondary" href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Précédent</a>{% endif %}
+  <span class="muted">Page {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
+  {% if page_obj.has_next %}<a class="btn secondary" href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Suivant</a>{% endif %}
 </p>
 {% endif %}
 {% endblock %}
