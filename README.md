@@ -22,7 +22,10 @@ python manage.py runserver
 ```
 
 L'administration (gestion des rôles, modération des propositions) se fait via
-`/admin/`.
+`/admin/`. Depuis la fiche d'un utilisateur, l'administrateur peut aussi
+**lier le compte à une personne existante de l'arbre** (champ « person » du
+profil, un seul compte par personne) : utile après l'import GEDCOM pour
+rattacher un membre à sa fiche « profil minimal » et éviter les doublons.
 
 ## Avec Docker (docker compose)
 

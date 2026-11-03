@@ -26,6 +26,24 @@ class ProfileTests(TestCase):
         user.profile.save()
         self.assertTrue(user.profile.is_moderator)
 
+    def test_account_can_be_linked_to_existing_person(self):
+        user = User.objects.create_user("jean", password="secret123")
+        person = Person.objects.create(first_name="Jean", last_name="Dupont", gedcom_id="I42")
+        user.profile.person = person
+        user.profile.save()
+        self.assertEqual(user.profile.person, person)
+        self.assertEqual(person.account.user, user)
+
+    def test_person_can_have_only_one_account(self):
+        person = Person.objects.create(first_name="Jean", last_name="Dupont")
+        u1 = User.objects.create_user("jean1", password="secret123")
+        u2 = User.objects.create_user("jean2", password="secret123")
+        u1.profile.person = person
+        u1.profile.save()
+        u2.profile.person = person
+        with self.assertRaises(Exception):
+            u2.profile.save()
+
 
 class PersonTests(TestCase):
     def test_death_before_birth_is_invalid(self):

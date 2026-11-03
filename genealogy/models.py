@@ -20,6 +20,11 @@ class Profile(models.Model):
     role = models.CharField(
         max_length=20, choices=Role.choices, default=Role.MEMBER
     )
+    person = models.OneToOneField(
+        "Person", null=True, blank=True, on_delete=models.SET_NULL,
+        related_name="account",
+        help_text="Personne de l'arbre correspondant à ce compte (évite les doublons)",
+    )
 
     def __str__(self):
         return f"{self.user.username} ({self.get_role_display()})"

@@ -8,9 +8,10 @@ from .models import EditProposal, Event, Media, Person, Profile, Union
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ("user", "role")
+    list_display = ("user", "role", "person")
     list_filter = ("role",)
-    search_fields = ("user__username", "user__email")
+    search_fields = ("user__username", "user__email",
+                     "person__first_name", "person__last_name")
 
 
 class ProfileInline(admin.StackedInline):
