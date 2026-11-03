@@ -1,0 +1,21 @@
+{% extends "genealogy/base.html" %}
+{% block title %}Proposer une modification — {{ person }}{% endblock %}
+{% block content %}
+<h1>Proposer une modification pour {{ person }}</h1>
+<p>Les valeurs ci-dessous sont les valeurs actuelles. Modifiez ce que vous souhaitez corriger/compléter :
+la proposition devra être validée par un modérateur avant d'être appliquée.</p>
+<form method="post">
+  {% csrf_token %}
+  {% for field in form %}
+    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+    {{ field }}
+    {% if field.errors %}<p style="color:#8a2f2b">{{ field.errors|join:", " }}</p>{% endif %}
+  {% endfor %}
+  <label for="{{ note_form.note.id_for_label }}">{{ note_form.note.label }}</label>
+  {{ note_form.note }}
+  <p style="margin-top:1rem">
+    <button type="submit">Soumettre la proposition</button>
+    <a class="btn secondary" href="{% url 'person_detail' person.pk %}">Annuler</a>
+  </p>
+</form>
+{% endblock %}

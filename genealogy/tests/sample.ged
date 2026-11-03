@@ -1,0 +1,31 @@
+0 HEAD
+1 CHAR UTF-8
+0 @I1@ INDI
+1 NAME Jean /Dupont/ 
+1 SEX M
+1 BIRT
+2 DATE 12 JAN 1950
+2 PLAC Paris, France
+1 DEAT
+2 DATE 3 MAR 2010
+2 PLAC Lyon, France
+0 @I2@ INDI
+1 NAME Marie /Martin/ Durand
+1 SEX F
+1 BIRT
+2 DATE 5 JUN 1952
+2 PLAC Marseille, France
+0 @I3@ INDI
+1 NAME Lucie /Dupont/
+1 SEX F
+1 BIRT
+2 DATE 20 DEC 1978
+2 PLAC Paris, France
+0 @F1@ FAM
+1 HUSB @I1@
+1 WIFE @I2@
+1 MARR
+2 DATE 14 JUL 1974
+2 PLAC Paris, France
+1 CHIL @I3@
+0 TRLR

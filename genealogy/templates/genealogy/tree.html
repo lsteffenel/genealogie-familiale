@@ -1,0 +1,25 @@
+{% extends "genealogy/base.html" %}
+{% block title %}Arbre graphique{% endblock %}
+{% block content %}
+<h1>Arbre généalogique</h1>
+{% if not root %}
+  <p>Aucune personne enregistrée pour le moment.</p>
+{% else %}
+<form method="get" class="card inline-controls" style="display:flex;gap:1.5rem;align-items:flex-end;flex-wrap:wrap">
+  <label><input type="checkbox" name="name" value="1" {% if show_name %}checked{% endif %}> Nom</label>
+  <label><input type="checkbox" name="dates" value="1" {% if show_dates %}checked{% endif %}> Dates</label>
+  <label><input type="checkbox" name="photo" value="1" {% if show_photo %}checked{% endif %}> Photo</label>
+  <label style="min-width:220px">Racine :
+    <select name="root">
+      {% for p in persons %}
+        <option value="{{ p.pk }}" {% if p.pk == root.pk %}selected{% endif %}>{% if show_name %}{{ p.first_name }} {{ p.last_name }}{% else %}Personne #{{ p.pk }}{% endif %}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <button type="submit">Appliquer</button>
+</form>
+<ul class="tree">
+  <li>{% include "genealogy/tree_node.html" with node=root depth=0 %}</li>
+</ul>
+{% endif %}
+{% endblock %}
