@@ -2,6 +2,8 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy
 
 from .models import EditProposal, Event, Media, Person, Profile, Union
 
@@ -61,17 +63,17 @@ class EditProposalAdmin(admin.ModelAdmin):
     readonly_fields = ("created_at", "reviewed_at")
     actions = ("approve_proposals", "reject_proposals")
 
-    @admin.action(description="Approuver les propositions sélectionnées")
+    @admin.action(description=gettext_lazy("Approuver les propositions sélectionnées"))
     def approve_proposals(self, request, queryset):
         count = 0
         for proposal in queryset.filter(status="pending"):
             proposal.apply(request.user)
             count += 1
-        self.message_user(request, f"{count} proposition(s) approuvée(s).")
+        self.message_user(request, _("%(count)s proposition(s) approuvée(s).") % {"count": count})
 
-    @admin.action(description="Rejeter les propositions sélectionnées")
+    @admin.action(description=gettext_lazy("Rejeter les propositions sélectionnées"))
     def reject_proposals(self, request, queryset):
         count = queryset.filter(status="pending").update(
             status="rejected", reviewed_by=request.user, reviewed_at=timezone.now()
         )
-        self.message_user(request, f"{count} proposition(s) rejetée(s).")
+        self.message_user(request, _("%(count)s proposition(s) rejetée(s).") % {"count": count})

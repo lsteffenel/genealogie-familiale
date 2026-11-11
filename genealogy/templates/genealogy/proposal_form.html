@@ -1,9 +1,9 @@
 {% extends "genealogy/base.html" %}
-{% block title %}Proposer une modification — {{ person }}{% endblock %}
+{% load i18n %}
+{% block title %}{% blocktrans with person=person %}Proposer une modification — {{ person }}{% endblocktrans %}{% endblock %}
 {% block content %}
-<h1>Proposer une modification pour {{ person }}</h1>
-<p>Les valeurs ci-dessous sont les valeurs actuelles. Modifiez ce que vous souhaitez corriger/compléter :
-la proposition devra être validée par un modérateur avant d'être appliquée.</p>
+<h1>{% blocktrans with person=person %}Proposer une modification pour {{ person }}{% endblocktrans %}</h1>
+<p>{% trans "Les valeurs ci-dessous sont les valeurs actuelles. Modifiez ce que vous souhaitez corriger/compléter : la proposition devra être validée par un modérateur avant d'être appliquée." %}</p>
 <form method="post">
   {% csrf_token %}
   {% for field in form %}
@@ -14,8 +14,8 @@ la proposition devra être validée par un modérateur avant d'être appliquée.
   <label for="{{ note_form.note.id_for_label }}">{{ note_form.note.label }}</label>
   {{ note_form.note }}
   <p style="margin-top:1rem">
-    <button type="submit">Soumettre la proposition</button>
-    <a class="btn secondary" href="{% url 'person_detail' person.pk %}">Annuler</a>
+    <button type="submit">{% trans "Soumettre la proposition" %}</button>
+    <a class="btn secondary" href="{% url 'person_detail' person.pk %}">{% trans "Annuler" %}</a>
   </p>
 </form>
 {% endblock %}

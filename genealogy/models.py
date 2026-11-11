@@ -7,12 +7,13 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ValidationError
 from django.core.files.base import ContentFile
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class Role(models.TextChoices):
-    MEMBER = "member", "Membre"
-    MODERATOR = "moderator", "Modérateur"
-    ADMIN = "admin", "Administrateur"
+    MEMBER = "member", _("Membre")
+    MODERATOR = "moderator", _("Modérateur")
+    ADMIN = "admin", _("Administrateur")
 
 
 class Profile(models.Model):
@@ -23,7 +24,7 @@ class Profile(models.Model):
     person = models.OneToOneField(
         "Person", null=True, blank=True, on_delete=models.SET_NULL,
         related_name="account",
-        help_text="Personne de l'arbre correspondant à ce compte (évite les doublons)",
+        help_text=_("Personne de l'arbre correspondant à ce compte (évite les doublons)"),
     )
 
     def __str__(self):
@@ -36,27 +37,27 @@ class Profile(models.Model):
 
 class Person(models.Model):
     class Gender(models.TextChoices):
-        MALE = "M", "Homme"
-        FEMALE = "F", "Femme"
-        OTHER = "X", "Autre"
+        MALE = "M", _("Homme")
+        FEMALE = "F", _("Femme")
+        OTHER = "X", _("Autre")
 
-    first_name = models.CharField(max_length=150)
-    last_name = models.CharField(max_length=150)
-    maiden_name = models.CharField(max_length=150, blank=True)
-    gender = models.CharField(max_length=1, choices=Gender.choices, blank=True)
-    birth_date = models.DateField(null=True, blank=True)
-    birth_place = models.CharField(max_length=255, blank=True)
-    death_date = models.DateField(null=True, blank=True)
-    death_place = models.CharField(max_length=255, blank=True)
-    biography = models.TextField(blank=True)
+    first_name = models.CharField(max_length=150, verbose_name=_("Prénom"))
+    last_name = models.CharField(max_length=150, verbose_name=_("Nom"))
+    maiden_name = models.CharField(max_length=150, blank=True, verbose_name=_("Nom de jeune fille"))
+    gender = models.CharField(max_length=1, choices=Gender.choices, blank=True, verbose_name=_("Sexe"))
+    birth_date = models.DateField(null=True, blank=True, verbose_name=_("Date de naissance"))
+    birth_place = models.CharField(max_length=255, blank=True, verbose_name=_("Lieu de naissance"))
+    death_date = models.DateField(null=True, blank=True, verbose_name=_("Date de décès"))
+    death_place = models.CharField(max_length=255, blank=True, verbose_name=_("Lieu de décès"))
+    biography = models.TextField(blank=True, verbose_name=_("Biographie"))
     google_photo_media_item_id = models.CharField(
         max_length=255,
         blank=True,
-        help_text="Identifiant de la photo dans l'album Google Photos partagé",
+        help_text=_("Identifiant de la photo dans l'album Google Photos partagé"),
     )
     gedcom_id = models.CharField(
         max_length=50, unique=True, null=True, blank=True,
-        help_text="Identifiant d'origine dans le fichier GEDCOM importé",
+        help_text=_("Identifiant d'origine dans le fichier GEDCOM importé"),
     )
     created_by = models.ForeignKey(
         User, null=True, blank=True, on_delete=models.SET_NULL,
@@ -74,16 +75,16 @@ class Person(models.Model):
     def clean(self):
         if self.birth_date and self.death_date and self.death_date < self.birth_date:
             raise ValidationError(
-                "La date de décès ne peut pas être antérieure à la date de naissance."
+                _("La date de décès ne peut pas être antérieure à la date de naissance.")
             )
 
 
 class Union(models.Model):
     class UnionType(models.TextChoices):
-        MARRIAGE = "marriage", "Mariage"
-        PACS = "pacs", "PACS"
-        COHABITATION = "cohabitation", "Concubinage"
-        OTHER = "other", "Autre"
+        MARRIAGE = "marriage", _("Mariage")
+        PACS = "pacs", _("PACS")
+        COHABITATION = "cohabitation", _("Concubinage")
+        OTHER = "other", _("Autre")
 
     partner_a = models.ForeignKey(
         Person, on_delete=models.CASCADE, related_name="unions_as_a"
@@ -110,17 +111,17 @@ class Union(models.Model):
 
     def clean(self):
         if self.partner_a_id and self.partner_b_id and self.partner_a_id == self.partner_b_id:
-            raise ValidationError("Les deux partenaires doivent être des personnes différentes.")
+            raise ValidationError(_("Les deux partenaires doivent être des personnes différentes."))
 
 
 class Event(models.Model):
     class EventType(models.TextChoices):
-        DIPLOMA = "diploma", "Diplôme"
-        JOB = "job", "Métier"
-        RESIDENCE = "residence", "Résidence"
-        ANECDOTE = "anecdote", "Anecdote / Histoire"
-        AWARD = "award", "Distinction"
-        OTHER = "other", "Autre"
+        DIPLOMA = "diploma", _("Diplôme")
+        JOB = "job", _("Métier")
+        RESIDENCE = "residence", _("Résidence")
+        ANECDOTE = "anecdote", _("Anecdote / Histoire")
+        AWARD = "award", _("Distinction")
+        OTHER = "other", _("Autre")
 
     person = models.ForeignKey(Person, on_delete=models.CASCADE, related_name="events")
     event_type = models.CharField(max_length=20, choices=EventType.choices)
@@ -153,7 +154,7 @@ class Media(models.Model):
     image = models.ImageField(upload_to="photos/", blank=True)
     google_photo_media_item_id = models.CharField(
         max_length=255, blank=True,
-        help_text="Identifiant du média dans Google Photos (affichage via l'API)",
+        help_text=_("Identifiant du média dans Google Photos (affichage via l'API)"),
     )
     uploaded_by = models.ForeignKey(
         User, null=True, blank=True, on_delete=models.SET_NULL,
@@ -169,23 +170,23 @@ class Media(models.Model):
 
     def clean(self):
         if not self.person and not self.event:
-            raise ValidationError("Un média doit être rattaché à une personne ou à un événement.")
+            raise ValidationError(_("Un média doit être rattaché à une personne ou à un événement."))
         if not self.image and not self.google_photo_media_item_id:
             raise ValidationError(
-                "Un média doit contenir une image uploadée ou un identifiant Google Photos."
+                _("Un média doit contenir une image uploadée ou un identifiant Google Photos.")
             )
 
 
 class ProposalStatus(models.TextChoices):
-    PENDING = "pending", "En attente"
-    APPROVED = "approved", "Approuvée"
-    REJECTED = "rejected", "Rejetée"
+    PENDING = "pending", _("En attente")
+    APPROVED = "approved", _("Approuvée")
+    REJECTED = "rejected", _("Rejetée")
 
 
 class EditProposal(models.Model):
     class Action(models.TextChoices):
-        EDIT = "edit", "Modification"
-        CREATE = "create", "Ajout"
+        EDIT = "edit", _("Modification")
+        CREATE = "create", _("Ajout")
 
     action = models.CharField(
         max_length=10, choices=Action.choices, default=Action.EDIT
@@ -195,18 +196,18 @@ class EditProposal(models.Model):
     target = GenericForeignKey("content_type", "object_id")
     field_changes = models.JSONField(
         default=dict, blank=True,
-        help_text="Dictionnaire {champ: nouvelle_valeur} proposé par le membre",
+        help_text=_("Dictionnaire {champ: nouvelle_valeur} proposé par le membre"),
     )
     new_object_data = models.JSONField(
         null=True, blank=True,
-        help_text="Pour action=create : données du nouvel objet (ex. média à créer)",
+        help_text=_("Pour action=create : données du nouvel objet (ex. média à créer)"),
     )
     uploaded_file = models.FileField(
         upload_to="proposals/", null=True, blank=True,
-        help_text="Fichier uploadé par le membre, rattaché au nouvel objet à validation",
+        help_text=_("Fichier uploadé par le membre, rattaché au nouvel objet à validation"),
     )
     note = models.TextField(
-        blank=True, help_text="Commentaire du membre accompagnant sa proposition"
+        blank=True, help_text=_("Commentaire du membre accompagnant sa proposition")
     )
     proposed_by = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="proposals_made"
@@ -227,18 +228,23 @@ class EditProposal(models.Model):
 
     def __str__(self):
         if self.action == EditProposal.Action.CREATE:
-            return f"Proposition #{self.pk} : ajout ({self.get_status_display()})"
-        return f"Proposition #{self.pk} sur {self.content_type.model} #{self.object_id} ({self.get_status_display()})"
+            return _("Proposition #%(pk)s : ajout (%(status)s)") % {
+                "pk": self.pk, "status": self.get_status_display(),
+            }
+        return _("Proposition #%(pk)s sur %(model)s #%(object_id)s (%(status)s)") % {
+            "pk": self.pk, "model": self.content_type.model,
+            "object_id": self.object_id, "status": self.get_status_display(),
+        }
 
     def apply(self, reviewer):
         from django.utils import timezone
 
         if self.status != ProposalStatus.PENDING:
-            raise ValidationError("Seule une proposition en attente peut être appliquée.")
+            raise ValidationError(_("Seule une proposition en attente peut être appliquée."))
         if self.action == EditProposal.Action.CREATE:
             data = self.new_object_data or {}
             if data.get("model") != "media":
-                raise ValidationError("Type d'objet à créer non supporté.")
+                raise ValidationError(_("Type d'objet à créer non supporté."))
             media = Media(
                 person_id=data.get("person_id"),
                 title=data.get("title", ""),
@@ -257,7 +263,7 @@ class EditProposal(models.Model):
         else:
             for field, value in self.field_changes.items():
                 if not hasattr(self.target, field):
-                    raise ValidationError(f"Champ inconnu : {field}")
+                    raise ValidationError(_("Champ inconnu : %(field)s") % {"field": field})
                 setattr(self.target, field, value)
             self.target.save()
         self.status = ProposalStatus.APPROVED
@@ -269,7 +275,7 @@ class EditProposal(models.Model):
         from django.utils import timezone
 
         if self.status != ProposalStatus.PENDING:
-            raise ValidationError("Seule une proposition en attente peut être rejetée.")
+            raise ValidationError(_("Seule une proposition en attente peut être rejetée."))
         self.status = ProposalStatus.REJECTED
         self.reviewed_by = reviewer
         self.review_comment = comment

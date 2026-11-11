@@ -5,6 +5,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
+from django.utils.translation import gettext as _
 from django.views.generic import DetailView, ListView
 
 from .forms import MediaProposalForm, PersonProposalForm, ProposalNoteForm, ReviewForm
@@ -73,7 +74,7 @@ def propose_person_edit(request, pk):
         if form.is_valid() and note_form.is_valid():
             changes = form.changed_fields(person)
             if not changes:
-                messages.info(request, "Aucune modification détectée.")
+                messages.info(request, _("Aucune modification détectée."))
                 return redirect("person_detail", pk=person.pk)
             EditProposal.objects.create(
                 content_type=ContentType.objects.get_for_model(Person),
@@ -84,8 +85,8 @@ def propose_person_edit(request, pk):
             )
             messages.success(
                 request,
-                "Votre proposition a été soumise et est en attente de validation "
-                "par un modérateur.",
+                _("Votre proposition a été soumise et est en attente de validation "
+                  "par un modérateur."),
             )
             return redirect("person_detail", pk=person.pk)
     else:
@@ -109,7 +110,7 @@ def tree_view(request, pk=None):
     if root_id:
         root = by_pk.get(int(root_id))
         if root is None:
-            raise Http404("Personne inconnue")
+            raise Http404(_("Personne inconnue"))
     else:
         root = persons[0]
 
@@ -175,7 +176,7 @@ def propose_media_add(request):
             )
             messages.success(
                 request,
-                "Votre photo a été soumise et est en attente de validation par un modérateur.",
+                _("Votre photo a été soumise et est en attente de validation par un modérateur."),
             )
             return redirect("person_detail", pk=cleaned["person"].pk)
     else:
@@ -209,12 +210,12 @@ def proposal_review(request, pk):
             if action == "approve":
                 try:
                     proposal.apply(request.user)
-                    messages.success(request, f"Proposition #{proposal.pk} approuvée et appliquée.")
+                    messages.success(request, _("Proposition #%(pk)s approuvée et appliquée.") % {"pk": proposal.pk})
                 except Exception as exc:
-                    messages.error(request, f"Échec de l'application : {exc}")
+                    messages.error(request, _("Échec de l'application : %(exc)s") % {"exc": exc})
             elif action == "reject":
                 proposal.reject(request.user, form.cleaned_data["comment"])
-                messages.success(request, f"Proposition #{proposal.pk} rejetée.")
+                messages.success(request, _("Proposition #%(pk)s rejetée.") % {"pk": proposal.pk})
             return redirect("proposal_list")
     else:
         form = ReviewForm()

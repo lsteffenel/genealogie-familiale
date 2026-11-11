@@ -1,29 +1,30 @@
 from django import forms
+from django.utils.translation import gettext_lazy as _
 
 from .models import Person
 
 
 class MediaProposalForm(forms.Form):
-    person = forms.ModelChoiceField(queryset=Person.objects.all(), label="Personne associée")
-    title = forms.CharField(max_length=255, label="Titre de la photo")
+    person = forms.ModelChoiceField(queryset=Person.objects.all(), label=_("Personne associée"))
+    title = forms.CharField(max_length=255, label=_("Titre de la photo"))
     description = forms.CharField(
-        required=False, widget=forms.Textarea(attrs={"rows": 3}), label="Description"
+        required=False, widget=forms.Textarea(attrs={"rows": 3}), label=_("Description")
     )
-    image = forms.ImageField(required=False, label="Fichier photo (stockage local)")
+    image = forms.ImageField(required=False, label=_("Fichier photo (stockage local)"))
     google_photo_media_item_id = forms.CharField(
         required=False, max_length=255,
-        label="Identifiant Google Photos (si la photo vient de l'album partagé)",
+        label=_("Identifiant Google Photos (si la photo vient de l'album partagé)"),
     )
     note = forms.CharField(
         required=False, widget=forms.Textarea(attrs={"rows": 2}),
-        label="Commentaire (affiché au modérateur)",
+        label=_("Commentaire (affiché au modérateur)"),
     )
 
     def clean(self):
         cleaned = super().clean()
         if not cleaned.get("image") and not cleaned.get("google_photo_media_item_id"):
             raise forms.ValidationError(
-                "Indiquez un fichier à uploader ou un identifiant Google Photos."
+                _("Indiquez un fichier à uploader ou un identifiant Google Photos.")
             )
         return cleaned
 
@@ -61,12 +62,12 @@ class PersonProposalForm(forms.ModelForm):
 class ProposalNoteForm(forms.Form):
     note = forms.CharField(
         required=False, widget=forms.Textarea(attrs={"rows": 2}),
-        label="Commentaire (affiché au modérateur)",
+        label=_("Commentaire (affiché au modérateur)"),
     )
 
 
 class ReviewForm(forms.Form):
     comment = forms.CharField(
         required=False, widget=forms.Textarea(attrs={"rows": 2}),
-        label="Commentaire de modération",
+        label=_("Commentaire de modération"),
     )

@@ -1,14 +1,15 @@
 {% extends "genealogy/base.html" %}
-{% block title %}Connexion{% endblock %}
+{% load i18n %}
+{% block title %}{% trans "Connexion" %}{% endblock %}
 {% block content %}
-<h1>Connexion</h1>
+<h1>{% trans "Connexion" %}</h1>
 <form method="post" style="max-width:320px">
   {% csrf_token %}
   {% if form.non_field_errors %}<p style="color:#8a2f2b">{{ form.non_field_errors|join:", " }}</p>{% endif %}
-  <label for="{{ form.username.id_for_label }}">Nom d'utilisateur</label>
+  <label for="{{ form.username.id_for_label }}">{% trans "Nom d'utilisateur" %}</label>
   {{ form.username }}
-  <label for="{{ form.password.id_for_label }}">Mot de passe</label>
+  <label for="{{ form.password.id_for_label }}">{% trans "Mot de passe" %}</label>
   {{ form.password }}
-  <p style="margin-top:1rem"><button type="submit">Se connecter</button></p>
+  <p style="margin-top:1rem"><button type="submit">{% trans "Se connecter" %}</button></p>
 </form>
 {% endblock %}

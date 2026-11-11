@@ -1,0 +1,502 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: genealogie-familiale 1.0\n"
+"Language: pt_BR\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "%(count)s proposition(s) approuvée(s)."
+msgstr "%(count)s proposta(s) aprovada(s)."
+
+msgid "%(count)s proposition(s) rejetée(s)."
+msgstr "%(count)s proposta(s) rejeitada(s)."
+
+msgid "%(counter)s personne"
+msgid_plural "%(counter)s personnes"
+msgstr[0] "%(counter)s pessoa"
+msgstr[1] "%(counter)s pessoas"
+
+msgid ""
+"%(username)s propose %(target)s.\n"
+"Détail : %(changes)s\n"
+"%(note)s\n"
+"\n"
+"Modérez-la depuis l'admin ou la rubrique Modération du site."
+msgstr ""
+"%(username)s propõe %(target)s.\n"
+"Detalhes: %(changes)s\n"
+"%(note)s\n"
+"\n"
+"Modere-a no admin ou na seção Moderação do site."
+
+msgid "Action"
+msgstr "Ação"
+
+msgid "Administrateur"
+msgstr "Administrador"
+
+msgid "Administration"
+msgstr "Administração"
+
+msgid "Ajout"
+msgstr "Adição"
+
+msgid "Ajout d'un média"
+msgstr "Adição de uma mídia"
+
+msgid "Ajouter une photo"
+msgstr "Adicionar uma foto"
+
+msgid "Anecdote / Histoire"
+msgstr "Anedota / História"
+
+msgid "Annuler"
+msgstr "Cancelar"
+
+msgid "Appliquer"
+msgstr "Aplicar"
+
+msgid "Approuver et appliquer"
+msgstr "Aprovar e aplicar"
+
+msgid "Approuver les propositions sélectionnées"
+msgstr "Aprovar as propostas selecionadas"
+
+msgid "Approuvée"
+msgstr "Aprovada"
+
+msgid "Arbre graphique"
+msgstr "Árvore genealógica"
+
+msgid "Arbre généalogique"
+msgstr "Árvore genealógica"
+
+msgid "Aucune modification détectée."
+msgstr "Nenhuma alteração detectada."
+
+msgid "Aucune personne enregistrée pour le moment."
+msgstr "Nenhuma pessoa cadastrada ainda."
+
+msgid "Aucune personne trouvée."
+msgstr "Nenhuma pessoa encontrada."
+
+msgid "Aucune proposition avec ce statut."
+msgstr "Nenhuma proposta com este status."
+
+msgid "Autre"
+msgstr "Outro"
+
+msgid "Biographie"
+msgstr "Biografia"
+
+msgid "Champ"
+msgstr "Campo"
+
+msgid "Champ inconnu : %(field)s"
+msgstr "Campo desconhecido: %(field)s"
+
+msgid "Changements"
+msgstr "Alterações"
+
+msgid "Changements proposés"
+msgstr "Alterações propostas"
+
+msgid "Commentaire (affiché au modérateur)"
+msgstr "Comentário (exibido ao moderador)"
+
+msgid "Commentaire de modération"
+msgstr "Comentário de moderação"
+
+msgid "Commentaire du membre accompagnant sa proposition"
+msgstr "Comentário do membro que acompanha a proposta"
+
+msgid "Concubinage"
+msgstr "Convivência"
+
+msgid "Connexion"
+msgstr "Entrar"
+
+msgid "Contenu"
+msgstr "Conteúdo"
+
+msgid "Date"
+msgstr "Data"
+
+msgid "Date de décès"
+msgstr "Data de falecimento"
+
+msgid "Date de naissance"
+msgstr "Data de nascimento"
+
+msgid "Dates"
+msgstr "Datas"
+
+msgid "Description"
+msgstr "Descrição"
+
+msgid "Dictionnaire {champ: nouvelle_valeur} proposé par le membre"
+msgstr "Dicionário {campo: novo_valor} proposto pelo membro"
+
+msgid "Diplôme"
+msgstr "Diploma"
+
+msgid "Distinction"
+msgstr "Condecoração"
+
+msgid "Déconnexion"
+msgstr "Sair"
+
+msgid "Décès"
+msgstr "Óbito"
+
+msgid "Décédé(e) le %(d)s"
+msgstr "Falecido/a em %(d)s"
+
+msgid "En attente"
+msgstr "Pendente"
+
+msgid "Famille"
+msgstr "Família"
+
+msgid "Femme"
+msgstr "Mulher"
+
+msgid "Fichier photo (stockage local)"
+msgstr "Arquivo de foto (armazenamento local)"
+
+msgid "Fichier uploadé par le membre, rattaché au nouvel objet à validation"
+msgstr ""
+"Arquivo enviado pelo membro, anexado ao novo objeto pendente de validação"
+
+msgid "Google Photos : %(mid)s"
+msgstr "Google Fotos: %(mid)s"
+
+msgid "Généalogie familiale"
+msgstr "Genealogia familiar"
+
+msgid "Homme"
+msgstr "Homem"
+
+msgid "Identifiant Google Photos (si la photo vient de l'album partagé)"
+msgstr "ID do Google Fotos (se a foto vier do álbum compartilhado)"
+
+msgid "Identifiant d'origine dans le fichier GEDCOM importé"
+msgstr "ID original no arquivo GEDCOM importado"
+
+msgid "Identifiant de la photo dans l'album Google Photos partagé"
+msgstr "ID da foto no álbum compartilhado do Google Fotos"
+
+msgid "Identifiant du média dans Google Photos (affichage via l'API)"
+msgstr "ID da mídia no Google Fotos (exibição via API)"
+
+msgid "Indiquez un fichier à uploader ou un identifiant Google Photos."
+msgstr "Informe um arquivo para enviar ou um ID do Google Fotos."
+
+msgid "La date de décès ne peut pas être antérieure à la date de naissance."
+msgstr "A data de falecimento não pode ser anterior à data de nascimento."
+
+msgid ""
+"La photo sera publiée sur la fiche de la personne après validation par un "
+"modérateur. Vous pouvez uploader un fichier local ou référencer une photo de"
+" l'album Google Photos partagé."
+msgstr ""
+"A foto será publicada na ficha da pessoa após validação por um moderador. "
+"Você pode enviar um arquivo local ou referenciar uma foto do álbum "
+"compartilhado do Google Fotos."
+
+msgid "Langue"
+msgstr "Idioma"
+
+msgid "Les deux partenaires doivent être des personnes différentes."
+msgstr "Os dois parceiros devem ser pessoas diferentes."
+
+msgid ""
+"Les valeurs ci-dessous sont les valeurs actuelles. Modifiez ce que vous "
+"souhaitez corriger/compléter : la proposition devra être validée par un "
+"modérateur avant d'être appliquée."
+msgstr ""
+"Os valores abaixo são os atuais. Altere o que deseja corrigir ou completar: "
+"a proposta deve ser validada por um moderador antes de ser aplicada."
+
+msgid "Lieu de décès"
+msgstr "Local de falecimento"
+
+msgid "Lieu de naissance"
+msgstr "Local de nascimento"
+
+msgid "Mariage"
+msgstr "Casamento"
+
+msgid "Membre"
+msgstr "Membro"
+
+msgid "Modification"
+msgstr "Alteração"
+
+msgid "Modérateur"
+msgstr "Moderador"
+
+msgid "Modération"
+msgstr "Moderação"
+
+msgid "Modération des propositions"
+msgstr "Moderação de propostas"
+
+msgid "Mot de passe"
+msgstr "Senha"
+
+msgid "Média proposé"
+msgstr "Mídia proposta"
+
+msgid "Métier"
+msgstr "Profissão"
+
+msgid "Naissance"
+msgstr "Nascimento"
+
+msgid "Nom"
+msgstr "Sobrenome"
+
+msgid "Nom d'utilisateur"
+msgstr "Nome de usuário"
+
+msgid "Nom de jeune fille"
+msgstr "Nome de solteira"
+
+msgid "Note du membre :"
+msgstr "Observação do membro:"
+
+msgid "Nouvelle valeur"
+msgstr "Novo valor"
+
+msgid "Né(e) le %(d)s"
+msgstr "Nascido/a em %(d)s"
+
+msgid "Objet"
+msgstr "Objeto"
+
+msgid "Objet :"
+msgstr "Objeto:"
+
+msgid "PACS"
+msgstr "PACS"
+
+msgid "Page %(number)s / %(num_pages)s"
+msgstr "Página %(number)s / %(num_pages)s"
+
+msgid "Parcours et histoires"
+msgstr "Trajetória e histórias"
+
+msgid "Parents :"
+msgstr "Pais:"
+
+msgid "Personne"
+msgstr "Pessoa"
+
+msgid "Personne #%(pid)s"
+msgstr "Pessoa #%(pid)s"
+
+msgid "Personne #%(pk)s"
+msgstr "Pessoa #%(pk)s"
+
+msgid "Personne associée"
+msgstr "Pessoa associada"
+
+msgid "Personne de l'arbre correspondant à ce compte (évite les doublons)"
+msgstr "Pessoa da árvore correspondente a esta conta (evita duplicatas)"
+
+msgid "Personne inconnue"
+msgstr "Pessoa desconhecida"
+
+msgid "Personnes"
+msgstr "Pessoas"
+
+msgid "Photo"
+msgstr "Foto"
+
+msgid "Photo de %(name)s"
+msgstr "Foto de %(name)s"
+
+msgid "Photo de %(name)s %(last)s"
+msgstr "Foto de %(name)s %(last)s"
+
+msgid ""
+"Photo disponible via Google Photos (album partagé, non chargé : identifiants"
+" API non configurés)."
+msgstr ""
+"Foto disponível via Google Fotos (álbum compartilhado, não carregada: "
+"credenciais da API não configuradas)."
+
+msgid "Photos"
+msgstr "Fotos"
+
+msgid "Pour action=create : données du nouvel objet (ex. média à créer)"
+msgstr "Para action=create: dados do novo objeto (ex.: mídia a criar)"
+
+msgid "Proposer l'ajout d'une photo"
+msgstr "Propor a adição de uma foto"
+
+msgid "Proposer une modification"
+msgstr "Propor uma alteração"
+
+msgid "Proposer une modification pour %(person)s"
+msgstr "Propor uma alteração para %(person)s"
+
+msgid "Proposer une modification — %(person)s"
+msgstr "Propor uma alteração — %(person)s"
+
+msgid "Proposition #%(pk)s"
+msgstr "Proposta #%(pk)s"
+
+msgid "Proposition #%(pk)s : ajout (%(status)s)"
+msgstr "Proposta #%(pk)s: adição (%(status)s)"
+
+msgid "Proposition #%(pk)s approuvée et appliquée."
+msgstr "Proposta #%(pk)s aprovada e aplicada."
+
+msgid "Proposition #%(pk)s rejetée."
+msgstr "Proposta #%(pk)s rejeitada."
+
+msgid "Proposition #%(pk)s sur %(model)s #%(object_id)s (%(status)s)"
+msgstr "Proposta #%(pk)s em %(model)s #%(object_id)s (%(status)s)"
+
+msgid "Propositions de modification"
+msgstr "Propostas de alteração"
+
+msgid "Proposée par"
+msgstr "Proposta por"
+
+msgid "Précédent"
+msgstr "Anterior"
+
+msgid "Prénom"
+msgstr "Nome"
+
+msgid "Racine :"
+msgstr "Raiz:"
+
+msgid "Rechercher"
+msgstr "Buscar"
+
+msgid "Rechercher un nom..."
+msgstr "Buscar um nome..."
+
+msgid "Rejeter"
+msgstr "Rejeitar"
+
+msgid "Rejeter les propositions sélectionnées"
+msgstr "Rejeitar as propostas selecionadas"
+
+msgid "Rejetée"
+msgstr "Rejeitada"
+
+msgid "Retour"
+msgstr "Voltar"
+
+msgid "Résidence"
+msgstr "Residência"
+
+msgid "Se connecter"
+msgstr "Entrar"
+
+msgid "Seule une proposition en attente peut être appliquée."
+msgstr "Somente uma proposta pendente pode ser aplicada."
+
+msgid "Seule une proposition en attente peut être rejetée."
+msgstr "Somente uma proposta pendente pode ser rejeitada."
+
+msgid "Sexe"
+msgstr "Sexo"
+
+msgid "Soumettre la photo"
+msgstr "Enviar a foto"
+
+msgid "Soumettre la proposition"
+msgstr "Enviar a proposta"
+
+msgid "Source"
+msgstr "Fonte"
+
+msgid "Statut"
+msgstr "Status"
+
+msgid "Suivant"
+msgstr "Próximo"
+
+msgid "Titre"
+msgstr "Título"
+
+msgid "Titre de la photo"
+msgstr "Título da foto"
+
+msgid "Traiter"
+msgstr "Tratar"
+
+msgid "Type d'objet à créer non supporté."
+msgstr "Tipo de objeto a criar não suportado."
+
+msgid ""
+"Un média doit contenir une image uploadée ou un identifiant Google Photos."
+msgstr "Uma mídia deve conter uma imagem enviada ou um ID do Google Fotos."
+
+msgid "Un média doit être rattaché à une personne ou à un événement."
+msgstr "Uma mídia deve estar vinculada a uma pessoa ou a um evento."
+
+msgid "Union avec"
+msgstr "União com"
+
+msgid ""
+"Votre photo a été soumise et est en attente de validation par un modérateur."
+msgstr "Sua foto foi enviada e está aguardando validação por um moderador."
+
+msgid ""
+"Votre proposition a été soumise et est en attente de validation par un "
+"modérateur."
+msgstr ""
+"Sua proposta foi enviada e está aguardando validação por um moderador."
+
+msgid "[Généalogie] Nouvelle proposition #%(pk)s à modérer"
+msgstr "[Genealogia] Nova proposta #%(pk)s para moderar"
+
+msgid "ajout d'un média « %(title)s »"
+msgstr "adição de uma mídia \"%(title)s\""
+
+msgid "enfants :"
+msgstr "filhos:"
+
+msgid "fichier : %(name)s"
+msgstr "arquivo: %(name)s"
+
+msgid "fichier uploadé"
+msgstr "arquivo enviado"
+
+msgid "fratrie :"
+msgstr "irmãos:"
+
+msgid "nouveau média"
+msgstr "nova mídia"
+
+msgid "né(e) le %(d)s"
+msgstr "nascido/a em %(d)s"
+
+msgid "née %(maiden)s"
+msgstr "nascida %(maiden)s"
+
+msgid "personne #%(person_id)s"
+msgstr "pessoa #%(person_id)s"
+
+msgid "proposé par <strong>%(username)s</strong> le %(date)s"
+msgstr "proposto por <strong>%(username)s</strong> em %(date)s"
+
+msgid "proposée par <strong>%(username)s</strong> le %(date)s"
+msgstr "proposta por <strong>%(username)s</strong> em %(date)s"
+
+msgid "Échec de l'application : %(exc)s"
+msgstr "Falha ao aplicar: %(exc)s"
+
+msgid "à %(p)s"
+msgstr "em %(p)s"
+
+msgid "— décédé(e) le %(d)s"
+msgstr "— falecido/a em %(d)s"

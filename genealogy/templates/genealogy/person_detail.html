@@ -1,38 +1,39 @@
 {% extends "genealogy/base.html" %}
+{% load i18n %}
 {% block title %}{{ person }}{% endblock %}
 {% block content %}
 <div class="card">
-  <h1>{{ person.first_name }} {{ person.last_name }}{% if person.maiden_name %} (née {{ person.maiden_name }}){% endif %}</h1>
+  <h1>{{ person.first_name }} {{ person.last_name }}{% if person.maiden_name %} ({% blocktrans with maiden=person.maiden_name %}née {{ maiden }}{% endblocktrans %}){% endif %}</h1>
   <p>
-    {% if person.birth_date %}Né(e) le {{ person.birth_date }}{% if person.birth_place %} à {{ person.birth_place }}{% endif %}.{% endif %}
-    {% if person.death_date %}Décédé(e) le {{ person.death_date }}{% if person.death_place %} à {{ person.death_place }}{% endif %}.{% endif %}
+    {% if person.birth_date %}{% blocktrans with d=person.birth_date %}Né(e) le {{ d }}{% endblocktrans %}{% if person.birth_place %} {% blocktrans with p=person.birth_place %}à {{ p }}{% endblocktrans %}.{% endif %}{% endif %}
+    {% if person.death_date %}{% blocktrans with d=person.death_date %}Décédé(e) le {{ d }}{% endblocktrans %}{% if person.death_place %} {% blocktrans with p=person.death_place %}à {{ p }}{% endblocktrans %}.{% endif %}{% endif %}
   </p>
   {% if person.biography %}<p>{{ person.biography|linebreaksbr }}</p>{% endif %}
   {% if person_photo_url %}
-    <p><img src="{{ person_photo_url }}" alt="Photo de {{ person }}" style="max-width:300px;border-radius:6px"></p>
+    <p><img src="{{ person_photo_url }}" alt="{% blocktrans with name=person %}Photo de {{ name }}{% endblocktrans %}" style="max-width:300px;border-radius:6px"></p>
   {% elif person.google_photo_media_item_id %}
-    <p>📷 Photo disponible via Google Photos (album partagé, non chargée : identifiants API non configurés).</p>
+    <p>📷 {% trans "Photo disponible via Google Photos (album partagé, non chargé : identifiants API non configurés)." %}</p>
   {% endif %}
   <p>
-    <a class="btn" href="{% url 'propose_person_edit' person.pk %}">Proposer une modification</a>
-    <a class="btn secondary" href="{% url 'propose_media_add' %}">Ajouter une photo</a>
+    <a class="btn" href="{% url 'propose_person_edit' person.pk %}">{% trans "Proposer une modification" %}</a>
+    <a class="btn secondary" href="{% url 'propose_media_add' %}">{% trans "Ajouter une photo" %}</a>
   </p>
 </div>
 
 {% if unions or parent_unions %}
 <div class="card">
-  <h2>Famille</h2>
+  <h2>{% trans "Famille" %}</h2>
   {% for union in parent_unions %}
-    <p>Parents : <a href="{% url 'person_detail' union.partner_a.pk %}">{{ union.partner_a }}</a>
+    <p>{% trans "Parents :" %} <a href="{% url 'person_detail' union.partner_a.pk %}">{{ union.partner_a }}</a>
        &amp; <a href="{% url 'person_detail' union.partner_b.pk %}">{{ union.partner_b }}</a>
-       {% if union.date %}({{ union.get_union_type_display }}, {{ union.date }}){% endif %}
-       — fratrie : {% for sibling in union.children.all %}<a href="{% url 'person_detail' sibling.pk %}">{{ sibling }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}
+       {% if union.date %}({{ union.get_union_type_display }}, {{ union.date|date:"SHORT_DATE_FORMAT" }}){% endif %}
+       — {% trans "fratrie :" %} {% for sibling in union.children.all %}<a href="{% url 'person_detail' sibling.pk %}">{{ sibling }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}
     </p>
   {% endfor %}
   {% for union in unions %}
-    <p>Union avec <a href="{% url 'person_detail' union.partner_b.pk %}">{{ union.partner_b }}</a>
-       {% if union.date %}({{ union.get_union_type_display }}, {{ union.date }}{% if union.place %}, {{ union.place }}{% endif %}){% endif %}
-       {% if union.children.all %} — enfants : {% for child in union.children.all %}<a href="{% url 'person_detail' child.pk %}">{{ child }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}{% endif %}
+    <p>{% trans "Union avec" %} <a href="{% url 'person_detail' union.partner_b.pk %}">{{ union.partner_b }}</a>
+       {% if union.date %}({{ union.get_union_type_display }}, {{ union.date|date:"SHORT_DATE_FORMAT" }}{% if union.place %}, {{ union.place }}{% endif %}){% endif %}
+       {% if union.children.all %} — {% trans "enfants :" %} {% for child in union.children.all %}<a href="{% url 'person_detail' child.pk %}">{{ child }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}{% endif %}
     </p>
   {% endfor %}
 </div>
@@ -40,11 +41,11 @@
 
 {% if events %}
 <div class="card">
-  <h2>Parcours et histoires</h2>
+  <h2>{% trans "Parcours et histoires" %}</h2>
   <ul>
     {% for event in events %}
       <li><strong>{{ event.get_event_type_display }}</strong> : {{ event.title }}
-        {% if event.date %}({{ event.date }}){% endif %}
+        {% if event.date %}({{ event.date|date:"SHORT_DATE_FORMAT" }}){% endif %}
         {% if event.description %}<br>{{ event.description|linebreaksbr }}{% endif %}</li>
     {% endfor %}
   </ul>
@@ -53,10 +54,10 @@
 
 {% if media %}
 <div class="card">
-  <h2>Photos</h2>
+  <h2>{% trans "Photos" %}</h2>
   <ul>
     {% for item in media %}
-      <li>{{ item.title }}{% if not item.google_photo_media_item_id %} (fichier uploadé){% endif %}</li>
+      <li>{{ item.title }}{% if not item.google_photo_media_item_id %} ({% trans "fichier uploadé" %}){% endif %}</li>
     {% endfor %}
   </ul>
   {% if media_photos %}
@@ -76,15 +77,15 @@
 
 {% if proposals %}
 <div class="card">
-  <h2>Propositions de modification</h2>
+  <h2>{% trans "Propositions de modification" %}</h2>
   <table>
-    <tr><th>Proposée par</th><th>Changements</th><th>Statut</th><th>Date</th></tr>
+    <tr><th>{% trans "Proposée par" %}</th><th>{% trans "Changements" %}</th><th>{% trans "Statut" %}</th><th>{% trans "Date" %}</th></tr>
     {% for proposal in proposals %}
     <tr>
       <td>{{ proposal.proposed_by.username }}</td>
       <td><ul>{% for field, value in proposal.field_changes.items %}<li><code>{{ field }}</code> → {{ value }}</li>{% endfor %}</ul></td>
       <td><span class="badge {{ proposal.status }}">{{ proposal.get_status_display }}</span></td>
-      <td>{{ proposal.created_at|date:"d/m/Y H:i" }}</td>
+      <td>{{ proposal.created_at|date:"SHORT_DATETIME_FORMAT" }}</td>
     </tr>
     {% endfor %}
   </table>

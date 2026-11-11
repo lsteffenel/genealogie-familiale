@@ -1,30 +1,31 @@
 {% extends "genealogy/base.html" %}
-{% block title %}Arbre généalogique{% endblock %}
+{% load i18n %}
+{% block title %}{% trans "Arbre généalogique" %}{% endblock %}
 {% block content %}
-<h1>Arbre généalogique</h1>
+<h1>{% trans "Arbre généalogique" %}</h1>
 <form method="get" action="{% url 'person_list' %}" class="card" style="display:flex;gap:0.8rem;align-items:center">
-  <input type="search" name="q" value="{{ request.GET.q }}" placeholder="Rechercher un nom..." style="max-width:320px">
-  <button type="submit">Rechercher</button>
-  <span class="muted">{{ page_obj.paginator.count }} personne(s)</span>
+  <input type="search" name="q" value="{{ request.GET.q }}" placeholder="{% trans "Rechercher un nom..." %}" style="max-width:320px">
+  <button type="submit">{% trans "Rechercher" %}</button>
+  <span class="muted">{% blocktrans count counter=page_obj.paginator.count %}{{ counter }} personne{% plural %}{{ counter }} personnes{% endblocktrans %}</span>
 </form>
 <table>
-  <tr><th>Nom</th><th>Prénom</th><th>Naissance</th><th>Décès</th></tr>
+  <tr><th>{% trans "Nom" %}</th><th>{% trans "Prénom" %}</th><th>{% trans "Naissance" %}</th><th>{% trans "Décès" %}</th></tr>
   {% for person in persons %}
   <tr>
     <td><a href="{% url 'person_detail' person.pk %}">{{ person.last_name }}</a></td>
     <td>{{ person.first_name }}</td>
-    <td>{{ person.birth_date|default:"" }}{% if person.birth_place %} — {{ person.birth_place }}{% endif %}</td>
-    <td>{{ person.death_date|default:"" }}{% if person.death_place %} — {{ person.death_place }}{% endif %}</td>
+    <td>{{ person.birth_date|date:"SHORT_DATE_FORMAT"|default:"" }}{% if person.birth_place %} — {{ person.birth_place }}{% endif %}</td>
+    <td>{{ person.death_date|date:"SHORT_DATE_FORMAT"|default:"" }}{% if person.death_place %} — {{ person.death_place }}{% endif %}</td>
   </tr>
   {% empty %}
-  <tr><td colspan="4">Aucune personne trouvée.</td></tr>
+  <tr><td colspan="4">{% trans "Aucune personne trouvée." %}</td></tr>
   {% endfor %}
 </table>
 {% if page_obj.has_other_pages %}
 <p class="pagination">
-  {% if page_obj.has_previous %}<a class="btn secondary" href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Précédent</a>{% endif %}
-  <span class="muted">Page {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
-  {% if page_obj.has_next %}<a class="btn secondary" href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Suivant</a>{% endif %}
+  {% if page_obj.has_previous %}<a class="btn secondary" href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{% trans "Précédent" %}</a>{% endif %}
+  <span class="muted">{% blocktrans with number=page_obj.number num_pages=page_obj.paginator.num_pages %}Page {{ number }} / {{ num_pages }}{% endblocktrans %}</span>
+  {% if page_obj.has_next %}<a class="btn secondary" href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{% trans "Suivant" %}</a>{% endif %}
 </p>
 {% endif %}
 {% endblock %}

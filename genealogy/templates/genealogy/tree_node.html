@@ -1,14 +1,15 @@
+{% load i18n %}
 <div class="person-card">
   {% if show_photo and node.photo_url %}
-    <img src="{{ node.photo_url }}" alt="Photo de {{ node.first_name }} {{ node.last_name }}">
+    <img src="{{ node.photo_url }}" alt="{% blocktrans with name=node.first_name last=node.last_name %}Photo de {{ name }} {{ last }}{% endblocktrans %}">
   {% endif %}
   <a href="{% url 'person_detail' node.pk %}">
     {% if show_name %}{{ node.first_name }} {{ node.last_name }}{% else %}•••{% endif %}
   </a>
   {% if show_dates %}
     <div class="dates">
-      {% if node.birth_date %}né(e) le {{ node.birth_date|date:"d/m/Y" }}{% endif %}
-      {% if node.death_date %}— décédé(e) le {{ node.death_date|date:"d/m/Y" }}{% endif %}
+      {% if node.birth_date %}{% blocktrans with d=node.birth_date|date:"SHORT_DATE_FORMAT" %}né(e) le {{ d }}{% endblocktrans %}{% endif %}
+      {% if node.death_date %}{% blocktrans with d=node.death_date|date:"SHORT_DATE_FORMAT" %}— décédé(e) le {{ d }}{% endblocktrans %}{% endif %}
     </div>
   {% endif %}
 </div>
@@ -16,7 +17,7 @@
   {% for entry in node.family_entries %}
     <div class="union">
       &amp; <a href="{% url 'person_detail' entry.spouse.pk %}">{% if show_name %}{{ entry.spouse.first_name }} {{ entry.spouse.last_name }}{% else %}•••{% endif %}</a>
-      {% if entry.union.date %}({{ entry.union.date }}){% endif %}
+      {% if entry.union.date %}({{ entry.union.date|date:"SHORT_DATE_FORMAT" }}){% endif %}
     </div>
     {% if entry.children and depth < max_depth %}
       <ul>
