@@ -8,8 +8,8 @@
   </a>
   {% if show_dates %}
     <div class="dates">
-      {% if node.birth_date %}{% blocktrans with d=node.birth_date|date:"SHORT_DATE_FORMAT" %}né(e) le {{ d }}{% endblocktrans %}{% endif %}
-      {% if node.death_date %}{% blocktrans with d=node.death_date|date:"SHORT_DATE_FORMAT" %}— décédé(e) le {{ d }}{% endblocktrans %}{% endif %}
+      {% if node.birth_date %}{{ node.born_label }}{% endif %}
+      {% if node.death_date %}— {{ node.died_label }}{% endif %}
     </div>
   {% endif %}
 </div>

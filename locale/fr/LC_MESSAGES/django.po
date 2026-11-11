@@ -1,0 +1,42 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: genealogie-familiale 1.0\n"
+"Language: fr\n"
+"Content-Type: text/plain; charset=utf-8\n"
+
+msgctxt "female"
+msgid "Décédé(e) le %(date)s"
+msgstr "Décédée le %(date)s"
+
+msgctxt "female"
+msgid "Né(e) le %(date)s"
+msgstr "Née le %(date)s"
+
+msgctxt "female"
+msgid "né(e) %(maiden)s"
+msgstr "née %(maiden)s"
+
+msgctxt "male"
+msgid "Décédé(e) le %(date)s"
+msgstr "Décédé le %(date)s"
+
+msgctxt "male"
+msgid "Né(e) le %(date)s"
+msgstr "Né le %(date)s"
+
+msgctxt "male"
+msgid "né(e) %(maiden)s"
+msgstr "né %(maiden)s"
+
+msgctxt "neutral"
+msgid "Décédé(e) le %(date)s"
+msgstr "Décédé(e) le %(date)s"
+
+msgctxt "neutral"
+msgid "Né(e) le %(date)s"
+msgstr "Né(e) le %(date)s"
+
+msgctxt "neutral"
+msgid "né(e) %(maiden)s"
+msgstr "né(e) %(maiden)s"

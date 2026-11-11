@@ -192,9 +192,6 @@ msgstr "Esci"
 msgid "Décès"
 msgstr "Morte"
 
-msgid "Décédé(e) le %(d)s"
-msgstr "Deceduto/a il %(d)s"
-
 msgid "En attente"
 msgstr "In attesa"
 
@@ -349,9 +346,6 @@ msgstr "Nuova unione"
 
 msgid "Nouvelle valeur"
 msgstr "Nuovo valore"
-
-msgid "Né(e) le %(d)s"
-msgstr "Nato/a il %(d)s"
 
 msgid "Objet"
 msgstr "Oggetto"
@@ -626,12 +620,6 @@ msgstr "fratelli:"
 msgid "nouvel objet : %(model)s"
 msgstr "nuovo oggetto: %(model)s"
 
-msgid "né(e) le %(d)s"
-msgstr "nato/a il %(d)s"
-
-msgid "née %(maiden)s"
-msgstr "nata %(maiden)s"
-
 msgid "personne #%(person_id)s"
 msgstr "persona #%(person_id)s"
 
@@ -662,5 +650,38 @@ msgstr "a %(p)s"
 msgid "événement « %(title)s » (%(type)s)"
 msgstr "evento \"%(title)s\" (%(type)s)"
 
-msgid "— décédé(e) le %(d)s"
-msgstr "— deceduto/a il %(d)s"
+msgctxt "female"
+msgid "Décédé(e) le %(date)s"
+msgstr "Deceduta il %(date)s"
+
+msgctxt "female"
+msgid "Né(e) le %(date)s"
+msgstr "Nata il %(date)s"
+
+msgctxt "female"
+msgid "né(e) %(maiden)s"
+msgstr "nata %(maiden)s"
+
+msgctxt "male"
+msgid "Décédé(e) le %(date)s"
+msgstr "Deceduto il %(date)s"
+
+msgctxt "male"
+msgid "Né(e) le %(date)s"
+msgstr "Nato il %(date)s"
+
+msgctxt "male"
+msgid "né(e) %(maiden)s"
+msgstr "nato %(maiden)s"
+
+msgctxt "neutral"
+msgid "Décédé(e) le %(date)s"
+msgstr "Deceduto/a il %(date)s"
+
+msgctxt "neutral"
+msgid "Né(e) le %(date)s"
+msgstr "Nato/a il %(date)s"
+
+msgctxt "neutral"
+msgid "né(e) %(maiden)s"
+msgstr "nato/a %(maiden)s"

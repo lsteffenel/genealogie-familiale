@@ -192,9 +192,6 @@ msgstr "Log out"
 msgid "Décès"
 msgstr "Death"
 
-msgid "Décédé(e) le %(d)s"
-msgstr "Died on %(d)s"
-
 msgid "En attente"
 msgstr "Pending"
 
@@ -349,9 +346,6 @@ msgstr "New union"
 
 msgid "Nouvelle valeur"
 msgstr "New value"
-
-msgid "Né(e) le %(d)s"
-msgstr "Born on %(d)s"
 
 msgid "Objet"
 msgstr "Object"
@@ -621,12 +615,6 @@ msgstr "siblings:"
 msgid "nouvel objet : %(model)s"
 msgstr "new object: %(model)s"
 
-msgid "né(e) le %(d)s"
-msgstr "born on %(d)s"
-
-msgid "née %(maiden)s"
-msgstr "née %(maiden)s"
-
 msgid "personne #%(person_id)s"
 msgstr "person #%(person_id)s"
 
@@ -657,5 +645,38 @@ msgstr "in %(p)s"
 msgid "événement « %(title)s » (%(type)s)"
 msgstr "event \"%(title)s\" (%(type)s)"
 
-msgid "— décédé(e) le %(d)s"
-msgstr "— died on %(d)s"
+msgctxt "female"
+msgid "Décédé(e) le %(date)s"
+msgstr "Died on %(date)s"
+
+msgctxt "female"
+msgid "Né(e) le %(date)s"
+msgstr "Born on %(date)s"
+
+msgctxt "female"
+msgid "né(e) %(maiden)s"
+msgstr "née %(maiden)s"
+
+msgctxt "male"
+msgid "Décédé(e) le %(date)s"
+msgstr "Died on %(date)s"
+
+msgctxt "male"
+msgid "Né(e) le %(date)s"
+msgstr "Born on %(date)s"
+
+msgctxt "male"
+msgid "né(e) %(maiden)s"
+msgstr "born %(maiden)s"
+
+msgctxt "neutral"
+msgid "Décédé(e) le %(date)s"
+msgstr "Died on %(date)s"
+
+msgctxt "neutral"
+msgid "Né(e) le %(date)s"
+msgstr "Born on %(date)s"
+
+msgctxt "neutral"
+msgid "né(e) %(maiden)s"
+msgstr "née %(maiden)s"
