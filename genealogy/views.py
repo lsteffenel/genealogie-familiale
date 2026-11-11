@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.contenttypes.models import ContentType
-from django.db.models import Q
+from django.db.models import Count, Q
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.translation import gettext as _
@@ -17,7 +17,7 @@ from .forms import (
     UnionProposalForm,
 )
 from .google_photos import get_media_item_base_url
-from .models import EditProposal, Person, ProposalStatus, Union
+from .models import EditProposal, Person, ProposalStatus, SiteConfiguration, Union
 
 MAX_TREE_DEPTH = 8
 
@@ -35,13 +35,36 @@ class PersonListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         query = self.request.GET.get("q", "").strip()
+        family = self.request.GET.get("family", "").strip()
         if query:
             queryset = queryset.filter(
                 Q(first_name__icontains=query)
                 | Q(last_name__icontains=query)
                 | Q(maiden_name__icontains=query)
             )
+        elif family:
+            queryset = queryset.filter(last_name__iexact=family)
         return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        query = self.request.GET.get("q", "").strip()
+        family = self.request.GET.get("family", "").strip()
+        context["home_html"] = SiteConfiguration.get().home_page_html
+        context["query"] = query
+        context["family"] = family
+        if not query and not family:
+            context["mode"] = "families"
+            context["families"] = (
+                Person.objects.values("last_name")
+                .annotate(count=Count("id"))
+                .order_by("last_name")
+            )
+        elif family:
+            context["mode"] = "family"
+        else:
+            context["mode"] = "search"
+        return context
 
 
 class PersonDetailView(LoginRequiredMixin, DetailView):
@@ -177,7 +200,8 @@ def tree_view(request, pk=None):
         if root is None:
             raise Http404(_("Personne inconnue"))
     else:
-        root = persons[0]
+        default_root = SiteConfiguration.get().default_tree_root
+        root = default_root if default_root in persons else persons[0]
 
     show_name = request.GET.get("name", "1") == "1"
     show_dates = request.GET.get("dates", "1") == "1"

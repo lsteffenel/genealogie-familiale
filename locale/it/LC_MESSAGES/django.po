@@ -141,6 +141,9 @@ msgstr "Commento del membro che accompagna la proposta"
 msgid "Concubinage"
 msgstr "Convivenza"
 
+msgid "Configuration du site"
+msgstr "Configurazione del sito"
+
 msgid "Confirmation"
 msgstr "Confermazione (cresima)"
 
@@ -149,6 +152,9 @@ msgstr "Accedi"
 
 msgid "Contenu"
 msgstr "Contenuto"
+
+msgid "Contenu de la page d'accueil (HTML)"
+msgstr "Contenuto della home page (HTML)"
 
 msgid "Crémation"
 msgstr "Cremazione"
@@ -192,6 +198,9 @@ msgstr "In attesa"
 msgid "Famille"
 msgstr "Famiglia"
 
+msgid "Famille %(name)s"
+msgstr "Famiglia %(name)s"
+
 msgid "Femme"
 msgstr "Donna"
 
@@ -207,6 +216,13 @@ msgstr "Google Foto: %(mid)s"
 
 msgid "Généalogie familiale"
 msgstr "Genealogia familiare"
+
+msgid ""
+"HTML affiché en haut de la page d'accueil, avant la liste des personnes. "
+"Édité par l'administrateur uniquement."
+msgstr ""
+"HTML mostrato in cima alla home page, prima dell'elenco delle persone. "
+"Modificabile solo dall'amministratore."
 
 msgid "Homme"
 msgstr "Uomo"
@@ -310,6 +326,9 @@ msgstr "Cognome"
 msgid "Nom d'utilisateur"
 msgstr "Nome utente"
 
+msgid "Nom de famille"
+msgstr "Cognome"
+
 msgid "Nom de jeune fille"
 msgstr "Nome da nubile"
 
@@ -346,6 +365,9 @@ msgstr "PACS"
 msgid "Page %(number)s / %(num_pages)s"
 msgstr "Pagina %(number)s / %(num_pages)s"
 
+msgid "Page d'accueil"
+msgstr "Home page"
+
 msgid "Parcours et histoires"
 msgstr "Percorso e storie"
 
@@ -373,6 +395,11 @@ msgstr ""
 
 msgid "Personne inconnue"
 msgstr "Persona sconosciuta"
+
+msgid ""
+"Personne utilisée comme racine par défaut sur la page « Arbre graphique »."
+msgstr ""
+"Persona usata come radice predefinita nella pagina «Albero genealogico»."
 
 msgid "Personnes"
 msgstr "Persone"
@@ -440,6 +467,9 @@ msgstr "Nome"
 
 msgid "Racine :"
 msgstr "Radice:"
+
+msgid "Racine par défaut de l'arbre graphique"
+msgstr "Radice predefinita dell'albero genealogico"
 
 msgid "Recensement"
 msgstr "Censimento"
@@ -509,6 +539,9 @@ msgstr "Titolo"
 
 msgid "Titre de la photo"
 msgstr "Titolo della foto"
+
+msgid "Toutes les familles"
+msgstr "Tutte le famiglie"
 
 msgid "Traiter"
 msgstr "Gestisci"

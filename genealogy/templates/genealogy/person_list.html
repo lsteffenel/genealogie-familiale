@@ -3,11 +3,33 @@
 {% block title %}{% trans "Arbre généalogique" %}{% endblock %}
 {% block content %}
 <h1>{% trans "Arbre généalogique" %}</h1>
+{% if home_html %}
+<div class="card home-content">{{ home_html|safe }}</div>
+{% endif %}
 <form method="get" action="{% url 'person_list' %}" class="card" style="display:flex;gap:0.8rem;align-items:center">
-  <input type="search" name="q" value="{{ request.GET.q }}" placeholder="{% trans "Rechercher un nom..." %}" style="max-width:320px">
+  <input type="search" name="q" value="{{ query }}" placeholder="{% trans "Rechercher un nom..." %}" style="max-width:320px">
   <button type="submit">{% trans "Rechercher" %}</button>
+  {% if mode == "family" %}
+    <a class="btn secondary" href="{% url 'person_list' %}">{% trans "Toutes les familles" %}</a>
+  {% endif %}
   <span class="muted">{% blocktrans count counter=page_obj.paginator.count %}{{ counter }} personne{% plural %}{{ counter }} personnes{% endblocktrans %}</span>
 </form>
+{% if mode == "families" %}
+<table>
+  <tr><th>{% trans "Nom de famille" %}</th><th>{% trans "Personnes" %}</th></tr>
+  {% for family in families %}
+  <tr>
+    <td><a href="?family={{ family.last_name|urlencode }}">{{ family.last_name }}</a></td>
+    <td>{{ family.count }}</td>
+  </tr>
+  {% empty %}
+  <tr><td colspan="2">{% trans "Aucune personne trouvée." %}</td></tr>
+  {% endfor %}
+</table>
+{% else %}
+{% if mode == "family" %}
+<h2>{% blocktrans with name=family %}Famille {{ name }}{% endblocktrans %}</h2>
+{% endif %}
 <table>
   <tr><th>{% trans "Nom" %}</th><th>{% trans "Prénom" %}</th><th>{% trans "Naissance" %}</th><th>{% trans "Décès" %}</th></tr>
   {% for person in persons %}
@@ -21,11 +43,12 @@
   <tr><td colspan="4">{% trans "Aucune personne trouvée." %}</td></tr>
   {% endfor %}
 </table>
-{% if page_obj.has_other_pages %}
+{% endif %}
+{% if page_obj.has_other_pages and mode != "families" %}
 <p class="pagination">
-  {% if page_obj.has_previous %}<a class="btn secondary" href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{% trans "Précédent" %}</a>{% endif %}
+  {% if page_obj.has_previous %}<a class="btn secondary" href="?page={{ page_obj.previous_page_number }}{% if query %}&q={{ query }}{% endif %}{% if family %}&family={{ family|urlencode }}{% endif %}">{% trans "Précédent" %}</a>{% endif %}
   <span class="muted">{% blocktrans with number=page_obj.number num_pages=page_obj.paginator.num_pages %}Page {{ number }} / {{ num_pages }}{% endblocktrans %}</span>
-  {% if page_obj.has_next %}<a class="btn secondary" href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{% trans "Suivant" %}</a>{% endif %}
+  {% if page_obj.has_next %}<a class="btn secondary" href="?page={{ page_obj.next_page_number }}{% if query %}&q={{ query }}{% endif %}{% if family %}&family={{ family|urlencode }}{% endif %}">{% trans "Suivant" %}</a>{% endif %}
 </p>
 {% endif %}
 {% endblock %}

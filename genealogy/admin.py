@@ -5,7 +5,7 @@ from django.utils import timezone
 from django.utils.translation import gettext as _
 from django.utils.translation import gettext_lazy
 
-from .models import EditProposal, Event, Media, Person, Profile, Union
+from .models import EditProposal, Event, Media, Person, Profile, SiteConfiguration, Union
 
 
 @admin.register(Profile)
@@ -54,6 +54,20 @@ class EventAdmin(admin.ModelAdmin):
 class MediaAdmin(admin.ModelAdmin):
     list_display = ("title", "person", "event", "google_photo_media_item_id", "created_at")
     search_fields = ("title",)
+
+
+@admin.register(SiteConfiguration)
+class SiteConfigurationAdmin(admin.ModelAdmin):
+    fieldsets = (
+        (None, {"fields": ("default_tree_root",)}),
+        (gettext_lazy("Page d'accueil"), {"fields": ("home_page_html",)}),
+    )
+
+    def has_add_permission(self, request):
+        return not SiteConfiguration.objects.exists()
+
+    def has_delete_permission(self, request, obj=None):
+        return False
 
 
 @admin.register(EditProposal)

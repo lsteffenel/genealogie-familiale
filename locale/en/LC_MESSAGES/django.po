@@ -141,6 +141,9 @@ msgstr "Member comment accompanying the proposal"
 msgid "Concubinage"
 msgstr "Cohabitation"
 
+msgid "Configuration du site"
+msgstr "Site configuration"
+
 msgid "Confirmation"
 msgstr "Confirmation"
 
@@ -149,6 +152,9 @@ msgstr "Log in"
 
 msgid "Contenu"
 msgstr "Content"
+
+msgid "Contenu de la page d'accueil (HTML)"
+msgstr "Home page content (HTML)"
 
 msgid "Crémation"
 msgstr "Cremation"
@@ -192,6 +198,9 @@ msgstr "Pending"
 msgid "Famille"
 msgstr "Family"
 
+msgid "Famille %(name)s"
+msgstr "%(name)s family"
+
 msgid "Femme"
 msgstr "Woman"
 
@@ -207,6 +216,13 @@ msgstr "Google Photos: %(mid)s"
 
 msgid "Généalogie familiale"
 msgstr "Family genealogy"
+
+msgid ""
+"HTML affiché en haut de la page d'accueil, avant la liste des personnes. "
+"Édité par l'administrateur uniquement."
+msgstr ""
+"HTML displayed at the top of the home page, before the person list. Edited "
+"by the administrator only."
 
 msgid "Homme"
 msgstr "Man"
@@ -310,6 +326,9 @@ msgstr "Last name"
 msgid "Nom d'utilisateur"
 msgstr "Username"
 
+msgid "Nom de famille"
+msgstr "Family name"
+
 msgid "Nom de jeune fille"
 msgstr "Maiden name"
 
@@ -346,6 +365,9 @@ msgstr "Civil partnership (PACS)"
 msgid "Page %(number)s / %(num_pages)s"
 msgstr "Page %(number)s / %(num_pages)s"
 
+msgid "Page d'accueil"
+msgstr "Home page"
+
 msgid "Parcours et histoires"
 msgstr "Life events and stories"
 
@@ -372,6 +394,10 @@ msgstr "Person in the tree corresponding to this account (avoids duplicates)"
 
 msgid "Personne inconnue"
 msgstr "Unknown person"
+
+msgid ""
+"Personne utilisée comme racine par défaut sur la page « Arbre graphique »."
+msgstr "Person used as the default root on the \"Family tree\" page."
 
 msgid "Personnes"
 msgstr "People"
@@ -439,6 +465,9 @@ msgstr "First name"
 
 msgid "Racine :"
 msgstr "Root:"
+
+msgid "Racine par défaut de l'arbre graphique"
+msgstr "Default root of the family tree"
 
 msgid "Recensement"
 msgstr "Census"
@@ -508,6 +537,9 @@ msgstr "Title"
 
 msgid "Titre de la photo"
 msgstr "Photo title"
+
+msgid "Toutes les familles"
+msgstr "All families"
 
 msgid "Traiter"
 msgstr "Review"

@@ -196,6 +196,31 @@ class Media(models.Model):
             )
 
 
+class SiteConfiguration(models.Model):
+    default_tree_root = models.ForeignKey(
+        "Person", null=True, blank=True, on_delete=models.SET_NULL,
+        related_name="+", verbose_name=_("Racine par défaut de l'arbre graphique"),
+        help_text=_("Personne utilisée comme racine par défaut sur la page « Arbre graphique »."),
+    )
+    home_page_html = models.TextField(
+        blank=True,
+        verbose_name=_("Contenu de la page d'accueil (HTML)"),
+        help_text=_("HTML affiché en haut de la page d'accueil, avant la liste des personnes. Édité par l'administrateur uniquement."),
+    )
+
+    class Meta:
+        verbose_name = _("Configuration du site")
+        verbose_name_plural = _("Configuration du site")
+
+    def __str__(self):
+        return _("Configuration du site")
+
+    @classmethod
+    def get(cls):
+        obj, _ = cls.objects.get_or_create(pk=1)
+        return obj
+
+
 class ProposalStatus(models.TextChoices):
     PENDING = "pending", _("En attente")
     APPROVED = "approved", _("Approuvée")
