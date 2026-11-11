@@ -116,11 +116,30 @@ class Union(models.Model):
 
 class Event(models.Model):
     class EventType(models.TextChoices):
-        DIPLOMA = "diploma", _("Diplôme")
+        DIPLOMA = "diploma", _("Diplôme (graduation)")
         JOB = "job", _("Métier")
         RESIDENCE = "residence", _("Résidence")
         ANECDOTE = "anecdote", _("Anecdote / Histoire")
         AWARD = "award", _("Distinction")
+        ADOPTION = "adoption", _("Adoption")
+        BAPTISM = "baptism", _("Baptême")
+        CHILD_BAPTISM = "child_baptism", _("Baptême d'enfant")
+        CONFIRMATION = "confirmation", _("Confirmation")
+        BAR_MITZVAH = "bar_mitzvah", _("Bar-mitsva")
+        BAS_MITZVAH = "bas_mitzvah", _("Bas-mitsva")
+        BLESSING = "blessing", _("Bénédiction")
+        BURIAL = "burial", _("Inhumation")
+        CENSUS = "census", _("Recensement")
+        CREMATION = "cremation", _("Crémation")
+        EMIGRATION = "emigration", _("Émigration")
+        IMMIGRATION = "immigration", _("Immigration")
+        NATURALIZATION = "naturalization", _("Naturalisation")
+        ORDINATION = "ordination", _("Ordination")
+        PROBATE = "probate", _("Acte de décès (probate)")
+        RELIGION = "religion", _("Religion")
+        RETIREMENT = "retirement", _("Retraite")
+        TITLE = "title", _("Titre")
+        NOBILITY = "nobility", _("Noblesse")
         OTHER = "other", _("Autre")
 
     person = models.ForeignKey(Person, on_delete=models.CASCADE, related_name="events")
@@ -243,23 +262,48 @@ class EditProposal(models.Model):
             raise ValidationError(_("Seule une proposition en attente peut être appliquée."))
         if self.action == EditProposal.Action.CREATE:
             data = self.new_object_data or {}
-            if data.get("model") != "media":
-                raise ValidationError(_("Type d'objet à créer non supporté."))
-            media = Media(
-                person_id=data.get("person_id"),
-                title=data.get("title", ""),
-                description=data.get("description", ""),
-                google_photo_media_item_id=data.get("google_photo_media_item_id", ""),
-            )
-            if self.uploaded_file:
-                self.uploaded_file.open("rb")
-                media.image.save(
-                    os.path.basename(self.uploaded_file.name),
-                    ContentFile(self.uploaded_file.read()),
-                    save=False,
+            model = data.get("model")
+            if model == "media":
+                media = Media(
+                    person_id=data.get("person_id"),
+                    title=data.get("title", ""),
+                    description=data.get("description", ""),
+                    google_photo_media_item_id=data.get("google_photo_media_item_id", ""),
                 )
-            media.full_clean()
-            media.save()
+                if self.uploaded_file:
+                    self.uploaded_file.open("rb")
+                    media.image.save(
+                        os.path.basename(self.uploaded_file.name),
+                        ContentFile(self.uploaded_file.read()),
+                        save=False,
+                    )
+                media.full_clean()
+                media.save()
+            elif model == "event":
+                event = Event(
+                    person_id=data.get("person_id"),
+                    event_type=data.get("event_type", Event.EventType.OTHER),
+                    title=data.get("title", ""),
+                    date=data.get("date") or None,
+                    place=data.get("place", ""),
+                    description=data.get("description", ""),
+                    created_by=reviewer,
+                )
+                event.full_clean()
+                event.save()
+            elif model == "union":
+                union = Union(
+                    partner_a_id=data.get("person_id"),
+                    partner_b_id=data.get("partner_id"),
+                    union_type=data.get("union_type", Union.UnionType.OTHER),
+                    date=data.get("date") or None,
+                    place=data.get("place", ""),
+                    notes=data.get("notes", ""),
+                )
+                union.full_clean()
+                union.save()
+            else:
+                raise ValidationError(_("Type d'objet à créer non supporté."))
         else:
             for field, value in self.field_changes.items():
                 if not hasattr(self.target, field):

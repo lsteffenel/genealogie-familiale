@@ -8,7 +8,14 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.translation import gettext as _
 from django.views.generic import DetailView, ListView
 
-from .forms import MediaProposalForm, PersonProposalForm, ProposalNoteForm, ReviewForm
+from .forms import (
+    EventProposalForm,
+    MediaProposalForm,
+    PersonProposalForm,
+    ProposalNoteForm,
+    ReviewForm,
+    UnionProposalForm,
+)
 from .google_photos import get_media_item_base_url
 from .models import EditProposal, Person, ProposalStatus, Union
 
@@ -71,18 +78,68 @@ def propose_person_edit(request, pk):
     if request.method == "POST":
         form = PersonProposalForm(request.POST)
         note_form = ProposalNoteForm(request.POST)
-        if form.is_valid() and note_form.is_valid():
+        event_form = EventProposalForm(request.POST)
+        union_form = UnionProposalForm(request.POST)
+        adv_kind = request.POST.get("adv_kind", "")
+        advanced_error = None
+        advanced = None
+        if adv_kind == "event" and event_form.is_filled():
+            if event_form.is_valid() and event_form.cleaned_data.get("title"):
+                advanced = ("event", event_form.cleaned_data)
+            else:
+                advanced_error = _(
+                    "Section avancée invalide : un titre est requis pour un événement."
+                )
+        elif adv_kind == "union" and union_form.is_filled():
+            if union_form.is_valid() and union_form.cleaned_data.get("partner"):
+                advanced = ("union", union_form.cleaned_data)
+            else:
+                advanced_error = _(
+                    "Section avancée invalide : un partenaire est requis pour une union."
+                )
+        if advanced_error:
+            messages.error(request, advanced_error)
+        elif form.is_valid() and note_form.is_valid():
             changes = form.changed_fields(person)
-            if not changes:
+            if not changes and not advanced:
                 messages.info(request, _("Aucune modification détectée."))
                 return redirect("person_detail", pk=person.pk)
-            EditProposal.objects.create(
-                content_type=ContentType.objects.get_for_model(Person),
-                object_id=person.pk,
-                field_changes=changes,
-                note=note_form.cleaned_data["note"],
-                proposed_by=request.user,
-            )
+            if changes:
+                EditProposal.objects.create(
+                    content_type=ContentType.objects.get_for_model(Person),
+                    object_id=person.pk,
+                    field_changes=changes,
+                    note=note_form.cleaned_data["note"],
+                    proposed_by=request.user,
+                )
+            if advanced:
+                kind, data = advanced
+                if kind == "event":
+                    new_object_data = {
+                        "model": "event",
+                        "person_id": person.pk,
+                        "event_type": data.get("event_type") or "other",
+                        "title": data.get("title", ""),
+                        "date": data["date"].isoformat() if data.get("date") else "",
+                        "place": data.get("place", ""),
+                        "description": data.get("description", ""),
+                    }
+                else:
+                    new_object_data = {
+                        "model": "union",
+                        "person_id": person.pk,
+                        "partner_id": data["partner"].pk,
+                        "union_type": data.get("union_type") or "other",
+                        "date": data["date"].isoformat() if data.get("date") else "",
+                        "place": data.get("place", ""),
+                        "notes": data.get("notes", ""),
+                    }
+                EditProposal.objects.create(
+                    action=EditProposal.Action.CREATE,
+                    new_object_data=new_object_data,
+                    note=note_form.cleaned_data["note"],
+                    proposed_by=request.user,
+                )
             messages.success(
                 request,
                 _("Votre proposition a été soumise et est en attente de validation "
@@ -92,10 +149,18 @@ def propose_person_edit(request, pk):
     else:
         form = PersonProposalForm(instance=person)
         note_form = ProposalNoteForm()
+        event_form = EventProposalForm()
+        union_form = UnionProposalForm()
     return render(
         request,
         "genealogy/proposal_form.html",
-        {"form": form, "note_form": note_form, "person": person},
+        {
+            "form": form,
+            "note_form": note_form,
+            "person": person,
+            "event_form": event_form,
+            "union_form": union_form,
+        },
     )
 
 

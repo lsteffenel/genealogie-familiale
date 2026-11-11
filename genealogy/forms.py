@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
 
-from .models import Person
+from .models import Event, Person, Union
 
 
 class MediaProposalForm(forms.Form):
@@ -71,3 +71,43 @@ class ReviewForm(forms.Form):
         required=False, widget=forms.Textarea(attrs={"rows": 2}),
         label=_("Commentaire de modération"),
     )
+
+
+class EventProposalForm(forms.Form):
+    event_type = forms.ChoiceField(
+        choices=Event.EventType.choices, required=False, label=_("Type d'événement")
+    )
+    title = forms.CharField(required=False, max_length=255, label=_("Titre"))
+    date = forms.DateField(
+        required=False, widget=forms.DateInput(attrs={"type": "date"}), label=_("Date")
+    )
+    place = forms.CharField(required=False, max_length=255, label=_("Lieu"))
+    description = forms.CharField(
+        required=False, widget=forms.Textarea(attrs={"rows": 3}), label=_("Description")
+    )
+
+    def is_filled(self):
+        return any(
+            self.data.get(name) for name in ("event_type", "title", "date", "place", "description")
+        )
+
+
+class UnionProposalForm(forms.Form):
+    partner = forms.ModelChoiceField(
+        queryset=Person.objects.all(), required=False, label=_("Partenaire")
+    )
+    union_type = forms.ChoiceField(
+        choices=Union.UnionType.choices, required=False, label=_("Type d'union")
+    )
+    date = forms.DateField(
+        required=False, widget=forms.DateInput(attrs={"type": "date"}), label=_("Date")
+    )
+    place = forms.CharField(required=False, max_length=255, label=_("Lieu"))
+    notes = forms.CharField(
+        required=False, widget=forms.Textarea(attrs={"rows": 2}), label=_("Notes")
+    )
+
+    def is_filled(self):
+        return any(
+            self.data.get(name) for name in ("partner", "union_type", "date", "place", "notes")
+        )

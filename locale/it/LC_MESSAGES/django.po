@@ -30,6 +30,9 @@ msgstr ""
 "\n"
 "Moderala dall'admin o dalla sezione Moderazione del sito."
 
+msgid "Acte de décès (probate)"
+msgstr "Atto di morte (probate)"
+
 msgid "Action"
 msgstr "Azione"
 
@@ -39,11 +42,14 @@ msgstr "Amministratore"
 msgid "Administration"
 msgstr "Amministrazione"
 
+msgid "Adoption"
+msgstr "Adozione"
+
 msgid "Ajout"
 msgstr "Aggiunta"
 
-msgid "Ajout d'un média"
-msgstr "Aggiunta di un media"
+msgid "Ajout : %(model)s"
+msgstr "Aggiunta: %(model)s"
 
 msgid "Ajouter une photo"
 msgstr "Aggiungi una foto"
@@ -72,6 +78,9 @@ msgstr "Albero genealogico"
 msgid "Arbre généalogique"
 msgstr "Albero genealogico"
 
+msgid "Aucun (informations de base uniquement)"
+msgstr "Nessuno (solo informazioni di base)"
+
 msgid "Aucune modification détectée."
 msgstr "Nessuna modifica rilevata."
 
@@ -87,8 +96,26 @@ msgstr "Nessuna proposta con questo stato."
 msgid "Autre"
 msgstr "Altro"
 
+msgid "Avancé"
+msgstr "Avanzate"
+
+msgid "Baptême"
+msgstr "Battesimo"
+
+msgid "Baptême d'enfant"
+msgstr "Battesimo infantile"
+
+msgid "Bar-mitsva"
+msgstr "Bar mitzvah"
+
+msgid "Bas-mitsva"
+msgstr "Bat mitzvah"
+
 msgid "Biographie"
 msgstr "Biografia"
+
+msgid "Bénédiction"
+msgstr "Benedizione"
 
 msgid "Champ"
 msgstr "Campo"
@@ -114,11 +141,17 @@ msgstr "Commento del membro che accompagna la proposta"
 msgid "Concubinage"
 msgstr "Convivenza"
 
+msgid "Confirmation"
+msgstr "Confermazione (cresima)"
+
 msgid "Connexion"
 msgstr "Accedi"
 
 msgid "Contenu"
 msgstr "Contenuto"
+
+msgid "Crémation"
+msgstr "Cremazione"
 
 msgid "Date"
 msgstr "Data"
@@ -138,8 +171,8 @@ msgstr "Descrizione"
 msgid "Dictionnaire {champ: nouvelle_valeur} proposé par le membre"
 msgstr "Dizionario {campo: nuovo_valore} proposto dal membro"
 
-msgid "Diplôme"
-msgstr "Diploma"
+msgid "Diplôme (graduation)"
+msgstr "Diploma (laurea)"
 
 msgid "Distinction"
 msgstr "Onorificenza"
@@ -190,8 +223,14 @@ msgstr "ID della foto nell'album Google Foto condiviso"
 msgid "Identifiant du média dans Google Photos (affichage via l'API)"
 msgstr "ID del media in Google Foto (visualizzazione via API)"
 
+msgid "Immigration"
+msgstr "Immigrazione"
+
 msgid "Indiquez un fichier à uploader ou un identifiant Google Photos."
 msgstr "Indica un file da caricare o un ID Google Foto."
+
+msgid "Inhumation"
+msgstr "Sepoltura"
 
 msgid "La date de décès ne peut pas être antérieure à la date de naissance."
 msgstr "La data di morte non può essere precedente alla data di nascita."
@@ -219,6 +258,9 @@ msgstr ""
 "I valori qui sotto sono quelli attuali. Modifica ciò che desideri correggere"
 " o completare: la proposta deve essere validata da un moderatore prima di "
 "essere applicata."
+
+msgid "Lieu"
+msgstr "Luogo"
 
 msgid "Lieu de décès"
 msgstr "Luogo di morte"
@@ -256,6 +298,12 @@ msgstr "Professione"
 msgid "Naissance"
 msgstr "Nascita"
 
+msgid "Naturalisation"
+msgstr "Naturalizzazione"
+
+msgid "Noblesse"
+msgstr "Nobiltà"
+
 msgid "Nom"
 msgstr "Cognome"
 
@@ -267,6 +315,15 @@ msgstr "Nome da nubile"
 
 msgid "Note du membre :"
 msgstr "Nota del membro:"
+
+msgid "Notes"
+msgstr "Note"
+
+msgid "Nouvel événement"
+msgstr "Nuovo evento"
+
+msgid "Nouvelle union"
+msgstr "Nuova unione"
 
 msgid "Nouvelle valeur"
 msgstr "Nuovo valore"
@@ -280,6 +337,9 @@ msgstr "Oggetto"
 msgid "Objet :"
 msgstr "Oggetto:"
 
+msgid "Ordination"
+msgstr "Ordinazione"
+
 msgid "PACS"
 msgstr "PACS"
 
@@ -291,6 +351,9 @@ msgstr "Percorso e storie"
 
 msgid "Parents :"
 msgstr "Genitori:"
+
+msgid "Partenaire"
+msgstr "Partner"
 
 msgid "Personne"
 msgstr "Persona"
@@ -378,6 +441,9 @@ msgstr "Nome"
 msgid "Racine :"
 msgstr "Radice:"
 
+msgid "Recensement"
+msgstr "Censimento"
+
 msgid "Rechercher"
 msgstr "Cerca"
 
@@ -393,14 +459,26 @@ msgstr "Rifiuta le proposte selezionate"
 msgid "Rejetée"
 msgstr "Rifiutata"
 
+msgid "Religion"
+msgstr "Religione"
+
 msgid "Retour"
 msgstr "Indietro"
+
+msgid "Retraite"
+msgstr "Pensione"
 
 msgid "Résidence"
 msgstr "Residenza"
 
 msgid "Se connecter"
 msgstr "Accedi"
+
+msgid "Section avancée invalide : un partenaire est requis pour une union."
+msgstr "Sezione avanzata non valida: è richiesto un partner per un'unione."
+
+msgid "Section avancée invalide : un titre est requis pour un événement."
+msgstr "Sezione avanzata non valida: è richiesto un titolo per un evento."
 
 msgid "Seule une proposition en attente peut être appliquée."
 msgstr "Solo una proposta in attesa può essere applicata."
@@ -435,8 +513,17 @@ msgstr "Titolo della foto"
 msgid "Traiter"
 msgstr "Gestisci"
 
+msgid "Type d'ajout avancé"
+msgstr "Tipo di aggiunta avanzata"
+
 msgid "Type d'objet à créer non supporté."
 msgstr "Tipo di oggetto da creare non supportato."
+
+msgid "Type d'union"
+msgstr "Tipo di unione"
+
+msgid "Type d'événement"
+msgstr "Tipo di evento"
 
 msgid ""
 "Un média doit contenir une image uploadée ou un identifiant Google Photos."
@@ -445,8 +532,14 @@ msgstr "Un media deve contenere un'immagine caricata o un ID Google Foto."
 msgid "Un média doit être rattaché à une personne ou à un événement."
 msgstr "Un media deve essere collegato a una persona o a un evento."
 
+msgid "Union (mariage, PACS, concubinage)"
+msgstr "Unione (matrimonio, PACS, convivenza)"
+
 msgid "Union avec"
 msgstr "Unione con"
+
+msgid "Union proposée"
+msgstr "Unione proposta"
 
 msgid ""
 "Votre photo a été soumise et est en attente de validation par un modérateur."
@@ -467,6 +560,12 @@ msgstr "[Genealogia] Nuova proposta #%(pk)s da moderare"
 msgid "ajout d'un média « %(title)s »"
 msgstr "aggiunta di un media \"%(title)s\""
 
+msgid ""
+"ajouter un événement GEDCOM (baptême, diplôme, recensement, etc.) ou une "
+"union"
+msgstr ""
+"aggiungi un evento GEDCOM (battesimo, diploma, censimento, ecc.) o un'unione"
+
 msgid "enfants :"
 msgstr "figli:"
 
@@ -479,8 +578,8 @@ msgstr "file caricato"
 msgid "fratrie :"
 msgstr "fratelli:"
 
-msgid "nouveau média"
-msgstr "nuovo media"
+msgid "nouvel objet : %(model)s"
+msgstr "nuovo oggetto: %(model)s"
 
 msgid "né(e) le %(d)s"
 msgstr "nato/a il %(d)s"
@@ -497,11 +596,26 @@ msgstr "proposto da <strong>%(username)s</strong> il %(date)s"
 msgid "proposée par <strong>%(username)s</strong> le %(date)s"
 msgstr "proposta da <strong>%(username)s</strong> il %(date)s"
 
+msgid "union avec partenaire"
+msgstr "unione con partner"
+
 msgid "Échec de l'application : %(exc)s"
 msgstr "Applicazione non riuscita: %(exc)s"
 
+msgid "Émigration"
+msgstr "Emigrazione"
+
+msgid "Événement (baptême, diplôme, recensement, émigration, titre...)"
+msgstr "Evento (battesimo, diploma, censimento, emigrazione, titolo...)"
+
+msgid "Événement proposé"
+msgstr "Evento proposto"
+
 msgid "à %(p)s"
 msgstr "a %(p)s"
+
+msgid "événement « %(title)s » (%(type)s)"
+msgstr "evento \"%(title)s\" (%(type)s)"
 
 msgid "— décédé(e) le %(d)s"
 msgstr "— deceduto/a il %(d)s"

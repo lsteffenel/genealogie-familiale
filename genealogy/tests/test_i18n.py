@@ -6,7 +6,7 @@ class I18nTests(TestCase):
     def test_default_language_is_french(self):
         response = self.client.get(reverse("login"))
         self.assertContains(response, "Se connecter")
-        self.assertContains(response, '<html lang="fr-fr">')
+        self.assertContains(response, '<html lang="fr">')
 
     def test_accept_language_english(self):
         response = self.client.get(reverse("login"), HTTP_ACCEPT_LANGUAGE="en")

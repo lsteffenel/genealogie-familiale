@@ -15,14 +15,20 @@
   <tr>
     <td>{{ proposal.pk }}</td>
     <td>{{ proposal.get_action_display }}</td>
-    <td>{% if proposal.action == "edit" %}{{ proposal.content_type.model }} #{{ proposal.object_id }}{% else %}{% trans "nouveau média" %}{% endif %}</td>
+    <td>{% if proposal.action == "edit" %}{{ proposal.content_type.model }} #{{ proposal.object_id }}{% else %}{% blocktrans with model=proposal.new_object_data.model %}nouvel objet : {{ model }}{% endblocktrans %}{% endif %}</td>
     <td>{{ proposal.proposed_by.username }}</td>
     <td>{% if proposal.action == "edit" %}
           <ul>{% for field, value in proposal.field_changes.items %}<li><code>{{ field }}</code> → {{ value }}</li>{% endfor %}</ul>
         {% else %}
-          {{ proposal.new_object_data.title }}
-          {% if proposal.uploaded_file %}📎 {% trans "fichier uploadé" %}{% endif %}
-          {% if proposal.new_object_data.google_photo_media_item_id %}🔗 Google Photos{% endif %}
+          {% if proposal.new_object_data.model == "event" %}
+            {% blocktrans with title=proposal.new_object_data.title type=proposal.new_object_data.event_type %}événement « {{ title }} » ({{ type }}){% endblocktrans %}
+          {% elif proposal.new_object_data.model == "union" %}
+            {% trans "union avec partenaire" %} #{{ proposal.new_object_data.partner_id }}
+          {% else %}
+            {{ proposal.new_object_data.title }}
+            {% if proposal.uploaded_file %}📎 {% trans "fichier uploadé" %}{% endif %}
+            {% if proposal.new_object_data.google_photo_media_item_id %}🔗 Google Photos{% endif %}
+          {% endif %}
         {% endif %}
         {% if proposal.note %}<br><em>{{ proposal.note }}</em>{% endif %}</td>
     <td><span class="badge {{ proposal.status }}">{{ proposal.get_status_display }}</span></td>
