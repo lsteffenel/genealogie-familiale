@@ -166,6 +166,7 @@ class Event(models.Model):
         RETIREMENT = "retirement", _("Retraite")
         TITLE = "title", _("Titre")
         NOBILITY = "nobility", _("Noblesse")
+        NAME_CHANGE = "name_change", _("Changement de nom")
         OTHER = "other", _("Autre")
 
     person = models.ForeignKey(Person, on_delete=models.CASCADE, related_name="events")

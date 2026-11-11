@@ -37,3 +37,42 @@ class ImportGedcomTests(TestCase):
         call_command("import_gedcom", SAMPLE, "--dry-run", stdout=out)
         self.assertEqual(Person.objects.count(), 0)
         self.assertEqual(Union.objects.count(), 0)
+
+    def test_import_name_change_events(self):
+        import tempfile
+
+        from genealogy.models import Event
+
+        ged = """0 HEAD
+1 CHAR UTF-8
+0 @I1@ INDI
+1 NAME Louis /Steffenel/
+1 SEX M
+1 BIRT
+2 DATE 1961
+1 NAME Louis /Estefanel/
+1 ALIA Louis Estefanel
+2 NOTE Graphie d'origine
+1 EVEN
+2 TYPE Changement de nom
+2 DATE 1961
+2 PLAC Rome, Italie
+2 NOTE Naturalisation italienne
+0 TRLR
+"""
+        with tempfile.NamedTemporaryFile("w", suffix=".ged", delete=False) as f:
+            f.write(ged)
+            path = f.name
+        call_command("import_gedcom", path)
+        person = Person.objects.get(gedcom_id="I1")
+        self.assertEqual(person.last_name, "Steffenel")
+        events = list(person.events.all())
+        self.assertEqual(len(events), 3)
+        self.assertTrue(all(e.event_type == Event.EventType.NAME_CHANGE for e in events))
+        even = next(e for e in events if e.title == "Changement de nom")
+        self.assertEqual(str(even.date), "1961-01-01")
+        self.assertEqual(even.place, "Rome, Italie")
+        self.assertIn("Naturalisation italienne", even.description)
+        alia = next(e for e in events if e.title == "Louis Estefanel" and e.description)
+        self.assertEqual(alia.description, "Graphie d'origine")
+        self.assertTrue(any(e.title == "Louis Estefanel" and not e.description for e in events))

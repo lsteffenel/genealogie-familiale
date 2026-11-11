@@ -134,6 +134,9 @@ msgstr "Campo"
 msgid "Champ inconnu : %(field)s"
 msgstr "Campo sconosciuto: %(field)s"
 
+msgid "Changement de nom"
+msgstr "Cambio di cognome"
+
 msgid "Changements"
 msgstr "Modifiche"
 
