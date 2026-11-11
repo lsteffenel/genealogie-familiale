@@ -77,6 +77,18 @@ class GenderedLabelsTests(TestCase):
         with translation.override("fr"):
             self.assertIn("Né(e) le", person.born_label)
 
+    def test_labels_adapt_to_gender_in_french(self):
+        male = Person(first_name="Jean", last_name="Dupont", gender="M",
+                      birth_date=datetime.date(1920, 5, 10),
+                      death_date=datetime.date(1990, 1, 1))
+        female = Person(first_name="Marie", last_name="Martin", gender="F",
+                        birth_date=datetime.date(1922, 3, 15), maiden_name="Durand")
+        with translation.override("fr"):
+            self.assertTrue(male.born_label.startswith("Né le"))
+            self.assertTrue(male.died_label.startswith("Décédé le"))
+            self.assertTrue(female.born_label.startswith("Née le"))
+            self.assertEqual(female.maiden_label, "née Durand")
+
     def test_empty_labels_without_dates(self):
         person = Person(first_name="Jean", last_name="Dupont")
         self.assertEqual(person.born_label, "")
