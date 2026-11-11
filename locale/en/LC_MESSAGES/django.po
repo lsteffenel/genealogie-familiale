@@ -102,6 +102,15 @@ msgstr "Other"
 msgid "Avancé"
 msgstr "Advanced"
 
+msgid "Bandeau de la page Personnes (HTML)"
+msgstr "Banner for the People page (HTML)"
+
+msgid "Bandeau de la vue « moi » (HTML)"
+msgstr "Banner for the \"me\" view (HTML)"
+
+msgid "Bandeaux HTML"
+msgstr "HTML banners"
+
 msgid "Baptême"
 msgstr "Baptism"
 
@@ -195,9 +204,6 @@ msgstr "Contact"
 msgid "Contenu"
 msgstr "Content"
 
-msgid "Contenu de la page d'accueil (HTML)"
-msgstr "Home page content (HTML)"
-
 msgid "Cookies"
 msgstr "Cookies"
 
@@ -272,11 +278,18 @@ msgid "Généalogie familiale"
 msgstr "Family genealogy"
 
 msgid ""
-"HTML affiché en haut de la page d'accueil, avant la liste des personnes. "
-"Édité par l'administrateur uniquement."
+"HTML affiché en haut de la fiche de la personne associée au compte connecté."
+" Édité par l'administrateur uniquement."
 msgstr ""
-"HTML displayed at the top of the home page, before the person list. Edited "
-"by the administrator only."
+"HTML displayed at the top of the page of the person linked to the logged-in "
+"account. Edited by the administrator only."
+
+msgid ""
+"HTML affiché en haut de la liste des personnes (page Personnes). Édité par "
+"l'administrateur uniquement."
+msgstr ""
+"HTML displayed at the top of the people list (People page). Edited by the "
+"administrator only."
 
 msgid "Homme"
 msgstr "Man"
@@ -471,9 +484,6 @@ msgstr "Civil partnership (PACS)"
 
 msgid "Page %(number)s / %(num_pages)s"
 msgstr "Page %(number)s / %(num_pages)s"
-
-msgid "Page d'accueil"
-msgstr "Home page"
 
 msgid "Parcours et histoires"
 msgstr "Life events and stories"

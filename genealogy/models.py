@@ -220,8 +220,13 @@ class SiteConfiguration(models.Model):
     )
     home_page_html = models.TextField(
         blank=True,
-        verbose_name=_("Contenu de la page d'accueil (HTML)"),
-        help_text=_("HTML affiché en haut de la page d'accueil, avant la liste des personnes. Édité par l'administrateur uniquement."),
+        verbose_name=_("Bandeau de la vue « moi » (HTML)"),
+        help_text=_("HTML affiché en haut de la fiche de la personne associée au compte connecté. Édité par l'administrateur uniquement."),
+    )
+    persons_page_html = models.TextField(
+        blank=True,
+        verbose_name=_("Bandeau de la page Personnes (HTML)"),
+        help_text=_("HTML affiché en haut de la liste des personnes (page Personnes). Édité par l'administrateur uniquement."),
     )
 
     class Meta:

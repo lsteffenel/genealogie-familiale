@@ -32,16 +32,26 @@ class SiteConfigurationTests(TestCase):
         response = self.client.get(reverse("tree"), {"root": self.alice.pk})
         self.assertEqual(response.context["root"], self.alice)
 
-    def test_home_page_html_displayed_above_list(self):
+    def test_home_banner_displayed_on_person_detail(self):
         config = SiteConfiguration.get()
-        config.home_page_html = "<p>Bienvenue sur notre arbre !</p>"
+        config.home_page_html = "<p>Bienvenue !</p>"
         config.save()
-        response = self.client.get(reverse("person_list"))
-        self.assertContains(response, "<p>Bienvenue sur notre arbre !</p>")
+        response = self.client.get(reverse("person_detail", args=[self.alice.pk]))
+        self.assertContains(response, "<p>Bienvenue !</p>")
         self.assertContains(response, "home-content")
 
-    def test_home_page_empty_by_default(self):
+    def test_persons_banner_displayed_above_list(self):
+        config = SiteConfiguration.get()
+        config.persons_page_html = "<p>Liste des familles</p>"
+        config.save()
         response = self.client.get(reverse("person_list"))
+        self.assertContains(response, "<p>Liste des familles</p>")
+        self.assertContains(response, "home-content")
+
+    def test_no_banner_by_default(self):
+        response = self.client.get(reverse("person_list"))
+        self.assertNotContains(response, "home-content")
+        response = self.client.get(reverse("person_detail", args=[self.alice.pk]))
         self.assertNotContains(response, "home-content")
 
     def test_list_shows_families_first(self):

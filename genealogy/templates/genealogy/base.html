@@ -9,7 +9,7 @@
 </head>
 <body>
   <header class="site">
-    <span class="brand"><a href="{% url 'person_list' %}">🌳 {% trans "Généalogie familiale" %}</a></span>
+    <span class="brand"><a href="{% url 'home' %}">🌳 {% trans "Généalogie familiale" %}</a></span>
     {% if user.is_authenticated %}
       <a href="{% url 'person_list' %}">{% trans "Personnes" %}</a>
       <a href="{% url 'tree' %}">{% trans "Arbre graphique" %}</a>

@@ -78,7 +78,7 @@ class MediaAdmin(admin.ModelAdmin):
 class SiteConfigurationAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {"fields": ("default_tree_root",)}),
-        (gettext_lazy("Page d'accueil"), {"fields": ("home_page_html",)}),
+        (gettext_lazy("Bandeaux HTML"), {"fields": ("home_page_html", "persons_page_html")}),
     )
 
     def has_add_permission(self, request):
