@@ -258,8 +258,8 @@ msgstr "%(name)s family"
 msgid "Femme"
 msgstr "Woman"
 
-msgid "Fichier photo (stockage local)"
-msgstr "Photo file (local storage)"
+msgid "Fichier photo"
+msgstr "Photo file"
 
 msgid "Fichier uploadé par le membre, rattaché au nouvel objet à validation"
 msgstr ""
@@ -267,9 +267,6 @@ msgstr ""
 
 msgid "Finalités"
 msgstr "Purposes"
-
-msgid "Google Photos : %(mid)s"
-msgstr "Google Photos: %(mid)s"
 
 msgid "Généalogie familiale"
 msgstr "Family genealogy"
@@ -284,23 +281,14 @@ msgstr ""
 msgid "Homme"
 msgstr "Man"
 
-msgid "Identifiant Google Photos (si la photo vient de l'album partagé)"
-msgstr "Google Photos ID (if the photo comes from the shared album)"
-
 msgid "Identifiant d'origine dans le fichier GEDCOM importé"
 msgstr "Original ID in the imported GEDCOM file"
-
-msgid "Identifiant de la photo dans l'album Google Photos partagé"
-msgstr "Photo ID in the shared Google Photos album"
-
-msgid "Identifiant du média dans Google Photos (affichage via l'API)"
-msgstr "Media ID in Google Photos (display via the API)"
 
 msgid "Immigration"
 msgstr "Immigration"
 
-msgid "Indiquez un fichier à uploader ou un identifiant Google Photos."
-msgstr "Provide a file to upload or a Google Photos ID."
+msgid "Indiquez un fichier à uploader."
+msgstr "Please provide a file to upload."
 
 msgid "Inhumation"
 msgstr "Burial"
@@ -322,12 +310,10 @@ msgstr "The date of death cannot be earlier than the date of birth."
 
 msgid ""
 "La photo sera publiée sur la fiche de la personne après validation par un "
-"modérateur. Vous pouvez uploader un fichier local ou référencer une photo de"
-" l'album Google Photos partagé."
+"modérateur."
 msgstr ""
 "The photo will be published on the person's page after validation by a "
-"moderator. You can upload a local file or reference a photo from the shared "
-"Google Photos album."
+"moderator."
 
 msgid ""
 "La présente politique de confidentialité décrit la manière dont ce site de "
@@ -532,13 +518,6 @@ msgstr "Photo of %(name)s"
 msgid "Photo de %(name)s %(last)s"
 msgstr "Photo of %(name)s %(last)s"
 
-msgid ""
-"Photo disponible via Google Photos (album partagé, non chargé : identifiants"
-" API non configurés)."
-msgstr ""
-"Photo available via Google Photos (shared album, not loaded: API credentials"
-" not configured)."
-
 msgid "Photos"
 msgstr "Photos"
 
@@ -699,9 +678,8 @@ msgstr "Union type"
 msgid "Type d'événement"
 msgstr "Event type"
 
-msgid ""
-"Un média doit contenir une image uploadée ou un identifiant Google Photos."
-msgstr "A media must contain an uploaded image or a Google Photos ID."
+msgid "Un média doit contenir une image uploadée."
+msgstr "A media must contain an uploaded image."
 
 msgid "Un média doit être rattaché à une personne ou à un événement."
 msgstr "A media must be attached to a person or an event."

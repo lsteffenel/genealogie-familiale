@@ -64,47 +64,12 @@ Les changements de graphie de nom sont importés comme événements « Changemen
 
 ## Modèle de données
 
-- **Person** : identité, sexe, naissance/décès, biographie, photo (upload ou Google Photos)
+- **Person** : identité, sexe, naissance/décès, biographie, photo (upload)
 - **Union** : mariage/PACS/concubinage entre deux personnes, enfants associés
 - **Event** : informations tierces (diplôme, métier, résidence, anecdote, distinction)
-- **Media** : photos rattachées à une personne ou un événement (upload ou Google Photos)
+- **Media** : photos rattachées à une personne ou un événement (upload local)
 - **EditProposal** : proposition de modification soumise par un membre, approuvée/rejetée par un modérateur
 - **Profile** : rôle de l'utilisateur (membre, modérateur, administrateur)
-
-## Google Photos (lecture seule)
-
-Les fiches peuvent référencer des photos de l'album Google Photos partagé via
-leur `media item ID` (champ `google_photo_media_item_id` sur `Person` et `Media`).
-
-Configuration (dans `.env`) :
-
-```
-GOOGLE_PHOTOS_CLIENT_ID=...
-GOOGLE_PHOTOS_CLIENT_SECRET=...
-GOOGLE_PHOTOS_REFRESH_TOKEN=...
-```
-
-Obtention du refresh token (une seule fois, depuis un poste ayant accès au compte Google) :
-
-```bash
-python - <<'EOF'
-from google_auth_oauthlib.flow import InstalledAppFlow
-flow = InstalledAppFlow.from_client_config(
-    {"installed": {"client_id": "VOTRE_CLIENT_ID", "client_secret": "VOTRE_SECRET",
-                   "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-                   "token_uri": "https://oauth2.googleapis.com/token",
-                   "redirect_uris": ["http://localhost"]}},
-    scopes=["https://www.googleapis.com/auth/photospicker.mediaitems.readonly"],
-)
-creds = flow.run_local_server(port=0)
-print(creds.refresh_token)
-EOF
-```
-
-Le scope utilisé est `photospicker.mediaitems.readonly` : accès strictement en
-lecture aux médias sélectionnés via le sélecteur Google Photos. Sans ces
-variables, le site affiche un simple libellé à la place des photos. Les URL
-signées retournées par l'API sont mises en cache 6 h.
 
 ## Confidentialité et RGPD
 
@@ -125,7 +90,7 @@ signées retournées par l'API sont mises en cache 6 h.
 - `/` : page d'accueil avec contenu éditorial configurable (admin) puis liste **hiérarchisée par nom de famille** (cliquer sur une famille pour voir ses membres), avec recherche
 - `/personne/<id>/` : fiche complète (famille, unions, enfants, parcours, photos, historique des propositions)
 - `/personne/<id>/proposer/` : formulaire de proposition de modification (validée par un modérateur), avec une section **« Avancé »** permettant de proposer en plus un **événement GEDCOM** (baptême, confirmation, diplôme/graduation, recensement, émigration, naturalisation, titre, noblesse, etc.) ou une **union** avec un partenaire
-- `/photos/ajouter/` : **upload local d'une photo** (ou référence Google Photos), soumis à validation avant publication ; le fichier validé est stocké dans `media/photos/` (volume `media_data` sous Docker, servi derrière authentification)
+- `/photos/ajouter/` : **upload local d'une photo**, soumis à validation avant publication ; le fichier validé est stocké dans `media/photos/` (volume `media_data` sous Docker, servi derrière authentification)
 - `/propositions/` : file de modération (réservée aux modérateurs)
 - `/arbre/` : **arbre graphique** avec choix de la racine et cases à cocher
   pour afficher/masquer nom, dates et photo (paramètres `?name=0&dates=0&photo=0`)
@@ -143,7 +108,6 @@ Configuration via `EMAIL_BACKEND`, `DEFAULT_FROM_EMAIL` et, pour le SMTP,
 
 1. Fondations : modèles, rôles, import GEDCOM, modération
 2. Interface membre : arbre graphique, soumission de propositions
-3. Intégration Google Photos (API, lecture seule)
 4. Notifications e-mail des modérateurs
 5. Déploiement
 

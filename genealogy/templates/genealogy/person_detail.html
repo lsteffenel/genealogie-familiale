@@ -11,8 +11,6 @@
   {% if person.biography %}<p>{{ person.biography|linebreaksbr }}</p>{% endif %}
   {% if person_photo_url %}
     <p><img src="{{ person_photo_url }}" alt="{% blocktrans with name=person %}Photo de {{ name }}{% endblocktrans %}" style="max-width:300px;border-radius:6px"></p>
-  {% elif person.google_photo_media_item_id %}
-    <p>📷 {% trans "Photo disponible via Google Photos (album partagé, non chargé : identifiants API non configurés)." %}</p>
   {% endif %}
   <p>
     <a class="btn" href="{% url 'propose_person_edit' person.pk %}">{% trans "Proposer une modification" %}</a>
@@ -57,15 +55,15 @@
   <h2>{% trans "Photos" %}</h2>
   <ul>
     {% for item in media %}
-      <li>{{ item.title }}{% if not item.google_photo_media_item_id %} ({% trans "fichier uploadé" %}){% endif %}</li>
+      <li>{{ item.title }}</li>
     {% endfor %}
   </ul>
-  {% if media_photos %}
+  {% if media %}
   <div style="display:flex;flex-wrap:wrap;gap:0.8rem;margin-top:0.8rem">
-    {% for item, url in media_photos %}
-      {% if url %}
+    {% for item in media %}
+      {% if item.image %}
         <figure style="margin:0">
-          <img src="{{ url }}" alt="{{ item.title }}" style="width:200px;border-radius:6px">
+          <img src="{{ item.image.url }}" alt="{{ item.title }}" style="width:200px;border-radius:6px">
           <figcaption>{{ item.title }}</figcaption>
         </figure>
       {% endif %}

@@ -70,7 +70,7 @@ class EventAdmin(admin.ModelAdmin):
 
 @admin.register(Media)
 class MediaAdmin(admin.ModelAdmin):
-    list_display = ("title", "person", "event", "google_photo_media_item_id", "created_at")
+    list_display = ("title", "person", "event", "created_at")
     search_fields = ("title",)
 
 
