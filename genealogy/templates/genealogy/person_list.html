@@ -3,8 +3,8 @@
 {% block title %}{% trans "Arbre généalogique" %}{% endblock %}
 {% block content %}
 <h1>{% trans "Arbre généalogique" %}</h1>
-{% if home_html %}
-<div class="card home-content">{{ home_html|safe }}</div>
+{% if persons_html %}
+<div class="card home-content">{{ persons_html|safe }}</div>
 {% endif %}
 <form method="get" action="{% url 'person_list' %}" class="card" style="display:flex;gap:0.8rem;align-items:center">
   <input type="search" name="q" value="{{ query }}" placeholder="{% trans "Rechercher un nom..." %}" style="max-width:320px">

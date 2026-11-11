@@ -2,6 +2,9 @@
 {% load i18n %}
 {% block title %}{{ person }}{% endblock %}
 {% block content %}
+{% if home_html %}
+<div class="card home-content">{{ home_html|safe }}</div>
+{% endif %}
 <div class="card">
   <h1>{{ person.first_name }} {{ person.last_name }}{% if person.maiden_name %} ({{ person.maiden_label }}){% endif %}</h1>
   <p>

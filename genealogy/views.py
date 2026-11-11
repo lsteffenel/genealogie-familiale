@@ -26,6 +26,14 @@ def is_moderator(user):
     return user.is_authenticated and hasattr(user, "profile") and user.profile.is_moderator
 
 
+@login_required
+def home_view(request):
+    person = getattr(getattr(request.user, "profile", None), "person", None)
+    if person is not None:
+        return redirect("person_detail", pk=person.pk)
+    return redirect("person_list")
+
+
 class PersonListView(LoginRequiredMixin, ListView):
     model = Person
     template_name = "genealogy/person_list.html"
@@ -50,7 +58,7 @@ class PersonListView(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         query = self.request.GET.get("q", "").strip()
         family = self.request.GET.get("family", "").strip()
-        context["home_html"] = SiteConfiguration.get().home_page_html
+        context["persons_html"] = SiteConfiguration.get().persons_page_html
         context["query"] = query
         context["family"] = family
         if not query and not family:
@@ -88,6 +96,7 @@ class PersonDetailView(LoginRequiredMixin, DetailView):
             status=ProposalStatus.PENDING,
         ).select_related("proposed_by", "reviewed_by")
         context["can_propose"] = True
+        context["home_html"] = SiteConfiguration.get().home_page_html
         context["person_photo_url"] = next(
             (item.image.url for item in context["media"] if item.image), None
         )

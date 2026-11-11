@@ -102,6 +102,15 @@ msgstr "Altro"
 msgid "Avancé"
 msgstr "Avanzate"
 
+msgid "Bandeau de la page Personnes (HTML)"
+msgstr "Banner della pagina Persone (HTML)"
+
+msgid "Bandeau de la vue « moi » (HTML)"
+msgstr "Banner della vista « io » (HTML)"
+
+msgid "Bandeaux HTML"
+msgstr "Banner HTML"
+
 msgid "Baptême"
 msgstr "Battesimo"
 
@@ -195,9 +204,6 @@ msgstr "Contatti"
 msgid "Contenu"
 msgstr "Contenuto"
 
-msgid "Contenu de la page d'accueil (HTML)"
-msgstr "Contenuto della home page (HTML)"
-
 msgid "Cookies"
 msgstr "Cookie"
 
@@ -272,10 +278,17 @@ msgid "Généalogie familiale"
 msgstr "Genealogia familiare"
 
 msgid ""
-"HTML affiché en haut de la page d'accueil, avant la liste des personnes. "
-"Édité par l'administrateur uniquement."
+"HTML affiché en haut de la fiche de la personne associée au compte connecté."
+" Édité par l'administrateur uniquement."
 msgstr ""
-"HTML mostrato in cima alla home page, prima dell'elenco delle persone. "
+"HTML mostrato in cima alla scheda della persona collegata all'account "
+"connesso. Modificabile solo dall'amministratore."
+
+msgid ""
+"HTML affiché en haut de la liste des personnes (page Personnes). Édité par "
+"l'administrateur uniquement."
+msgstr ""
+"HTML mostrato in cima all'elenco delle persone (pagina Persone). "
 "Modificabile solo dall'amministratore."
 
 msgid "Homme"
@@ -475,9 +488,6 @@ msgstr "PACS"
 
 msgid "Page %(number)s / %(num_pages)s"
 msgstr "Pagina %(number)s / %(num_pages)s"
-
-msgid "Page d'accueil"
-msgstr "Home page"
 
 msgid "Parcours et histoires"
 msgstr "Percorso e storie"
