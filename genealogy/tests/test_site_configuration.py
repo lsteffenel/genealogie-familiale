@@ -63,3 +63,13 @@ class SiteConfigurationTests(TestCase):
         self.assertEqual(response.context["mode"], "search")
         self.assertContains(response, "Alice")
         self.assertNotContains(response, "Bob")
+
+    def test_str_methods_return_real_strings(self):
+        from genealogy.models import EditProposal
+
+        config = SiteConfiguration.get()
+        self.assertIs(type(str(config)), str)
+        proposal = EditProposal.objects.create(
+            action=EditProposal.Action.CREATE, proposed_by=self.member
+        )
+        self.assertIs(type(str(proposal)), str)

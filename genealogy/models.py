@@ -213,7 +213,7 @@ class SiteConfiguration(models.Model):
         verbose_name_plural = _("Configuration du site")
 
     def __str__(self):
-        return _("Configuration du site")
+        return str(_("Configuration du site"))
 
     @classmethod
     def get(cls):
@@ -272,13 +272,13 @@ class EditProposal(models.Model):
 
     def __str__(self):
         if self.action == EditProposal.Action.CREATE:
-            return _("Proposition #%(pk)s : ajout (%(status)s)") % {
+            return str(_("Proposition #%(pk)s : ajout (%(status)s)") % {
                 "pk": self.pk, "status": self.get_status_display(),
-            }
-        return _("Proposition #%(pk)s sur %(model)s #%(object_id)s (%(status)s)") % {
+            })
+        return str(_("Proposition #%(pk)s sur %(model)s #%(object_id)s (%(status)s)") % {
             "pk": self.pk, "model": self.content_type.model,
             "object_id": self.object_id, "status": self.get_status_display(),
-        }
+        })
 
     def apply(self, reviewer):
         from django.utils import timezone
