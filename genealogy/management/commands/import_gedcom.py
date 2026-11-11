@@ -4,7 +4,7 @@ from datetime import date
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
 
-from genealogy.models import Person, Union
+from genealogy.models import Event, Person, Union
 
 MONTHS = {
     "JAN": 1, "FEB": 2, "MAR": 3, "APR": 4, "MAY": 5, "JUN": 6,
@@ -149,6 +149,56 @@ class Command(BaseCommand):
                 unions[xref] = (union, [c.strip("@") for c in
                                         [e["rest"] for e in sub_entries(record, "CHIL")]])
 
+            events = []
+            for record in individuals:
+                xref = record[0]["xref"]
+                person = persons.get(xref)
+                if person is None:
+                    continue
+                for even in sub_entries(record, "EVEN"):
+                    base = record.index(even)
+                    etype = ""
+                    edate = ""
+                    eplac = ""
+                    enote = ""
+                    for sub in record[base + 1:]:
+                        if sub["level"] <= even["level"]:
+                            break
+                        if sub["tag"] == "TYPE":
+                            etype = sub["rest"]
+                        elif sub["tag"] == "DATE":
+                            edate = sub["rest"]
+                        elif sub["tag"] == "PLAC":
+                            eplac = sub["rest"]
+                        elif sub["tag"] == "NOTE":
+                            enote = sub["rest"]
+                    if etype and ("nom" in etype.lower() or "name" in etype.lower()):
+                        events.append(Event(
+                            person=person, event_type=Event.EventType.NAME_CHANGE,
+                            title=etype[:255], date=parse_gedcom_date(edate),
+                            place=eplac, description=enote,
+                        ))
+                for alia in sub_entries(record, "ALIA"):
+                    note = ""
+                    base = record.index(alia)
+                    for sub in record[base + 1:]:
+                        if sub["level"] <= alia["level"]:
+                            break
+                        if sub["tag"] == "NOTE":
+                            note = sub["rest"]
+                    events.append(Event(
+                        person=person, event_type=Event.EventType.NAME_CHANGE,
+                        title=alia["rest"][:255], description=note,
+                    ))
+                for extra_name in sub_entries(record, "NAME")[1:]:
+                    first, last, maiden = parse_name(extra_name["rest"])
+                    full = " ".join(p for p in (first, last, maiden) if p)
+                    if full:
+                        events.append(Event(
+                            person=person, event_type=Event.EventType.NAME_CHANGE,
+                            title=full[:255],
+                        ))
+
             if not dry_run:
                 with transaction.atomic():
                     for person in persons.values():
@@ -156,6 +206,8 @@ class Command(BaseCommand):
                     for union, child_xrefs in unions.values():
                         union.save()
                         union.children.set([persons[c] for c in child_xrefs if c in persons])
+                    for event in events:
+                        event.save()
             return persons, unions
 
         persons, unions = build()

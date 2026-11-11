@@ -134,6 +134,9 @@ msgstr "Field"
 msgid "Champ inconnu : %(field)s"
 msgstr "Unknown field: %(field)s"
 
+msgid "Changement de nom"
+msgstr "Name change"
+
 msgid "Changements"
 msgstr "Changes"
 

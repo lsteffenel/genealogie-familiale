@@ -58,6 +58,10 @@ python manage.py import_gedcom chemin/vers/export.ged          # import réel
 python manage.py import_gedcom chemin/vers/export.ged --dry-run  # test à blanc
 ```
 
+Les changements de graphie de nom sont importés comme événements « Changement de nom »
+(affichés dans « Parcours et histoires » de la fiche) depuis : `EVEN` avec `TYPE` contenant
+« nom »/« name », les balises `ALIA`, et tout `NAME` supplémentaire de la fiche individu.
+
 ## Modèle de données
 
 - **Person** : identité, sexe, naissance/décès, biographie, photo (upload ou Google Photos)
