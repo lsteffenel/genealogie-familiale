@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.contenttypes.models import ContentType
@@ -101,6 +102,17 @@ class PersonDetailView(LoginRequiredMixin, DetailView):
 
 def legal_page(request, template):
     return render(request, template)
+
+
+@staff_member_required
+def export_gedcom_view(request):
+    from django.http import HttpResponse
+
+    from .management.commands.export_gedcom import Command
+
+    response = HttpResponse(Command().build(), content_type="text/plain; charset=utf-8")
+    response["Content-Disposition"] = 'attachment; filename="export.ged"'
+    return response
 
 
 @login_required

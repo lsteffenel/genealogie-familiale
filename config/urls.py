@@ -4,7 +4,10 @@ from django.contrib.auth.decorators import login_required
 from django.urls import include, path
 from django.views.static import serve
 
+from genealogy import views as genealogy_views
+
 urlpatterns = [
+    path("admin/export-gedcom/", genealogy_views.export_gedcom_view, name="admin_export_gedcom"),
     path("admin/", admin.site.urls),
     path("i18n/", include("django.conf.urls.i18n")),
     path("", include("genealogy.urls")),

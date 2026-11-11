@@ -48,6 +48,7 @@ admin.site.register(User, CustomUserAdmin)
 
 @admin.register(Person)
 class PersonAdmin(admin.ModelAdmin):
+    change_list_template = "admin/genealogy/person/change_list.html"
     list_display = ("first_name", "last_name", "birth_date", "death_date", "gedcom_id")
     search_fields = ("first_name", "last_name", "gedcom_id")
     list_filter = ("gender",)

@@ -246,6 +246,9 @@ msgstr "Morte"
 msgid "En attente"
 msgstr "In attesa"
 
+msgid "Exporter en GEDCOM"
+msgstr "Esporta in GEDCOM"
+
 msgid "Famille"
 msgstr "Famiglia"
 
