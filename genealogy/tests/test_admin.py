@@ -77,3 +77,42 @@ class EditProposalAdminTests(TestCase):
         self.assertEqual(response.status_code, 302)
         self.pending.refresh_from_db()
         self.assertEqual(self.pending.status, ProposalStatus.PENDING)
+
+
+class UserAdminAddTests(TestCase):
+    def setUp(self):
+        self.admin = User.objects.create_superuser("admin2", password="secret123")
+        self.client.force_login(self.admin)
+
+    def _post_add_user(self, person=None):
+        data = {
+            "username": "nouveau",
+            "password1": "Secr3t-pass!",
+            "password2": "Secr3t-pass!",
+            "profile-TOTAL_FORMS": "1",
+            "profile-INITIAL_FORMS": "0",
+            "profile-MIN_NUM_FORMS": "0",
+            "profile-MAX_NUM_FORMS": "1",
+            "profile-0-role": "member",
+        }
+        if person is not None:
+            data["profile-0-person"] = str(person.pk)
+        return self.client.post(reverse("admin:auth_user_add"), data)
+
+    def test_add_user_without_person(self):
+        from genealogy.models import Profile
+
+        response = self._post_add_user()
+        self.assertEqual(response.status_code, 302)
+        user = User.objects.get(username="nouveau")
+        self.assertEqual(Profile.objects.filter(user=user).count(), 1)
+
+    def test_add_user_with_person_linked_at_once(self):
+        from genealogy.models import Profile
+
+        person = Person.objects.create(first_name="Jean", last_name="Dupont")
+        response = self._post_add_user(person=person)
+        self.assertEqual(response.status_code, 302)
+        user = User.objects.get(username="nouveau")
+        profile = Profile.objects.get(user=user)
+        self.assertEqual(profile.person, person)

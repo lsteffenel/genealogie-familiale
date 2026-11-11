@@ -28,6 +28,19 @@ class ProfileInline(admin.StackedInline):
 class CustomUserAdmin(UserAdmin):
     inlines = (ProfileInline,)
 
+    def save_formset(self, request, form, formset, change):
+        # Le signal post_save crée déjà un Profile pour chaque nouvel
+        # utilisateur : réutiliser cette ligne au lieu d'en insérer une seconde
+        # (sinon IntegrityError sur la contrainte unique user_id).
+        instances = formset.save(commit=False)
+        for instance in instances:
+            if isinstance(instance, Profile) and instance.pk is None:
+                existing = Profile.objects.filter(user=form.instance).first()
+                if existing is not None:
+                    instance.pk = existing.pk
+            instance.save()
+        formset.save_m2m()
+
 
 admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)
