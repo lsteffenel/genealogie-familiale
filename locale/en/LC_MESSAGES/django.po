@@ -72,6 +72,9 @@ msgstr "Approve selected proposals"
 msgid "Approuvée"
 msgstr "Approved"
 
+msgid "Approuvées"
+msgstr "Approved"
+
 msgid "Arbre graphique"
 msgstr "Family tree"
 
@@ -487,6 +490,9 @@ msgstr "Reject selected proposals"
 msgid "Rejetée"
 msgstr "Rejected"
 
+msgid "Rejetées"
+msgstr "Rejected"
+
 msgid "Religion"
 msgstr "Religion"
 
@@ -510,6 +516,9 @@ msgstr "Invalid advanced section: a title is required for an event."
 
 msgid "Seule une proposition en attente peut être appliquée."
 msgstr "Only a pending proposal can be applied."
+
+msgid "Seule une proposition en attente peut être approuvée."
+msgstr "Only a pending proposal can be approved."
 
 msgid "Seule une proposition en attente peut être rejetée."
 msgstr "Only a pending proposal can be rejected."
@@ -537,6 +546,9 @@ msgstr "Title"
 
 msgid "Titre de la photo"
 msgstr "Photo title"
+
+msgid "Toutes"
+msgstr "All"
 
 msgid "Toutes les familles"
 msgstr "All families"

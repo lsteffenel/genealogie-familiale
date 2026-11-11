@@ -72,6 +72,9 @@ msgstr "Aprovar as propostas selecionadas"
 msgid "Approuvée"
 msgstr "Aprovada"
 
+msgid "Approuvées"
+msgstr "Aprovadas"
+
 msgid "Arbre graphique"
 msgstr "Árvore genealógica"
 
@@ -486,6 +489,9 @@ msgstr "Rejeitar as propostas selecionadas"
 msgid "Rejetée"
 msgstr "Rejeitada"
 
+msgid "Rejetées"
+msgstr "Rejeitadas"
+
 msgid "Religion"
 msgstr "Religião"
 
@@ -509,6 +515,9 @@ msgstr "Seção avançada inválida: um título é obrigatório para um evento."
 
 msgid "Seule une proposition en attente peut être appliquée."
 msgstr "Somente uma proposta pendente pode ser aplicada."
+
+msgid "Seule une proposition en attente peut être approuvée."
+msgstr "Somente uma proposta pendente pode ser aprovada."
 
 msgid "Seule une proposition en attente peut être rejetée."
 msgstr "Somente uma proposta pendente pode ser rejeitada."
@@ -536,6 +545,9 @@ msgstr "Título"
 
 msgid "Titre de la photo"
 msgstr "Título da foto"
+
+msgid "Toutes"
+msgstr "Todas"
 
 msgid "Toutes les familles"
 msgstr "Todas as famílias"
