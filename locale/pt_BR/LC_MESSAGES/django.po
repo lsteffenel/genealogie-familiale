@@ -120,6 +120,14 @@ msgstr "Biografia"
 msgid "Bénédiction"
 msgstr "Bênção"
 
+msgid ""
+"Ces données servent uniquement à faire fonctionner le site collaboratif : "
+"afficher l'arbre, gérer les comptes et modérer les propositions de "
+"modification."
+msgstr ""
+"Esses dados servem exclusivamente para fazer o site colaborativo funcionar: "
+"exibir a árvore, gerenciar contas e moderar propostas de alteração."
+
 msgid "Champ"
 msgstr "Campo"
 
@@ -132,6 +140,13 @@ msgstr "Alterações"
 msgid "Changements proposés"
 msgstr "Alterações propostas"
 
+msgid ""
+"Chaque membre dispose d'un compte personnel et est responsable de la "
+"confidentialité de son mot de passe."
+msgstr ""
+"Cada membro possui uma conta pessoal e é responsável pela confidencialidade "
+"de sua senha."
+
 msgid "Commentaire (affiché au modérateur)"
 msgstr "Comentário (exibido ao moderador)"
 
@@ -141,8 +156,14 @@ msgstr "Comentário de moderação"
 msgid "Commentaire du membre accompagnant sa proposition"
 msgstr "Comentário do membro que acompanha a proposta"
 
+msgid "Compte"
+msgstr "Conta"
+
 msgid "Concubinage"
 msgstr "Convivência"
+
+msgid "Conditions d'utilisation"
+msgstr "Termos de uso"
 
 msgid "Configuration du site"
 msgstr "Configuração do site"
@@ -150,14 +171,32 @@ msgstr "Configuração do site"
 msgid "Confirmation"
 msgstr "Confirmação (crisma)"
 
+msgid ""
+"Conformément au RGPD, vous disposez d'un droit d'accès, de rectification, "
+"d'effacement, d'opposition et de portabilité de vos données. Pour l'exercer,"
+" contactez l'administrateur du site."
+msgstr ""
+"De acordo com o GDPR, você tem direito de acesso, retificação, exclusão, "
+"oposição e portabilidade dos seus dados. Para exercê-los, entre em contato "
+"com o administrador do site."
+
 msgid "Connexion"
 msgstr "Entrar"
+
+msgid "Conservation"
+msgstr "Retenção"
+
+msgid "Contact"
+msgstr "Contato"
 
 msgid "Contenu"
 msgstr "Conteúdo"
 
 msgid "Contenu de la page d'accueil (HTML)"
 msgstr "Conteúdo da página inicial (HTML)"
+
+msgid "Cookies"
+msgstr "Cookies"
 
 msgid "Crémation"
 msgstr "Cremação"
@@ -183,8 +222,17 @@ msgstr "Dicionário {campo: novo_valor} proposto pelo membro"
 msgid "Diplôme (graduation)"
 msgstr "Diploma (formatura)"
 
+msgid "Disponibilité"
+msgstr "Disponibilidade"
+
 msgid "Distinction"
 msgstr "Condecoração"
+
+msgid "Données collectées"
+msgstr "Dados coletados"
+
+msgid "Données personnelles de tiers"
+msgstr "Dados pessoais de terceiros"
 
 msgid "Déconnexion"
 msgstr "Sair"
@@ -210,6 +258,9 @@ msgstr "Arquivo de foto (armazenamento local)"
 msgid "Fichier uploadé par le membre, rattaché au nouvel objet à validation"
 msgstr ""
 "Arquivo enviado pelo membro, anexado ao novo objeto pendente de validação"
+
+msgid "Finalités"
+msgstr "Finalidades"
 
 msgid "Google Photos : %(mid)s"
 msgstr "Google Fotos: %(mid)s"
@@ -248,6 +299,19 @@ msgstr "Informe um arquivo para enviar ou um ID do Google Fotos."
 msgid "Inhumation"
 msgstr "Sepultamento"
 
+msgid ""
+"L'administrateur ne saurait être tenu responsable des erreurs présentes dans"
+" les données publiées par les membres."
+msgstr ""
+"O administrador não pode ser responsabilizado por erros presentes nos dados "
+"publicados pelos membros."
+
+msgid ""
+"L'utilisation de ce site implique l'acceptation pleine et entière des "
+"présentes conditions d'utilisation."
+msgstr ""
+"O uso deste site implica a aceitação plena e integral destes termos de uso."
+
 msgid "La date de décès ne peut pas être antérieure à la date de naissance."
 msgstr "A data de falecimento não pode ser anterior à data de nascimento."
 
@@ -260,11 +324,58 @@ msgstr ""
 "Você pode enviar um arquivo local ou referenciar uma foto do álbum "
 "compartilhado do Google Fotos."
 
+msgid ""
+"La présente politique de confidentialité décrit la manière dont ce site de "
+"généalogie familiale collecte, utilise et protège vos données personnelles."
+msgstr ""
+"Esta política de privacidade descreve como este site de genealogia familiar "
+"coleta, usa e protege seus dados pessoais."
+
 msgid "Langue"
 msgstr "Idioma"
 
+msgid ""
+"Le site est fourni sans garantie de disponibilité permanente ; il peut être "
+"interrompu pour maintenance."
+msgstr ""
+"O site é fornecido sem garantia de disponibilidade permanente; pode ser "
+"interrompido para manutenção."
+
+msgid ""
+"Le site utilise uniquement des cookies de session et de préférence de "
+"langue."
+msgstr "O site usa apenas cookies de sessão e de preferência de idioma."
+
 msgid "Les deux partenaires doivent être des personnes différentes."
 msgstr "Os dois parceiros devem ser pessoas diferentes."
+
+msgid ""
+"Les données concernant des personnes privées ne doivent être publiées "
+"qu'avec leur accord."
+msgstr ""
+"Dados sobre pessoas privadas só podem ser publicados com o consentimento "
+"delas."
+
+msgid ""
+"Les données sont conservées tant que le compte est actif, puis supprimées ou"
+" anonymisées, conformément au RGPD."
+msgstr ""
+"Os dados são mantidos enquanto a conta estiver ativa e depois excluídos ou "
+"anonimizados, conforme o GDPR."
+
+msgid ""
+"Les informations généalogiques et les photos publiées le sont sous la "
+"responsabilité de leur auteur, après validation par un modérateur."
+msgstr ""
+"As informações genealógicas e fotos são publicadas sob responsabilidade de "
+"seu autor, após validação por um moderador."
+
+msgid ""
+"Les propositions de modification sont soumises à validation par un "
+"modérateur avant d'être publiées."
+msgstr ""
+"As propostas de alteração devem ser validadas por um moderador antes de "
+"serem publicadas."
 
 msgid ""
 "Les valeurs ci-dessous sont les valeurs actuelles. Modifiez ce que vous "
@@ -336,6 +447,16 @@ msgstr "Observação do membro:"
 
 msgid "Notes"
 msgstr "Observações"
+
+msgid ""
+"Nous collectons les données suivantes : nom d'utilisateur, adresse e-mail et"
+" mot de passe du compte ; les informations généalogiques que vous soumettez "
+"(personnes, unions, événements, photos) ; les journaux techniques (adresse "
+"IP, navigateur)."
+msgstr ""
+"Coletamos os seguintes dados: nome de usuário, e-mail e senha da conta; as "
+"informações genealógicas que você envia (pessoas, uniões, eventos, fotos); "
+"os logs técnicos (endereço IP, navegador)."
 
 msgid "Nouvel événement"
 msgstr "Novo evento"
@@ -417,8 +538,18 @@ msgstr ""
 msgid "Photos"
 msgstr "Fotos"
 
+msgid "Politique de confidentialité"
+msgstr "Política de privacidade"
+
 msgid "Pour action=create : données du nouvel objet (ex. média à créer)"
 msgstr "Para action=create: dados do novo objeto (ex.: mídia a criar)"
+
+msgid ""
+"Pour toute question relative à vos données personnelles, contactez "
+"l'administrateur du site."
+msgstr ""
+"Para qualquer dúvida sobre seus dados pessoais, entre em contato com o "
+"administrador do site."
 
 msgid "Proposer l'ajout d'une photo"
 msgstr "Propor a adição de uma foto"
@@ -488,6 +619,9 @@ msgstr "Rejeitadas"
 
 msgid "Religion"
 msgstr "Religião"
+
+msgid "Responsabilité"
+msgstr "Responsabilidade"
 
 msgid "Retour"
 msgstr "Voltar"
@@ -576,6 +710,9 @@ msgstr "União com"
 
 msgid "Union proposée"
 msgstr "União proposta"
+
+msgid "Vos droits"
+msgstr "Seus direitos"
 
 msgid ""
 "Votre photo a été soumise et est en attente de validation par un modérateur."

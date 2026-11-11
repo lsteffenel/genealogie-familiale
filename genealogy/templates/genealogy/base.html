@@ -45,5 +45,9 @@
     {% endif %}
     {% block content %}{% endblock %}
   </main>
+  <footer class="site-footer" style="margin-top:2rem;padding:1rem;border-top:1px solid #ddd;font-size:0.85rem">
+    <a href="{% url 'privacy' %}">{% trans "Politique de confidentialité" %}</a> ·
+    <a href="{% url 'terms' %}">{% trans "Conditions d'utilisation" %}</a>
+  </footer>
 </body>
 </html>

@@ -1,0 +1,21 @@
+{% extends "genealogy/base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Politique de confidentialité" %}{% endblock %}
+{% block content %}
+<div class="card">
+  <h1>{% trans "Politique de confidentialité" %}</h1>
+  <p>{% trans "La présente politique de confidentialité décrit la manière dont ce site de généalogie familiale collecte, utilise et protège vos données personnelles." %}</p>
+  <h2>{% trans "Données collectées" %}</h2>
+  <p>{% trans "Nous collectons les données suivantes : nom d'utilisateur, adresse e-mail et mot de passe du compte ; les informations généalogiques que vous soumettez (personnes, unions, événements, photos) ; les journaux techniques (adresse IP, navigateur)." %}</p>
+  <h2>{% trans "Finalités" %}</h2>
+  <p>{% trans "Ces données servent uniquement à faire fonctionner le site collaboratif : afficher l'arbre, gérer les comptes et modérer les propositions de modification." %}</p>
+  <h2>{% trans "Conservation" %}</h2>
+  <p>{% trans "Les données sont conservées tant que le compte est actif, puis supprimées ou anonymisées, conformément au RGPD." %}</p>
+  <h2>{% trans "Vos droits" %}</h2>
+  <p>{% trans "Conformément au RGPD, vous disposez d'un droit d'accès, de rectification, d'effacement, d'opposition et de portabilité de vos données. Pour l'exercer, contactez l'administrateur du site." %}</p>
+  <h2>{% trans "Cookies" %}</h2>
+  <p>{% trans "Le site utilise uniquement des cookies de session et de préférence de langue." %}</p>
+  <h2>{% trans "Contact" %}</h2>
+  <p>{% trans "Pour toute question relative à vos données personnelles, contactez l'administrateur du site." %}</p>
+</div>
+{% endblock %}

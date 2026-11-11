@@ -95,6 +95,10 @@ class PersonDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
+def legal_page(request, template):
+    return render(request, template)
+
+
 @login_required
 def propose_person_edit(request, pk):
     person = get_object_or_404(Person, pk=pk)
