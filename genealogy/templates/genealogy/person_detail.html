@@ -30,8 +30,8 @@
        — {% trans "fratrie :" %} {% for sibling in union.children.all %}<a href="{% url 'person_detail' sibling.pk %}">{{ sibling }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}
     </p>
   {% endfor %}
-  {% for union in unions %}
-    <p>{% trans "Union avec" %} <a href="{% url 'person_detail' union.partner_b.pk %}">{{ union.partner_b }}</a>
+  {% for union, partner in unions %}
+    <p>{% trans "Union avec" %} <a href="{% url 'person_detail' partner.pk %}">{{ partner }}</a>
        {% if union.date %}({{ union.get_union_type_display }}, {{ union.date|date:"SHORT_DATE_FORMAT" }}{% if union.place %}, {{ union.place }}{% endif %}){% endif %}
        {% if union.children.all %} — {% trans "enfants :" %} {% for child in union.children.all %}<a href="{% url 'person_detail' child.pk %}">{{ child }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}{% endif %}
     </p>

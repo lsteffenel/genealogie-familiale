@@ -75,13 +75,17 @@ class PersonDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         person = self.object
-        context["unions"] = list(person.unions_as_a.all()) + list(person.unions_as_b.all())
+        context["unions"] = [
+            (union, union.partner_b if union.partner_a_id == person.pk else union.partner_a)
+            for union in list(person.unions_as_a.all()) + list(person.unions_as_b.all())
+        ]
         context["parent_unions"] = person.parent_unions.all()
         context["events"] = person.events.all()
         context["media"] = person.media.all()
         context["proposals"] = EditProposal.objects.filter(
             content_type=ContentType.objects.get_for_model(Person),
             object_id=person.pk,
+            status=ProposalStatus.PENDING,
         ).select_related("proposed_by", "reviewed_by")
         context["can_propose"] = True
         context["person_photo_url"] = get_media_item_base_url(
