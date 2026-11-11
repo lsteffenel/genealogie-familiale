@@ -22,7 +22,13 @@ python manage.py runserver
 ```
 
 L'administration (gestion des rôles, modération des propositions) se fait via
-`/admin/`. Depuis la fiche d'un utilisateur, l'administrateur peut aussi
+`/admin/`. La rubrique **« Configuration du site »** (instance unique) permet de
+choisir la **personne racine par défaut** de la page « Arbre graphique » et le
+**contenu HTML de la page d'accueil** (affiché avant la liste des personnes).
+La liste des **propositions** affiche par défaut uniquement celles **en attente**
+(filtre « Statut » pour consulter l'historique approuvé/rejeté), avec un bouton
+✅ sur chaque ligne en attente pour la valider individuellement. Depuis la fiche
+d'un utilisateur, l'administrateur peut aussi
 **lier le compte à une personne existante de l'arbre** (champ « person » du
 profil, un seul compte par personne) : utile après l'import GEDCOM pour
 rattacher un membre à sa fiche « profil minimal » et éviter les doublons.
@@ -112,7 +118,7 @@ signées retournées par l'API sont mises en cache 6 h.
 
 ## Interface membre
 
-- `/` : liste des personnes avec recherche
+- `/` : page d'accueil avec contenu éditorial configurable (admin) puis liste **hiérarchisée par nom de famille** (cliquer sur une famille pour voir ses membres), avec recherche
 - `/personne/<id>/` : fiche complète (famille, unions, enfants, parcours, photos, historique des propositions)
 - `/personne/<id>/proposer/` : formulaire de proposition de modification (validée par un modérateur), avec une section **« Avancé »** permettant de proposer en plus un **événement GEDCOM** (baptême, confirmation, diplôme/graduation, recensement, émigration, naturalisation, titre, noblesse, etc.) ou une **union** avec un partenaire
 - `/photos/ajouter/` : **upload local d'une photo** (ou référence Google Photos), soumis à validation avant publication ; le fichier validé est stocké dans `media/photos/` (volume `media_data` sous Docker, servi derrière authentification)
