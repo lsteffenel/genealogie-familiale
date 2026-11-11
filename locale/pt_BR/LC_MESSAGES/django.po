@@ -258,8 +258,8 @@ msgstr "Família %(name)s"
 msgid "Femme"
 msgstr "Mulher"
 
-msgid "Fichier photo (stockage local)"
-msgstr "Arquivo de foto (armazenamento local)"
+msgid "Fichier photo"
+msgstr "Arquivo de foto"
 
 msgid "Fichier uploadé par le membre, rattaché au nouvel objet à validation"
 msgstr ""
@@ -267,9 +267,6 @@ msgstr ""
 
 msgid "Finalités"
 msgstr "Finalidades"
-
-msgid "Google Photos : %(mid)s"
-msgstr "Google Fotos: %(mid)s"
 
 msgid "Généalogie familiale"
 msgstr "Genealogia familiar"
@@ -284,23 +281,14 @@ msgstr ""
 msgid "Homme"
 msgstr "Homem"
 
-msgid "Identifiant Google Photos (si la photo vient de l'album partagé)"
-msgstr "ID do Google Fotos (se a foto vier do álbum compartilhado)"
-
 msgid "Identifiant d'origine dans le fichier GEDCOM importé"
 msgstr "ID original no arquivo GEDCOM importado"
-
-msgid "Identifiant de la photo dans l'album Google Photos partagé"
-msgstr "ID da foto no álbum compartilhado do Google Fotos"
-
-msgid "Identifiant du média dans Google Photos (affichage via l'API)"
-msgstr "ID da mídia no Google Fotos (exibição via API)"
 
 msgid "Immigration"
 msgstr "Imigração"
 
-msgid "Indiquez un fichier à uploader ou un identifiant Google Photos."
-msgstr "Informe um arquivo para enviar ou um ID do Google Fotos."
+msgid "Indiquez un fichier à uploader."
+msgstr "Informe um arquivo para enviar."
 
 msgid "Inhumation"
 msgstr "Sepultamento"
@@ -323,12 +311,9 @@ msgstr "A data de falecimento não pode ser anterior à data de nascimento."
 
 msgid ""
 "La photo sera publiée sur la fiche de la personne après validation par un "
-"modérateur. Vous pouvez uploader un fichier local ou référencer une photo de"
-" l'album Google Photos partagé."
+"modérateur."
 msgstr ""
-"A foto será publicada na ficha da pessoa após validação por um moderador. "
-"Você pode enviar um arquivo local ou referenciar uma foto do álbum "
-"compartilhado do Google Fotos."
+"A foto será publicada na ficha da pessoa após validação por um moderador."
 
 msgid ""
 "La présente politique de confidentialité décrit la manière dont ce site de "
@@ -534,13 +519,6 @@ msgstr "Foto de %(name)s"
 msgid "Photo de %(name)s %(last)s"
 msgstr "Foto de %(name)s %(last)s"
 
-msgid ""
-"Photo disponible via Google Photos (album partagé, non chargé : identifiants"
-" API non configurés)."
-msgstr ""
-"Foto disponível via Google Fotos (álbum compartilhado, não carregada: "
-"credenciais da API não configuradas)."
-
 msgid "Photos"
 msgstr "Fotos"
 
@@ -701,9 +679,8 @@ msgstr "Tipo de união"
 msgid "Type d'événement"
 msgstr "Tipo de evento"
 
-msgid ""
-"Un média doit contenir une image uploadée ou un identifiant Google Photos."
-msgstr "Uma mídia deve conter uma imagem enviada ou um ID do Google Fotos."
+msgid "Un média doit contenir une image uploadée."
+msgstr "Uma mídia deve conter uma imagem enviada."
 
 msgid "Un média doit être rattaché à une personne ou à un événement."
 msgstr "Uma mídia deve estar vinculada a uma pessoa ou a um evento."

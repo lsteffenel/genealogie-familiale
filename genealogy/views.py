@@ -17,7 +17,6 @@ from .forms import (
     ReviewForm,
     UnionProposalForm,
 )
-from .google_photos import get_media_item_base_url
 from .models import EditProposal, Person, ProposalStatus, SiteConfiguration, Union
 
 MAX_TREE_DEPTH = 8
@@ -89,14 +88,9 @@ class PersonDetailView(LoginRequiredMixin, DetailView):
             status=ProposalStatus.PENDING,
         ).select_related("proposed_by", "reviewed_by")
         context["can_propose"] = True
-        context["person_photo_url"] = get_media_item_base_url(
-            person.google_photo_media_item_id
+        context["person_photo_url"] = next(
+            (item.image.url for item in context["media"] if item.image), None
         )
-        context["media_photos"] = [
-            (item, get_media_item_base_url(item.google_photo_media_item_id))
-            for item in context["media"]
-            if item.google_photo_media_item_id
-        ]
         return context
 
 
@@ -245,8 +239,8 @@ def tree_view(request, pk=None):
     for person in persons:
         person.family_entries = family_map.get(person.pk, [])
         person.photo_url = (
-            get_media_item_base_url(person.google_photo_media_item_id)
-            if show_photo and person.google_photo_media_item_id
+            next((m.image.url for m in person.media.all() if m.image), None)
+            if show_photo
             else None
         )
 
@@ -277,7 +271,6 @@ def propose_media_add(request):
                     "person_id": cleaned["person"].pk,
                     "title": cleaned["title"],
                     "description": cleaned["description"],
-                    "google_photo_media_item_id": cleaned["google_photo_media_item_id"],
                 },
                 uploaded_file=cleaned["image"] or None,
                 note=cleaned["note"],

@@ -44,7 +44,6 @@ class MediaUploadProposalTests(TestCase):
                 "person": self.person.pk,
                 "title": "Photo de mariage",
                 "description": "1974",
-                "google_photo_media_item_id": "",
                 "note": "scannée",
                 "image": self.photo_file(),
             },
@@ -57,30 +56,17 @@ class MediaUploadProposalTests(TestCase):
         self.assertEqual(proposal.new_object_data["title"], "Photo de mariage")
         self.assertEqual(Media.objects.count(), 0)
 
-    def test_submission_requires_file_or_google_id(self):
+    def test_submission_requires_file(self):
         self.client.force_login(self.member)
         response = self.client.post(
             reverse("propose_media_add"),
             {
                 "person": self.person.pk, "title": "Sans source",
-                "description": "", "google_photo_media_item_id": "", "note": "",
+                "description": "", "note": "",
             },
         )
         self.assertEqual(response.status_code, 200)
         self.assertEqual(EditProposal.objects.count(), 0)
-
-    def test_google_photo_reference_without_file_is_accepted(self):
-        self.client.force_login(self.member)
-        self.client.post(
-            reverse("propose_media_add"),
-            {
-                "person": self.person.pk, "title": "Photo album",
-                "description": "", "google_photo_media_item_id": "ITEM123", "note": "",
-            },
-        )
-        proposal = EditProposal.objects.get()
-        self.assertEqual(proposal.new_object_data["google_photo_media_item_id"], "ITEM123")
-        self.assertFalse(proposal.uploaded_file)
 
     def test_moderator_approval_creates_media_with_local_file(self):
         self.client.force_login(self.member)
@@ -88,7 +74,7 @@ class MediaUploadProposalTests(TestCase):
             reverse("propose_media_add"),
             {
                 "person": self.person.pk, "title": "Photo de mariage",
-                "description": "", "google_photo_media_item_id": "", "note": "",
+                "description": "", "note": "",
                 "image": self.photo_file(),
             },
         )
@@ -111,7 +97,8 @@ class MediaUploadProposalTests(TestCase):
             reverse("propose_media_add"),
             {
                 "person": self.person.pk, "title": "Photo",
-                "description": "", "google_photo_media_item_id": "ITEM9", "note": "",
+                "description": "", "note": "",
+                "image": self.photo_file(),
             },
         )
         proposal = EditProposal.objects.get()

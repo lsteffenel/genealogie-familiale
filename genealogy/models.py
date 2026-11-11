@@ -52,11 +52,6 @@ class Person(models.Model):
     death_date = models.DateField(null=True, blank=True, verbose_name=_("Date de décès"))
     death_place = models.CharField(max_length=255, blank=True, verbose_name=_("Lieu de décès"))
     biography = models.TextField(blank=True, verbose_name=_("Biographie"))
-    google_photo_media_item_id = models.CharField(
-        max_length=255,
-        blank=True,
-        help_text=_("Identifiant de la photo dans l'album Google Photos partagé"),
-    )
     gedcom_id = models.CharField(
         max_length=50, unique=True, null=True, blank=True,
         help_text=_("Identifiant d'origine dans le fichier GEDCOM importé"),
@@ -198,10 +193,6 @@ class Media(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     image = models.ImageField(upload_to="photos/", blank=True)
-    google_photo_media_item_id = models.CharField(
-        max_length=255, blank=True,
-        help_text=_("Identifiant du média dans Google Photos (affichage via l'API)"),
-    )
     uploaded_by = models.ForeignKey(
         User, null=True, blank=True, on_delete=models.SET_NULL,
         related_name="media_uploaded",
@@ -217,10 +208,8 @@ class Media(models.Model):
     def clean(self):
         if not self.person and not self.event:
             raise ValidationError(_("Un média doit être rattaché à une personne ou à un événement."))
-        if not self.image and not self.google_photo_media_item_id:
-            raise ValidationError(
-                _("Un média doit contenir une image uploadée ou un identifiant Google Photos.")
-            )
+        if not self.image:
+            raise ValidationError(_("Un média doit contenir une image uploadée."))
 
 
 class SiteConfiguration(models.Model):
@@ -320,7 +309,6 @@ class EditProposal(models.Model):
                     person_id=data.get("person_id"),
                     title=data.get("title", ""),
                     description=data.get("description", ""),
-                    google_photo_media_item_id=data.get("google_photo_media_item_id", ""),
                 )
                 if self.uploaded_file:
                     self.uploaded_file.open("rb")

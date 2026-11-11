@@ -1,11 +1,10 @@
-from unittest import mock
-
 from django.contrib.auth.models import User
 from django.core import mail
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 from django.urls import reverse
 
-from genealogy.models import Person, Union
+from genealogy.models import Media, Person, Union
 
 
 class TreeViewTests(TestCase):
@@ -14,7 +13,6 @@ class TreeViewTests(TestCase):
         self.client.force_login(self.user)
         self.grandpa = Person.objects.create(
             first_name="Albert", last_name="Dupont", birth_date="1930-05-01",
-            google_photo_media_item_id="ITEM_ALBERT",
         )
         self.grandma = Person.objects.create(first_name="Simone", last_name="Martin")
         self.father = Person.objects.create(
@@ -47,24 +45,23 @@ class TreeViewTests(TestCase):
         self.assertNotContains(response, "15/01/1960")
         self.assertContains(response, "•••")
 
+    def _add_photo(self):
+        return Media.objects.create(
+            person=self.grandpa, title="Albert",
+            image=SimpleUploadedFile("albert.jpg", b"x", content_type="image/jpeg"),
+        )
+
     def test_photo_shown_when_option_enabled(self):
-        with mock.patch(
-            "genealogy.views.get_media_item_base_url",
-            return_value="https://photos.example/albert=w800-h600",
-        ):
-            response = self.client.get(reverse("tree_root", args=[self.grandpa.pk]))
-        self.assertContains(response, "https://photos.example/albert=w800-h600")
+        self._add_photo()
+        response = self.client.get(reverse("tree_root", args=[self.grandpa.pk]))
+        self.assertContains(response, "/media/photos/albert")
 
     def test_photo_hidden_when_option_disabled(self):
-        with mock.patch(
-            "genealogy.views.get_media_item_base_url",
-            return_value="https://photos.example/albert=w800-h600",
-        ) as mocked:
-            response = self.client.get(
-                reverse("tree_root", args=[self.grandpa.pk]), {"photo": "0"}
-            )
-        self.assertNotContains(response, "photos.example")
-        mocked.assert_not_called()
+        self._add_photo()
+        response = self.client.get(
+            reverse("tree_root", args=[self.grandpa.pk]), {"photo": "0"}
+        )
+        self.assertNotContains(response, "/media/photos/")
 
     def test_root_selection_via_query_param(self):
         response = self.client.get(reverse("tree"), {"root": self.father.pk})

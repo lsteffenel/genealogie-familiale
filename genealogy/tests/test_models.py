@@ -70,7 +70,11 @@ class MediaTests(TestCase):
             Media(title="Photo sans cible").full_clean()
         with self.assertRaises(ValidationError):
             Media(person=person, title="Sans source").full_clean()
-        media = Media(person=person, title="OK", google_photo_media_item_id="abc123")
+        from django.core.files.uploadedfile import SimpleUploadedFile
+        media = Media(
+            person=person, title="OK",
+            image=SimpleUploadedFile("p.jpg", b"x", content_type="image/jpeg"),
+        )
         media.full_clean()
 
 

@@ -3,7 +3,7 @@
 {% block title %}{% trans "Ajouter une photo" %}{% endblock %}
 {% block content %}
 <h1>{% trans "Proposer l'ajout d'une photo" %}</h1>
-<p>{% trans "La photo sera publiée sur la fiche de la personne après validation par un modérateur. Vous pouvez uploader un fichier local ou référencer une photo de l'album Google Photos partagé." %}</p>
+<p>{% trans "La photo sera publiée sur la fiche de la personne après validation par un modérateur." %}</p>
 <form method="post" enctype="multipart/form-data">
   {% csrf_token %}
   {% if form.non_field_errors %}<p style="color:#8a2f2b">{{ form.non_field_errors|join:", " }}</p>{% endif %}

@@ -10,11 +10,7 @@ class MediaProposalForm(forms.Form):
     description = forms.CharField(
         required=False, widget=forms.Textarea(attrs={"rows": 3}), label=_("Description")
     )
-    image = forms.ImageField(required=False, label=_("Fichier photo (stockage local)"))
-    google_photo_media_item_id = forms.CharField(
-        required=False, max_length=255,
-        label=_("Identifiant Google Photos (si la photo vient de l'album partagé)"),
-    )
+    image = forms.ImageField(label=_("Fichier photo"))
     note = forms.CharField(
         required=False, widget=forms.Textarea(attrs={"rows": 2}),
         label=_("Commentaire (affiché au modérateur)"),
@@ -22,10 +18,8 @@ class MediaProposalForm(forms.Form):
 
     def clean(self):
         cleaned = super().clean()
-        if not cleaned.get("image") and not cleaned.get("google_photo_media_item_id"):
-            raise forms.ValidationError(
-                _("Indiquez un fichier à uploader ou un identifiant Google Photos.")
-            )
+        if not cleaned.get("image"):
+            raise forms.ValidationError(_("Indiquez un fichier à uploader."))
         return cleaned
 
 

@@ -48,7 +48,6 @@
       <tr><th>{% trans "Description" %}</th><td>{{ proposal.new_object_data.description }}</td></tr>
       <tr><th>{% trans "Source" %}</th><td>
         {% if proposal.uploaded_file %}📎 {% blocktrans with name=proposal.uploaded_file.name %}fichier : {{ name }}{% endblocktrans %}{% endif %}
-        {% if proposal.new_object_data.google_photo_media_item_id %}🔗 {% blocktrans with mid=proposal.new_object_data.google_photo_media_item_id %}Google Photos : {{ mid }}{% endblocktrans %}{% endif %}
       </td></tr>
     </table>
   {% endif %}
