@@ -7,7 +7,9 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ValidationError
 from django.core.files.base import ContentFile
 from django.db import models
+from django.utils import formats
 from django.utils.translation import gettext_lazy as _
+from django.utils.translation import pgettext
 
 
 class Role(models.TextChoices):
@@ -71,6 +73,30 @@ class Person(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
+
+    @property
+    def gender_context(self):
+        return {"M": "male", "F": "female"}.get(self.gender, "neutral")
+
+    @property
+    def born_label(self):
+        if not self.birth_date:
+            return ""
+        date = formats.date_format(self.birth_date, "SHORT_DATE_FORMAT")
+        return pgettext(self.gender_context, "Né(e) le %(date)s") % {"date": date}
+
+    @property
+    def died_label(self):
+        if not self.death_date:
+            return ""
+        date = formats.date_format(self.death_date, "SHORT_DATE_FORMAT")
+        return pgettext(self.gender_context, "Décédé(e) le %(date)s") % {"date": date}
+
+    @property
+    def maiden_label(self):
+        if not self.maiden_name:
+            return ""
+        return pgettext(self.gender_context, "né(e) %(maiden)s") % {"maiden": self.maiden_name}
 
     def clean(self):
         if self.birth_date and self.death_date and self.death_date < self.birth_date:

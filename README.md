@@ -147,7 +147,9 @@ Configuration via `EMAIL_BACKEND`, `DEFAULT_FROM_EMAIL` et, pour le SMTP,
 
 Le site est disponible en **français** (par défaut), **portugais brésilien**, **anglais** et **italien** :
 la langue est détectée via l'en-tête `Accept-Language` du navigateur et peut être changée via le
-sélecteur de l'en-tête (cookie + vue `set_language`). Les traductions vivent dans
+sélecteur de l'en-tête (cookie + vue `set_language`). Les libellés « né(e) » / « décédé(e) »
+s'accordent automatiquement au sexe de la personne (`pgettext` avec contexte male/female/neutral,
+propriétés `born_label` / `died_label` / `maiden_label` du modèle `Person`). Les traductions vivent dans
 `locale/<langue>/LC_MESSAGES/django.po` (compilées en `.mo`). Pour mettre à jour les traductions
 après modification des chaînes :
 

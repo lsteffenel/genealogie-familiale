@@ -3,10 +3,10 @@
 {% block title %}{{ person }}{% endblock %}
 {% block content %}
 <div class="card">
-  <h1>{{ person.first_name }} {{ person.last_name }}{% if person.maiden_name %} ({% blocktrans with maiden=person.maiden_name %}née {{ maiden }}{% endblocktrans %}){% endif %}</h1>
+  <h1>{{ person.first_name }} {{ person.last_name }}{% if person.maiden_name %} ({{ person.maiden_label }}){% endif %}</h1>
   <p>
-    {% if person.birth_date %}{% blocktrans with d=person.birth_date %}Né(e) le {{ d }}{% endblocktrans %}{% if person.birth_place %} {% blocktrans with p=person.birth_place %}à {{ p }}{% endblocktrans %}.{% endif %}{% endif %}
-    {% if person.death_date %}{% blocktrans with d=person.death_date %}Décédé(e) le {{ d }}{% endblocktrans %}{% if person.death_place %} {% blocktrans with p=person.death_place %}à {{ p }}{% endblocktrans %}.{% endif %}{% endif %}
+    {% if person.birth_date %}{{ person.born_label }}{% if person.birth_place %} {% blocktrans with p=person.birth_place %}à {{ p }}{% endblocktrans %}.{% endif %}{% endif %}
+    {% if person.death_date %}{{ person.died_label }}{% if person.death_place %} {% blocktrans with p=person.death_place %}à {{ p }}{% endblocktrans %}.{% endif %}{% endif %}
   </p>
   {% if person.biography %}<p>{{ person.biography|linebreaksbr }}</p>{% endif %}
   {% if person_photo_url %}
