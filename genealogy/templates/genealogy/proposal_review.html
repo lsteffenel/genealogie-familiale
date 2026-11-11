@@ -1,33 +1,54 @@
 {% extends "genealogy/base.html" %}
-{% block title %}Proposition #{{ proposal.pk }}{% endblock %}
+{% load i18n %}
+{% block title %}{% blocktrans with pk=proposal.pk %}Proposition #{{ pk }}{% endblocktrans %}{% endblock %}
 {% block content %}
-<h1>Proposition #{{ proposal.pk }}</h1>
+<h1>{% blocktrans with pk=proposal.pk %}Proposition #{{ pk }}{% endblocktrans %}</h1>
 <div class="card">
   {% if proposal.action == "edit" %}
-    <p>Objet : {{ proposal.content_type.model }} #{{ proposal.object_id }} —
-       proposée par <strong>{{ proposal.proposed_by.username }}</strong> le {{ proposal.created_at|date:"d/m/Y H:i" }}</p>
+    <p>{% trans "Objet :" %} {{ proposal.content_type.model }} #{{ proposal.object_id }} —
+       {% blocktrans with username=proposal.proposed_by.username date=proposal.created_at|date:"SHORT_DATETIME_FORMAT" %}proposée par <strong>{{ username }}</strong> le {{ date }}{% endblocktrans %}</p>
   {% else %}
-    <p><strong>Ajout d'un média</strong> proposé par <strong>{{ proposal.proposed_by.username }}</strong>
-       le {{ proposal.created_at|date:"d/m/Y H:i" }}</p>
+    <p><strong>{% blocktrans with model=proposal.new_object_data.model %}Ajout : {{ model }}{% endblocktrans %}</strong>
+       {% blocktrans with username=proposal.proposed_by.username date=proposal.created_at|date:"SHORT_DATETIME_FORMAT" %}proposé par <strong>{{ username }}</strong> le {{ date }}{% endblocktrans %}</p>
   {% endif %}
-  {% if proposal.note %}<p><em>Note du membre :</em> {{ proposal.note|linebreaksbr }}</p>{% endif %}
+  {% if proposal.note %}<p><em>{% trans "Note du membre :" %}</em> {{ proposal.note|linebreaksbr }}</p>{% endif %}
   {% if proposal.action == "edit" %}
-    <h2>Changements proposés</h2>
+    <h2>{% trans "Changements proposés" %}</h2>
     <table>
-      <tr><th>Champ</th><th>Nouvelle valeur</th></tr>
+      <tr><th>{% trans "Champ" %}</th><th>{% trans "Nouvelle valeur" %}</th></tr>
       {% for field, value in proposal.field_changes.items %}
       <tr><td><code>{{ field }}</code></td><td>{{ value }}</td></tr>
       {% endfor %}
     </table>
-  {% else %}
-    <h2>Média proposé</h2>
+  {% elif proposal.new_object_data.model == "event" %}
+    <h2>{% trans "Événement proposé" %}</h2>
     <table>
-      <tr><th>Titre</th><td>{{ proposal.new_object_data.title }}</td></tr>
-      <tr><th>Personne</th><td>Personne #{{ proposal.new_object_data.person_id }}</td></tr>
-      <tr><th>Description</th><td>{{ proposal.new_object_data.description }}</td></tr>
-      <tr><th>Source</th><td>
-        {% if proposal.uploaded_file %}📎 fichier : {{ proposal.uploaded_file.name }}{% endif %}
-        {% if proposal.new_object_data.google_photo_media_item_id %}🔗 Google Photos : {{ proposal.new_object_data.google_photo_media_item_id }}{% endif %}
+      <tr><th>{% trans "Type d'événement" %}</th><td>{{ proposal.new_object_data.event_type }}</td></tr>
+      <tr><th>{% trans "Titre" %}</th><td>{{ proposal.new_object_data.title }}</td></tr>
+      <tr><th>{% trans "Personne" %}</th><td>{% blocktrans with pid=proposal.new_object_data.person_id %}Personne #{{ pid }}{% endblocktrans %}</td></tr>
+      <tr><th>{% trans "Date" %}</th><td>{{ proposal.new_object_data.date }}</td></tr>
+      <tr><th>{% trans "Lieu" %}</th><td>{{ proposal.new_object_data.place }}</td></tr>
+      <tr><th>{% trans "Description" %}</th><td>{{ proposal.new_object_data.description }}</td></tr>
+    </table>
+  {% elif proposal.new_object_data.model == "union" %}
+    <h2>{% trans "Union proposée" %}</h2>
+    <table>
+      <tr><th>{% trans "Personne" %}</th><td>{% blocktrans with pid=proposal.new_object_data.person_id %}Personne #{{ pid }}{% endblocktrans %}</td></tr>
+      <tr><th>{% trans "Partenaire" %}</th><td>{% blocktrans with pid=proposal.new_object_data.partner_id %}Personne #{{ pid }}{% endblocktrans %}</td></tr>
+      <tr><th>{% trans "Type d'union" %}</th><td>{{ proposal.new_object_data.union_type }}</td></tr>
+      <tr><th>{% trans "Date" %}</th><td>{{ proposal.new_object_data.date }}</td></tr>
+      <tr><th>{% trans "Lieu" %}</th><td>{{ proposal.new_object_data.place }}</td></tr>
+      <tr><th>{% trans "Notes" %}</th><td>{{ proposal.new_object_data.notes }}</td></tr>
+    </table>
+  {% else %}
+    <h2>{% trans "Média proposé" %}</h2>
+    <table>
+      <tr><th>{% trans "Titre" %}</th><td>{{ proposal.new_object_data.title }}</td></tr>
+      <tr><th>{% trans "Personne" %}</th><td>{% blocktrans with pid=proposal.new_object_data.person_id %}Personne #{{ pid }}{% endblocktrans %}</td></tr>
+      <tr><th>{% trans "Description" %}</th><td>{{ proposal.new_object_data.description }}</td></tr>
+      <tr><th>{% trans "Source" %}</th><td>
+        {% if proposal.uploaded_file %}📎 {% blocktrans with name=proposal.uploaded_file.name %}fichier : {{ name }}{% endblocktrans %}{% endif %}
+        {% if proposal.new_object_data.google_photo_media_item_id %}🔗 {% blocktrans with mid=proposal.new_object_data.google_photo_media_item_id %}Google Photos : {{ mid }}{% endblocktrans %}{% endif %}
       </td></tr>
     </table>
   {% endif %}
@@ -37,9 +58,9 @@
   <label for="{{ form.comment.id_for_label }}">{{ form.comment.label }}</label>
   {{ form.comment }}
   <p style="margin-top:1rem">
-    <button type="submit" name="action" value="approve">Approuver et appliquer</button>
-    <button type="submit" name="action" value="reject" class="btn secondary">Rejeter</button>
-    <a class="btn secondary" href="{% url 'proposal_list' %}">Retour</a>
+    <button type="submit" name="action" value="approve">{% trans "Approuver et appliquer" %}</button>
+    <button type="submit" name="action" value="reject" class="btn secondary">{% trans "Rejeter" %}</button>
+    <a class="btn secondary" href="{% url 'proposal_list' %}">{% trans "Retour" %}</a>
   </p>
 </form>
 {% endblock %}

@@ -1,0 +1,649 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: genealogie-familiale 1.0\n"
+"Language: en\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "%(count)s proposition(s) approuvée(s)."
+msgstr "%(count)s proposal(s) approved."
+
+msgid "%(count)s proposition(s) rejetée(s)."
+msgstr "%(count)s proposal(s) rejected."
+
+msgid "%(counter)s personne"
+msgid_plural "%(counter)s personnes"
+msgstr[0] "%(counter)s person"
+msgstr[1] "%(counter)s people"
+
+msgid ""
+"%(username)s propose %(target)s.\n"
+"Détail : %(changes)s\n"
+"%(note)s\n"
+"\n"
+"Modérez-la depuis l'admin ou la rubrique Modération du site."
+msgstr ""
+"%(username)s proposes %(target)s.\n"
+"Details: %(changes)s\n"
+"%(note)s\n"
+"\n"
+"Review it from the admin or the Moderation section of the site."
+
+msgid "Acte de décès (probate)"
+msgstr "Probate record"
+
+msgid "Action"
+msgstr "Action"
+
+msgid "Administrateur"
+msgstr "Administrator"
+
+msgid "Administration"
+msgstr "Administration"
+
+msgid "Adoption"
+msgstr "Adoption"
+
+msgid "Ajout"
+msgstr "Addition"
+
+msgid "Ajout : %(model)s"
+msgstr "Addition: %(model)s"
+
+msgid "Ajouter une photo"
+msgstr "Add a photo"
+
+msgid "Anecdote / Histoire"
+msgstr "Anecdote / Story"
+
+msgid "Annuler"
+msgstr "Cancel"
+
+msgid "Appliquer"
+msgstr "Apply"
+
+msgid "Approuver et appliquer"
+msgstr "Approve and apply"
+
+msgid "Approuver les propositions sélectionnées"
+msgstr "Approve selected proposals"
+
+msgid "Approuvée"
+msgstr "Approved"
+
+msgid "Arbre graphique"
+msgstr "Family tree"
+
+msgid "Arbre généalogique"
+msgstr "Family tree"
+
+msgid "Aucun (informations de base uniquement)"
+msgstr "None (basic information only)"
+
+msgid "Aucune modification détectée."
+msgstr "No change detected."
+
+msgid "Aucune personne enregistrée pour le moment."
+msgstr "No person registered yet."
+
+msgid "Aucune personne trouvée."
+msgstr "No person found."
+
+msgid "Aucune proposition avec ce statut."
+msgstr "No proposal with this status."
+
+msgid "Autre"
+msgstr "Other"
+
+msgid "Avancé"
+msgstr "Advanced"
+
+msgid "Baptême"
+msgstr "Baptism"
+
+msgid "Baptême d'enfant"
+msgstr "Child baptism"
+
+msgid "Bar-mitsva"
+msgstr "Bar mitzvah"
+
+msgid "Bas-mitsva"
+msgstr "Bas mitzvah"
+
+msgid "Biographie"
+msgstr "Biography"
+
+msgid "Bénédiction"
+msgstr "Blessing"
+
+msgid "Champ"
+msgstr "Field"
+
+msgid "Champ inconnu : %(field)s"
+msgstr "Unknown field: %(field)s"
+
+msgid "Changements"
+msgstr "Changes"
+
+msgid "Changements proposés"
+msgstr "Proposed changes"
+
+msgid "Commentaire (affiché au modérateur)"
+msgstr "Comment (shown to the moderator)"
+
+msgid "Commentaire de modération"
+msgstr "Moderation comment"
+
+msgid "Commentaire du membre accompagnant sa proposition"
+msgstr "Member comment accompanying the proposal"
+
+msgid "Concubinage"
+msgstr "Cohabitation"
+
+msgid "Configuration du site"
+msgstr "Site configuration"
+
+msgid "Confirmation"
+msgstr "Confirmation"
+
+msgid "Connexion"
+msgstr "Log in"
+
+msgid "Contenu"
+msgstr "Content"
+
+msgid "Contenu de la page d'accueil (HTML)"
+msgstr "Home page content (HTML)"
+
+msgid "Crémation"
+msgstr "Cremation"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "Date de décès"
+msgstr "Date of death"
+
+msgid "Date de naissance"
+msgstr "Date of birth"
+
+msgid "Dates"
+msgstr "Dates"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "Dictionnaire {champ: nouvelle_valeur} proposé par le membre"
+msgstr "Dictionary {field: new_value} proposed by the member"
+
+msgid "Diplôme (graduation)"
+msgstr "Diploma (graduation)"
+
+msgid "Distinction"
+msgstr "Award"
+
+msgid "Déconnexion"
+msgstr "Log out"
+
+msgid "Décès"
+msgstr "Death"
+
+msgid "Décédé(e) le %(d)s"
+msgstr "Died on %(d)s"
+
+msgid "En attente"
+msgstr "Pending"
+
+msgid "Famille"
+msgstr "Family"
+
+msgid "Famille %(name)s"
+msgstr "%(name)s family"
+
+msgid "Femme"
+msgstr "Woman"
+
+msgid "Fichier photo (stockage local)"
+msgstr "Photo file (local storage)"
+
+msgid "Fichier uploadé par le membre, rattaché au nouvel objet à validation"
+msgstr ""
+"File uploaded by the member, attached to the new object pending validation"
+
+msgid "Google Photos : %(mid)s"
+msgstr "Google Photos: %(mid)s"
+
+msgid "Généalogie familiale"
+msgstr "Family genealogy"
+
+msgid ""
+"HTML affiché en haut de la page d'accueil, avant la liste des personnes. "
+"Édité par l'administrateur uniquement."
+msgstr ""
+"HTML displayed at the top of the home page, before the person list. Edited "
+"by the administrator only."
+
+msgid "Homme"
+msgstr "Man"
+
+msgid "Identifiant Google Photos (si la photo vient de l'album partagé)"
+msgstr "Google Photos ID (if the photo comes from the shared album)"
+
+msgid "Identifiant d'origine dans le fichier GEDCOM importé"
+msgstr "Original ID in the imported GEDCOM file"
+
+msgid "Identifiant de la photo dans l'album Google Photos partagé"
+msgstr "Photo ID in the shared Google Photos album"
+
+msgid "Identifiant du média dans Google Photos (affichage via l'API)"
+msgstr "Media ID in Google Photos (display via the API)"
+
+msgid "Immigration"
+msgstr "Immigration"
+
+msgid "Indiquez un fichier à uploader ou un identifiant Google Photos."
+msgstr "Provide a file to upload or a Google Photos ID."
+
+msgid "Inhumation"
+msgstr "Burial"
+
+msgid "La date de décès ne peut pas être antérieure à la date de naissance."
+msgstr "The date of death cannot be earlier than the date of birth."
+
+msgid ""
+"La photo sera publiée sur la fiche de la personne après validation par un "
+"modérateur. Vous pouvez uploader un fichier local ou référencer une photo de"
+" l'album Google Photos partagé."
+msgstr ""
+"The photo will be published on the person's page after validation by a "
+"moderator. You can upload a local file or reference a photo from the shared "
+"Google Photos album."
+
+msgid "Langue"
+msgstr "Language"
+
+msgid "Les deux partenaires doivent être des personnes différentes."
+msgstr "The two partners must be different people."
+
+msgid ""
+"Les valeurs ci-dessous sont les valeurs actuelles. Modifiez ce que vous "
+"souhaitez corriger/compléter : la proposition devra être validée par un "
+"modérateur avant d'être appliquée."
+msgstr ""
+"The values below are the current ones. Change what you want to correct or "
+"complete: the proposal must be validated by a moderator before being "
+"applied."
+
+msgid "Lieu"
+msgstr "Place"
+
+msgid "Lieu de décès"
+msgstr "Place of death"
+
+msgid "Lieu de naissance"
+msgstr "Place of birth"
+
+msgid "Mariage"
+msgstr "Marriage"
+
+msgid "Membre"
+msgstr "Member"
+
+msgid "Modification"
+msgstr "Edit"
+
+msgid "Modérateur"
+msgstr "Moderator"
+
+msgid "Modération"
+msgstr "Moderation"
+
+msgid "Modération des propositions"
+msgstr "Proposal moderation"
+
+msgid "Mot de passe"
+msgstr "Password"
+
+msgid "Média proposé"
+msgstr "Proposed media"
+
+msgid "Métier"
+msgstr "Occupation"
+
+msgid "Naissance"
+msgstr "Birth"
+
+msgid "Naturalisation"
+msgstr "Naturalization"
+
+msgid "Noblesse"
+msgstr "Nobility"
+
+msgid "Nom"
+msgstr "Last name"
+
+msgid "Nom d'utilisateur"
+msgstr "Username"
+
+msgid "Nom de famille"
+msgstr "Family name"
+
+msgid "Nom de jeune fille"
+msgstr "Maiden name"
+
+msgid "Note du membre :"
+msgstr "Member note:"
+
+msgid "Notes"
+msgstr "Notes"
+
+msgid "Nouvel événement"
+msgstr "New event"
+
+msgid "Nouvelle union"
+msgstr "New union"
+
+msgid "Nouvelle valeur"
+msgstr "New value"
+
+msgid "Né(e) le %(d)s"
+msgstr "Born on %(d)s"
+
+msgid "Objet"
+msgstr "Object"
+
+msgid "Objet :"
+msgstr "Object:"
+
+msgid "Ordination"
+msgstr "Ordination"
+
+msgid "PACS"
+msgstr "Civil partnership (PACS)"
+
+msgid "Page %(number)s / %(num_pages)s"
+msgstr "Page %(number)s / %(num_pages)s"
+
+msgid "Page d'accueil"
+msgstr "Home page"
+
+msgid "Parcours et histoires"
+msgstr "Life events and stories"
+
+msgid "Parents :"
+msgstr "Parents:"
+
+msgid "Partenaire"
+msgstr "Partner"
+
+msgid "Personne"
+msgstr "Person"
+
+msgid "Personne #%(pid)s"
+msgstr "Person #%(pid)s"
+
+msgid "Personne #%(pk)s"
+msgstr "Person #%(pk)s"
+
+msgid "Personne associée"
+msgstr "Associated person"
+
+msgid "Personne de l'arbre correspondant à ce compte (évite les doublons)"
+msgstr "Person in the tree corresponding to this account (avoids duplicates)"
+
+msgid "Personne inconnue"
+msgstr "Unknown person"
+
+msgid ""
+"Personne utilisée comme racine par défaut sur la page « Arbre graphique »."
+msgstr "Person used as the default root on the \"Family tree\" page."
+
+msgid "Personnes"
+msgstr "People"
+
+msgid "Photo"
+msgstr "Photo"
+
+msgid "Photo de %(name)s"
+msgstr "Photo of %(name)s"
+
+msgid "Photo de %(name)s %(last)s"
+msgstr "Photo of %(name)s %(last)s"
+
+msgid ""
+"Photo disponible via Google Photos (album partagé, non chargé : identifiants"
+" API non configurés)."
+msgstr ""
+"Photo available via Google Photos (shared album, not loaded: API credentials"
+" not configured)."
+
+msgid "Photos"
+msgstr "Photos"
+
+msgid "Pour action=create : données du nouvel objet (ex. média à créer)"
+msgstr "For action=create: data of the new object (e.g. media to create)"
+
+msgid "Proposer l'ajout d'une photo"
+msgstr "Propose adding a photo"
+
+msgid "Proposer une modification"
+msgstr "Propose a change"
+
+msgid "Proposer une modification pour %(person)s"
+msgstr "Propose a change for %(person)s"
+
+msgid "Proposer une modification — %(person)s"
+msgstr "Propose a change — %(person)s"
+
+msgid "Proposition #%(pk)s"
+msgstr "Proposal #%(pk)s"
+
+msgid "Proposition #%(pk)s : ajout (%(status)s)"
+msgstr "Proposal #%(pk)s: addition (%(status)s)"
+
+msgid "Proposition #%(pk)s approuvée et appliquée."
+msgstr "Proposal #%(pk)s approved and applied."
+
+msgid "Proposition #%(pk)s rejetée."
+msgstr "Proposal #%(pk)s rejected."
+
+msgid "Proposition #%(pk)s sur %(model)s #%(object_id)s (%(status)s)"
+msgstr "Proposal #%(pk)s on %(model)s #%(object_id)s (%(status)s)"
+
+msgid "Propositions de modification"
+msgstr "Proposed changes"
+
+msgid "Proposée par"
+msgstr "Proposed by"
+
+msgid "Précédent"
+msgstr "Previous"
+
+msgid "Prénom"
+msgstr "First name"
+
+msgid "Racine :"
+msgstr "Root:"
+
+msgid "Racine par défaut de l'arbre graphique"
+msgstr "Default root of the family tree"
+
+msgid "Recensement"
+msgstr "Census"
+
+msgid "Rechercher"
+msgstr "Search"
+
+msgid "Rechercher un nom..."
+msgstr "Search for a name..."
+
+msgid "Rejeter"
+msgstr "Reject"
+
+msgid "Rejeter les propositions sélectionnées"
+msgstr "Reject selected proposals"
+
+msgid "Rejetée"
+msgstr "Rejected"
+
+msgid "Religion"
+msgstr "Religion"
+
+msgid "Retour"
+msgstr "Back"
+
+msgid "Retraite"
+msgstr "Retirement"
+
+msgid "Résidence"
+msgstr "Residence"
+
+msgid "Se connecter"
+msgstr "Log in"
+
+msgid "Section avancée invalide : un partenaire est requis pour une union."
+msgstr "Invalid advanced section: a partner is required for a union."
+
+msgid "Section avancée invalide : un titre est requis pour un événement."
+msgstr "Invalid advanced section: a title is required for an event."
+
+msgid "Seule une proposition en attente peut être appliquée."
+msgstr "Only a pending proposal can be applied."
+
+msgid "Seule une proposition en attente peut être rejetée."
+msgstr "Only a pending proposal can be rejected."
+
+msgid "Sexe"
+msgstr "Gender"
+
+msgid "Soumettre la photo"
+msgstr "Submit the photo"
+
+msgid "Soumettre la proposition"
+msgstr "Submit the proposal"
+
+msgid "Source"
+msgstr "Source"
+
+msgid "Statut"
+msgstr "Status"
+
+msgid "Suivant"
+msgstr "Next"
+
+msgid "Titre"
+msgstr "Title"
+
+msgid "Titre de la photo"
+msgstr "Photo title"
+
+msgid "Toutes les familles"
+msgstr "All families"
+
+msgid "Traiter"
+msgstr "Review"
+
+msgid "Type d'ajout avancé"
+msgstr "Type of advanced addition"
+
+msgid "Type d'objet à créer non supporté."
+msgstr "Unsupported object type to create."
+
+msgid "Type d'union"
+msgstr "Union type"
+
+msgid "Type d'événement"
+msgstr "Event type"
+
+msgid ""
+"Un média doit contenir une image uploadée ou un identifiant Google Photos."
+msgstr "A media must contain an uploaded image or a Google Photos ID."
+
+msgid "Un média doit être rattaché à une personne ou à un événement."
+msgstr "A media must be attached to a person or an event."
+
+msgid "Union (mariage, PACS, concubinage)"
+msgstr "Union (marriage, civil partnership, cohabitation)"
+
+msgid "Union avec"
+msgstr "Union with"
+
+msgid "Union proposée"
+msgstr "Proposed union"
+
+msgid ""
+"Votre photo a été soumise et est en attente de validation par un modérateur."
+msgstr ""
+"Your photo has been submitted and is awaiting validation by a moderator."
+
+msgid ""
+"Votre proposition a été soumise et est en attente de validation par un "
+"modérateur."
+msgstr ""
+"Your proposal has been submitted and is awaiting validation by a moderator."
+
+msgid "[Généalogie] Nouvelle proposition #%(pk)s à modérer"
+msgstr "[Genealogy] New proposal #%(pk)s to review"
+
+msgid "ajout d'un média « %(title)s »"
+msgstr "media addition \"%(title)s\""
+
+msgid ""
+"ajouter un événement GEDCOM (baptême, diplôme, recensement, etc.) ou une "
+"union"
+msgstr "add a GEDCOM event (baptism, diploma, census, etc.) or a union"
+
+msgid "enfants :"
+msgstr "children:"
+
+msgid "fichier : %(name)s"
+msgstr "file: %(name)s"
+
+msgid "fichier uploadé"
+msgstr "uploaded file"
+
+msgid "fratrie :"
+msgstr "siblings:"
+
+msgid "nouvel objet : %(model)s"
+msgstr "new object: %(model)s"
+
+msgid "né(e) le %(d)s"
+msgstr "born on %(d)s"
+
+msgid "née %(maiden)s"
+msgstr "née %(maiden)s"
+
+msgid "personne #%(person_id)s"
+msgstr "person #%(person_id)s"
+
+msgid "proposé par <strong>%(username)s</strong> le %(date)s"
+msgstr "proposed by <strong>%(username)s</strong> on %(date)s"
+
+msgid "proposée par <strong>%(username)s</strong> le %(date)s"
+msgstr "proposed by <strong>%(username)s</strong> on %(date)s"
+
+msgid "union avec partenaire"
+msgstr "union with partner"
+
+msgid "Échec de l'application : %(exc)s"
+msgstr "Application failed: %(exc)s"
+
+msgid "Émigration"
+msgstr "Emigration"
+
+msgid "Événement (baptême, diplôme, recensement, émigration, titre...)"
+msgstr "Event (baptism, diploma, census, emigration, title...)"
+
+msgid "Événement proposé"
+msgstr "Proposed event"
+
+msgid "à %(p)s"
+msgstr "in %(p)s"
+
+msgid "événement « %(title)s » (%(type)s)"
+msgstr "event \"%(title)s\" (%(type)s)"
+
+msgid "— décédé(e) le %(d)s"
+msgstr "— died on %(d)s"

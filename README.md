@@ -114,7 +114,7 @@ signées retournées par l'API sont mises en cache 6 h.
 
 - `/` : liste des personnes avec recherche
 - `/personne/<id>/` : fiche complète (famille, unions, enfants, parcours, photos, historique des propositions)
-- `/personne/<id>/proposer/` : formulaire de proposition de modification (validée par un modérateur)
+- `/personne/<id>/proposer/` : formulaire de proposition de modification (validée par un modérateur), avec une section **« Avancé »** permettant de proposer en plus un **événement GEDCOM** (baptême, confirmation, diplôme/graduation, recensement, émigration, naturalisation, titre, noblesse, etc.) ou une **union** avec un partenaire
 - `/photos/ajouter/` : **upload local d'une photo** (ou référence Google Photos), soumis à validation avant publication ; le fichier validé est stocké dans `media/photos/` (volume `media_data` sous Docker, servi derrière authentification)
 - `/propositions/` : file de modération (réservée aux modérateurs)
 - `/arbre/` : **arbre graphique** avec choix de la racine et cases à cocher
@@ -136,6 +136,19 @@ Configuration via `EMAIL_BACKEND`, `DEFAULT_FROM_EMAIL` et, pour le SMTP,
 3. Intégration Google Photos (API, lecture seule)
 4. Notifications e-mail des modérateurs
 5. Déploiement
+
+## Internationalisation (i18n)
+
+Le site est disponible en **français** (par défaut), **portugais brésilien**, **anglais** et **italien** :
+la langue est détectée via l'en-tête `Accept-Language` du navigateur et peut être changée via le
+sélecteur de l'en-tête (cookie + vue `set_language`). Les traductions vivent dans
+`locale/<langue>/LC_MESSAGES/django.po` (compilées en `.mo`). Pour mettre à jour les traductions
+après modification des chaînes :
+
+```bash
+python manage.py makemessages -l en -l it -l pt-br   # nécessite gettext (xgettext)
+python manage.py compilemessages                      # nécessite gettext (msgfmt)
+```
 
 ## Tests
 

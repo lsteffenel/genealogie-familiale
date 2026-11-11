@@ -1,32 +1,41 @@
-{% load static %}
+{% load static i18n %}
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block title %}Généalogie familiale{% endblock %}</title>
+  <title>{% block title %}{% trans "Généalogie familiale" %}{% endblock %}</title>
   <link rel="stylesheet" href="{% static 'genealogy/css/style.css' %}">
 </head>
 <body>
   <header class="site">
-    <span class="brand"><a href="{% url 'person_list' %}">🌳 Généalogie familiale</a></span>
+    <span class="brand"><a href="{% url 'person_list' %}">🌳 {% trans "Généalogie familiale" %}</a></span>
     {% if user.is_authenticated %}
-      <a href="{% url 'person_list' %}">Personnes</a>
-      <a href="{% url 'tree' %}">Arbre graphique</a>
+      <a href="{% url 'person_list' %}">{% trans "Personnes" %}</a>
+      <a href="{% url 'tree' %}">{% trans "Arbre graphique" %}</a>
       {% if user.profile.is_moderator %}
-        <a href="{% url 'proposal_list' %}">Modération</a>
+        <a href="{% url 'proposal_list' %}">{% trans "Modération" %}</a>
       {% endif %}
-      <a href="{% url 'admin:index' %}">Administration</a>
+      <a href="{% url 'admin:index' %}">{% trans "Administration" %}</a>
       <span class="spacer"></span>
       <span class="user">{{ user.username }}</span>
       <form method="post" action="{% url 'logout' %}" style="margin:0">
         {% csrf_token %}
-        <button type="submit" class="btn secondary">Déconnexion</button>
+        <button type="submit" class="btn secondary">{% trans "Déconnexion" %}</button>
       </form>
     {% else %}
       <span class="spacer"></span>
-      <a href="{% url 'login' %}">Connexion</a>
+      <a href="{% url 'login' %}">{% trans "Connexion" %}</a>
     {% endif %}
+    <form method="post" action="{% url 'set_language' %}" style="margin:0">
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{{ request.path }}">
+      <select name="language" onchange="this.form.submit()" aria-label="{% trans "Langue" %}">
+        {% for lang_code, lang_name in LANGUAGES %}
+          <option value="{{ lang_code }}" {% if lang_code == LANGUAGE_CODE %}selected{% endif %}>{{ lang_name }}</option>
+        {% endfor %}
+      </select>
+    </form>
   </header>
   <main>
     {% if messages %}

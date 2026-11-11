@@ -6,6 +6,7 @@ from django.views.static import serve
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("i18n/", include("django.conf.urls.i18n")),
     path("", include("genealogy.urls")),
     path(
         "media/<path:path>",

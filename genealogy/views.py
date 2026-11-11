@@ -2,14 +2,22 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.contenttypes.models import ContentType
-from django.db.models import Q
+from django.db.models import Count, Q
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
+from django.utils.translation import gettext as _
 from django.views.generic import DetailView, ListView
 
-from .forms import MediaProposalForm, PersonProposalForm, ProposalNoteForm, ReviewForm
+from .forms import (
+    EventProposalForm,
+    MediaProposalForm,
+    PersonProposalForm,
+    ProposalNoteForm,
+    ReviewForm,
+    UnionProposalForm,
+)
 from .google_photos import get_media_item_base_url
-from .models import EditProposal, Person, ProposalStatus, Union
+from .models import EditProposal, Person, ProposalStatus, SiteConfiguration, Union
 
 MAX_TREE_DEPTH = 8
 
@@ -27,13 +35,36 @@ class PersonListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         query = self.request.GET.get("q", "").strip()
+        family = self.request.GET.get("family", "").strip()
         if query:
             queryset = queryset.filter(
                 Q(first_name__icontains=query)
                 | Q(last_name__icontains=query)
                 | Q(maiden_name__icontains=query)
             )
+        elif family:
+            queryset = queryset.filter(last_name__iexact=family)
         return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        query = self.request.GET.get("q", "").strip()
+        family = self.request.GET.get("family", "").strip()
+        context["home_html"] = SiteConfiguration.get().home_page_html
+        context["query"] = query
+        context["family"] = family
+        if not query and not family:
+            context["mode"] = "families"
+            context["families"] = (
+                Person.objects.values("last_name")
+                .annotate(count=Count("id"))
+                .order_by("last_name")
+            )
+        elif family:
+            context["mode"] = "family"
+        else:
+            context["mode"] = "search"
+        return context
 
 
 class PersonDetailView(LoginRequiredMixin, DetailView):
@@ -70,31 +101,89 @@ def propose_person_edit(request, pk):
     if request.method == "POST":
         form = PersonProposalForm(request.POST)
         note_form = ProposalNoteForm(request.POST)
-        if form.is_valid() and note_form.is_valid():
+        event_form = EventProposalForm(request.POST)
+        union_form = UnionProposalForm(request.POST)
+        adv_kind = request.POST.get("adv_kind", "")
+        advanced_error = None
+        advanced = None
+        if adv_kind == "event" and event_form.is_filled():
+            if event_form.is_valid() and event_form.cleaned_data.get("title"):
+                advanced = ("event", event_form.cleaned_data)
+            else:
+                advanced_error = _(
+                    "Section avancée invalide : un titre est requis pour un événement."
+                )
+        elif adv_kind == "union" and union_form.is_filled():
+            if union_form.is_valid() and union_form.cleaned_data.get("partner"):
+                advanced = ("union", union_form.cleaned_data)
+            else:
+                advanced_error = _(
+                    "Section avancée invalide : un partenaire est requis pour une union."
+                )
+        if advanced_error:
+            messages.error(request, advanced_error)
+        elif form.is_valid() and note_form.is_valid():
             changes = form.changed_fields(person)
-            if not changes:
-                messages.info(request, "Aucune modification détectée.")
+            if not changes and not advanced:
+                messages.info(request, _("Aucune modification détectée."))
                 return redirect("person_detail", pk=person.pk)
-            EditProposal.objects.create(
-                content_type=ContentType.objects.get_for_model(Person),
-                object_id=person.pk,
-                field_changes=changes,
-                note=note_form.cleaned_data["note"],
-                proposed_by=request.user,
-            )
+            if changes:
+                EditProposal.objects.create(
+                    content_type=ContentType.objects.get_for_model(Person),
+                    object_id=person.pk,
+                    field_changes=changes,
+                    note=note_form.cleaned_data["note"],
+                    proposed_by=request.user,
+                )
+            if advanced:
+                kind, data = advanced
+                if kind == "event":
+                    new_object_data = {
+                        "model": "event",
+                        "person_id": person.pk,
+                        "event_type": data.get("event_type") or "other",
+                        "title": data.get("title", ""),
+                        "date": data["date"].isoformat() if data.get("date") else "",
+                        "place": data.get("place", ""),
+                        "description": data.get("description", ""),
+                    }
+                else:
+                    new_object_data = {
+                        "model": "union",
+                        "person_id": person.pk,
+                        "partner_id": data["partner"].pk,
+                        "union_type": data.get("union_type") or "other",
+                        "date": data["date"].isoformat() if data.get("date") else "",
+                        "place": data.get("place", ""),
+                        "notes": data.get("notes", ""),
+                    }
+                EditProposal.objects.create(
+                    action=EditProposal.Action.CREATE,
+                    new_object_data=new_object_data,
+                    note=note_form.cleaned_data["note"],
+                    proposed_by=request.user,
+                )
             messages.success(
                 request,
-                "Votre proposition a été soumise et est en attente de validation "
-                "par un modérateur.",
+                _("Votre proposition a été soumise et est en attente de validation "
+                  "par un modérateur."),
             )
             return redirect("person_detail", pk=person.pk)
     else:
         form = PersonProposalForm(instance=person)
         note_form = ProposalNoteForm()
+        event_form = EventProposalForm()
+        union_form = UnionProposalForm()
     return render(
         request,
         "genealogy/proposal_form.html",
-        {"form": form, "note_form": note_form, "person": person},
+        {
+            "form": form,
+            "note_form": note_form,
+            "person": person,
+            "event_form": event_form,
+            "union_form": union_form,
+        },
     )
 
 
@@ -109,9 +198,10 @@ def tree_view(request, pk=None):
     if root_id:
         root = by_pk.get(int(root_id))
         if root is None:
-            raise Http404("Personne inconnue")
+            raise Http404(_("Personne inconnue"))
     else:
-        root = persons[0]
+        default_root = SiteConfiguration.get().default_tree_root
+        root = default_root if default_root in persons else persons[0]
 
     show_name = request.GET.get("name", "1") == "1"
     show_dates = request.GET.get("dates", "1") == "1"
@@ -175,7 +265,7 @@ def propose_media_add(request):
             )
             messages.success(
                 request,
-                "Votre photo a été soumise et est en attente de validation par un modérateur.",
+                _("Votre photo a été soumise et est en attente de validation par un modérateur."),
             )
             return redirect("person_detail", pk=cleaned["person"].pk)
     else:
@@ -209,12 +299,12 @@ def proposal_review(request, pk):
             if action == "approve":
                 try:
                     proposal.apply(request.user)
-                    messages.success(request, f"Proposition #{proposal.pk} approuvée et appliquée.")
+                    messages.success(request, _("Proposition #%(pk)s approuvée et appliquée.") % {"pk": proposal.pk})
                 except Exception as exc:
-                    messages.error(request, f"Échec de l'application : {exc}")
+                    messages.error(request, _("Échec de l'application : %(exc)s") % {"exc": exc})
             elif action == "reject":
                 proposal.reject(request.user, form.cleaned_data["comment"])
-                messages.success(request, f"Proposition #{proposal.pk} rejetée.")
+                messages.success(request, _("Proposition #%(pk)s rejetée.") % {"pk": proposal.pk})
             return redirect("proposal_list")
     else:
         form = ReviewForm()
