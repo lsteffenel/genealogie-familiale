@@ -120,6 +120,14 @@ msgstr "Biography"
 msgid "Bénédiction"
 msgstr "Blessing"
 
+msgid ""
+"Ces données servent uniquement à faire fonctionner le site collaboratif : "
+"afficher l'arbre, gérer les comptes et modérer les propositions de "
+"modification."
+msgstr ""
+"This data is used solely to operate the collaborative site: displaying the "
+"tree, managing accounts and moderating edit proposals."
+
 msgid "Champ"
 msgstr "Field"
 
@@ -132,6 +140,13 @@ msgstr "Changes"
 msgid "Changements proposés"
 msgstr "Proposed changes"
 
+msgid ""
+"Chaque membre dispose d'un compte personnel et est responsable de la "
+"confidentialité de son mot de passe."
+msgstr ""
+"Each member has a personal account and is responsible for keeping their "
+"password confidential."
+
 msgid "Commentaire (affiché au modérateur)"
 msgstr "Comment (shown to the moderator)"
 
@@ -141,8 +156,14 @@ msgstr "Moderation comment"
 msgid "Commentaire du membre accompagnant sa proposition"
 msgstr "Member comment accompanying the proposal"
 
+msgid "Compte"
+msgstr "Account"
+
 msgid "Concubinage"
 msgstr "Cohabitation"
+
+msgid "Conditions d'utilisation"
+msgstr "Terms of use"
 
 msgid "Configuration du site"
 msgstr "Site configuration"
@@ -150,14 +171,32 @@ msgstr "Site configuration"
 msgid "Confirmation"
 msgstr "Confirmation"
 
+msgid ""
+"Conformément au RGPD, vous disposez d'un droit d'accès, de rectification, "
+"d'effacement, d'opposition et de portabilité de vos données. Pour l'exercer,"
+" contactez l'administrateur du site."
+msgstr ""
+"In accordance with the GDPR, you have the right to access, rectify, erase, "
+"object to and port your data. To exercise these rights, contact the site "
+"administrator."
+
 msgid "Connexion"
 msgstr "Log in"
+
+msgid "Conservation"
+msgstr "Retention"
+
+msgid "Contact"
+msgstr "Contact"
 
 msgid "Contenu"
 msgstr "Content"
 
 msgid "Contenu de la page d'accueil (HTML)"
 msgstr "Home page content (HTML)"
+
+msgid "Cookies"
+msgstr "Cookies"
 
 msgid "Crémation"
 msgstr "Cremation"
@@ -183,8 +222,17 @@ msgstr "Dictionary {field: new_value} proposed by the member"
 msgid "Diplôme (graduation)"
 msgstr "Diploma (graduation)"
 
+msgid "Disponibilité"
+msgstr "Availability"
+
 msgid "Distinction"
 msgstr "Award"
+
+msgid "Données collectées"
+msgstr "Data collected"
+
+msgid "Données personnelles de tiers"
+msgstr "Third-party personal data"
 
 msgid "Déconnexion"
 msgstr "Log out"
@@ -213,6 +261,9 @@ msgstr "Photo file (local storage)"
 msgid "Fichier uploadé par le membre, rattaché au nouvel objet à validation"
 msgstr ""
 "File uploaded by the member, attached to the new object pending validation"
+
+msgid "Finalités"
+msgstr "Purposes"
 
 msgid "Google Photos : %(mid)s"
 msgstr "Google Photos: %(mid)s"
@@ -251,6 +302,18 @@ msgstr "Provide a file to upload or a Google Photos ID."
 msgid "Inhumation"
 msgstr "Burial"
 
+msgid ""
+"L'administrateur ne saurait être tenu responsable des erreurs présentes dans"
+" les données publiées par les membres."
+msgstr ""
+"The administrator cannot be held liable for errors in data published by "
+"members."
+
+msgid ""
+"L'utilisation de ce site implique l'acceptation pleine et entière des "
+"présentes conditions d'utilisation."
+msgstr "Using this site implies full acceptance of these terms of use."
+
 msgid "La date de décès ne peut pas être antérieure à la date de naissance."
 msgstr "The date of death cannot be earlier than the date of birth."
 
@@ -263,11 +326,56 @@ msgstr ""
 "moderator. You can upload a local file or reference a photo from the shared "
 "Google Photos album."
 
+msgid ""
+"La présente politique de confidentialité décrit la manière dont ce site de "
+"généalogie familiale collecte, utilise et protège vos données personnelles."
+msgstr ""
+"This privacy policy describes how this family genealogy site collects, uses "
+"and protects your personal data."
+
 msgid "Langue"
 msgstr "Language"
 
+msgid ""
+"Le site est fourni sans garantie de disponibilité permanente ; il peut être "
+"interrompu pour maintenance."
+msgstr ""
+"The site is provided without any guarantee of permanent availability; it may"
+" be interrupted for maintenance."
+
+msgid ""
+"Le site utilise uniquement des cookies de session et de préférence de "
+"langue."
+msgstr "The site only uses session and language-preference cookies."
+
 msgid "Les deux partenaires doivent être des personnes différentes."
 msgstr "The two partners must be different people."
+
+msgid ""
+"Les données concernant des personnes privées ne doivent être publiées "
+"qu'avec leur accord."
+msgstr ""
+"Data about private individuals may only be published with their consent."
+
+msgid ""
+"Les données sont conservées tant que le compte est actif, puis supprimées ou"
+" anonymisées, conformément au RGPD."
+msgstr ""
+"Data is kept as long as the account is active, then deleted or anonymised, "
+"in accordance with the GDPR."
+
+msgid ""
+"Les informations généalogiques et les photos publiées le sont sous la "
+"responsabilité de leur auteur, après validation par un modérateur."
+msgstr ""
+"Genealogical information and photos are published under the responsibility "
+"of their author, after validation by a moderator."
+
+msgid ""
+"Les propositions de modification sont soumises à validation par un "
+"modérateur avant d'être publiées."
+msgstr ""
+"Edit proposals must be validated by a moderator before being published."
 
 msgid ""
 "Les valeurs ci-dessous sont les valeurs actuelles. Modifiez ce que vous "
@@ -340,6 +448,16 @@ msgstr "Member note:"
 
 msgid "Notes"
 msgstr "Notes"
+
+msgid ""
+"Nous collectons les données suivantes : nom d'utilisateur, adresse e-mail et"
+" mot de passe du compte ; les informations généalogiques que vous soumettez "
+"(personnes, unions, événements, photos) ; les journaux techniques (adresse "
+"IP, navigateur)."
+msgstr ""
+"We collect the following data: username, email address and account password;"
+" the genealogical information you submit (people, unions, events, photos); "
+"technical logs (IP address, browser)."
 
 msgid "Nouvel événement"
 msgstr "New event"
@@ -424,8 +542,18 @@ msgstr ""
 msgid "Photos"
 msgstr "Photos"
 
+msgid "Politique de confidentialité"
+msgstr "Privacy policy"
+
 msgid "Pour action=create : données du nouvel objet (ex. média à créer)"
 msgstr "For action=create: data of the new object (e.g. media to create)"
+
+msgid ""
+"Pour toute question relative à vos données personnelles, contactez "
+"l'administrateur du site."
+msgstr ""
+"For any question regarding your personal data, contact the site "
+"administrator."
 
 msgid "Proposer l'ajout d'une photo"
 msgstr "Propose adding a photo"
@@ -495,6 +623,9 @@ msgstr "Rejected"
 
 msgid "Religion"
 msgstr "Religion"
+
+msgid "Responsabilité"
+msgstr "Liability"
 
 msgid "Retour"
 msgstr "Back"
@@ -583,6 +714,9 @@ msgstr "Union with"
 
 msgid "Union proposée"
 msgstr "Proposed union"
+
+msgid "Vos droits"
+msgstr "Your rights"
 
 msgid ""
 "Votre photo a été soumise et est en attente de validation par un modérateur."

@@ -19,4 +19,6 @@ urlpatterns = [
     path("propositions/<int:pk>/", views.proposal_review, name="proposal_review"),
     path("connexion/", auth_views.LoginView.as_view(template_name="genealogy/login.html"), name="login"),
     path("deconnexion/", auth_views.LogoutView.as_view(), name="logout"),
+    path("confidentialite/", views.legal_page, {"template": "genealogy/privacy.html"}, name="privacy"),
+    path("conditions/", views.legal_page, {"template": "genealogy/terms.html"}, name="terms"),
 ]

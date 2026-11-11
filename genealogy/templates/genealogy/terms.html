@@ -1,0 +1,21 @@
+{% extends "genealogy/base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Conditions d'utilisation" %}{% endblock %}
+{% block content %}
+<div class="card">
+  <h1>{% trans "Conditions d'utilisation" %}</h1>
+  <p>{% trans "L'utilisation de ce site implique l'acceptation pleine et entière des présentes conditions d'utilisation." %}</p>
+  <h2>{% trans "Compte" %}</h2>
+  <p>{% trans "Chaque membre dispose d'un compte personnel et est responsable de la confidentialité de son mot de passe." %}</p>
+  <h2>{% trans "Contenu" %}</h2>
+  <p>{% trans "Les informations généalogiques et les photos publiées le sont sous la responsabilité de leur auteur, après validation par un modérateur." %}</p>
+  <h2>{% trans "Modération" %}</h2>
+  <p>{% trans "Les propositions de modification sont soumises à validation par un modérateur avant d'être publiées." %}</p>
+  <h2>{% trans "Données personnelles de tiers" %}</h2>
+  <p>{% trans "Les données concernant des personnes privées ne doivent être publiées qu'avec leur accord." %}</p>
+  <h2>{% trans "Disponibilité" %}</h2>
+  <p>{% trans "Le site est fourni sans garantie de disponibilité permanente ; il peut être interrompu pour maintenance." %}</p>
+  <h2>{% trans "Responsabilité" %}</h2>
+  <p>{% trans "L'administrateur ne saurait être tenu responsable des erreurs présentes dans les données publiées par les membres." %}</p>
+</div>
+{% endblock %}
