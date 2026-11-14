@@ -817,3 +817,9 @@ msgstr "Nato/a il %(date)s"
 msgctxt "neutral"
 msgid "né(e) %(maiden)s"
 msgstr "nato/a %(maiden)s"
+
+msgid "Vos modifications sur votre propre fiche ont été appliquées directement."
+msgstr "Le modifiche sulla tua scheda sono state applicate direttamente."
+
+msgid "Votre photo a été publiée directement sur votre propre fiche."
+msgstr "La tua foto è stata pubblicata direttamente sulla tua scheda."

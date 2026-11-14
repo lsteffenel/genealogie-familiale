@@ -6,6 +6,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.db.models import Count, Q
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
+from django.utils import timezone
 from django.utils.translation import gettext as _
 from django.views.generic import DetailView, ListView
 
@@ -24,6 +25,22 @@ MAX_TREE_DEPTH = 8
 
 def is_moderator(user):
     return user.is_authenticated and hasattr(user, "profile") and user.profile.is_moderator
+
+
+def _own_person_id(user):
+    return getattr(getattr(user, "profile", None), "person_id", None)
+
+
+def auto_approve_own_person_edit(request, proposal, person_id):
+    """Modifications sur sa propre fiche : appliquées directement, sans modération."""
+    if person_id and _own_person_id(request.user) == person_id:
+        proposal.apply(request.user)  # exige le statut PENDING
+        proposal.status = ProposalStatus.APPROVED
+        proposal.reviewed_by = request.user
+        proposal.reviewed_at = timezone.now()
+        proposal.save(update_fields=["status", "reviewed_by", "reviewed_at"])
+        return True
+    return False
 
 
 @login_required
@@ -150,14 +167,16 @@ def propose_person_edit(request, pk):
             if not changes and not advanced:
                 messages.info(request, _("Aucune modification détectée."))
                 return redirect("person_detail", pk=person.pk)
+            auto = False
             if changes:
-                EditProposal.objects.create(
+                proposal = EditProposal.objects.create(
                     content_type=ContentType.objects.get_for_model(Person),
                     object_id=person.pk,
                     field_changes=changes,
                     note=note_form.cleaned_data["note"],
                     proposed_by=request.user,
                 )
+                auto = auto_approve_own_person_edit(request, proposal, person.pk)
             if advanced:
                 kind, data = advanced
                 if kind == "event":
@@ -180,17 +199,24 @@ def propose_person_edit(request, pk):
                         "place": data.get("place", ""),
                         "notes": data.get("notes", ""),
                     }
-                EditProposal.objects.create(
+                proposal = EditProposal.objects.create(
                     action=EditProposal.Action.CREATE,
                     new_object_data=new_object_data,
                     note=note_form.cleaned_data["note"],
                     proposed_by=request.user,
                 )
-            messages.success(
-                request,
-                _("Votre proposition a été soumise et est en attente de validation "
-                  "par un modérateur."),
-            )
+                auto = auto or auto_approve_own_person_edit(request, proposal, person.pk)
+            if auto:
+                messages.success(
+                    request,
+                    _("Vos modifications sur votre propre fiche ont été appliquées directement."),
+                )
+            else:
+                messages.success(
+                    request,
+                    _("Votre proposition a été soumise et est en attente de validation "
+                      "par un modérateur."),
+                )
             return redirect("person_detail", pk=person.pk)
     else:
         form = PersonProposalForm(instance=person)
@@ -273,7 +299,7 @@ def propose_media_add(request):
         form = MediaProposalForm(request.POST, request.FILES)
         if form.is_valid():
             cleaned = form.cleaned_data
-            EditProposal.objects.create(
+            proposal = EditProposal.objects.create(
                 action=EditProposal.Action.CREATE,
                 new_object_data={
                     "model": "media",
@@ -285,10 +311,16 @@ def propose_media_add(request):
                 note=cleaned["note"],
                 proposed_by=request.user,
             )
-            messages.success(
-                request,
-                _("Votre photo a été soumise et est en attente de validation par un modérateur."),
-            )
+            if auto_approve_own_person_edit(request, proposal, cleaned["person"].pk):
+                messages.success(
+                    request,
+                    _("Votre photo a été publiée directement sur votre propre fiche."),
+                )
+            else:
+                messages.success(
+                    request,
+                    _("Votre photo a été soumise et est en attente de validation par un modérateur."),
+                )
             return redirect("person_detail", pk=cleaned["person"].pk)
     else:
         form = MediaProposalForm()

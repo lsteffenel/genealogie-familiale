@@ -808,3 +808,9 @@ msgstr "Born on %(date)s"
 msgctxt "neutral"
 msgid "né(e) %(maiden)s"
 msgstr "née %(maiden)s"
+
+msgid "Vos modifications sur votre propre fiche ont été appliquées directement."
+msgstr "Your changes to your own page have been applied directly."
+
+msgid "Votre photo a été publiée directement sur votre propre fiche."
+msgstr "Your photo has been published directly on your own page."
